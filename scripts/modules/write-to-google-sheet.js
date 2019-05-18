@@ -28,7 +28,7 @@ function writeWildfire(data, id, spreadsheet_id) {
 			});
 		},
 		function updateOrAdd(step) {
-			console.log(worksheets)
+			// console.log(worksheets)
 			const id_index = getSheetIndex(worksheets, id);
 
 			if (id_index === -1) {
