@@ -4,21 +4,20 @@ import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 
 import './CircleMap.css';
 
-const map_url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-const attribution = 'attribution="&copy;<a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"';
 
-export class CircleMap extends Component {
-	
+export class CircleMap extends Component {	
 	render() {
-		console.log(this.props.data[0]);
+		console.log(this.props);
 
 		return (
 			<Map 
 				center={this.props.center} 
 				
 				zoom={this.props.zoom}>
-				<TileLayer url={map_url} attribution={attribution} maxZoom={this.props.maxZoom}
-				minZoom={this.props.minZoom}/>
+				<TileLayer url={this.props.tiles} 
+					attribution={this.props.attribution} 
+					maxZoom={this.props.maxZoom}
+					minZoom={this.props.minZoom}/>
 				
 				{this.props.data.map(d => {
 					console.log()

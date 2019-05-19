@@ -4,10 +4,6 @@ import CircleMap from '../CircleMap/CircleMap';
 import './WildfireTracker.css';
 
 
-const googleSheetURL = 'https://docs.google.com/spreadsheets/d/1mg71j-P91H_PpA9OufEPIRrDgpK80nWpN1CKH9LlIBk/edit?usp=sharing';
-
-
-
 export class WildfireTracker extends Component {
 	constructor(props) {
 		super(props);
@@ -23,10 +19,10 @@ export class WildfireTracker extends Component {
 	componentDidMount() {
 		// load data from Google sheet
 		Tabletop.init({
-			key: googleSheetURL,
-			callback: fire_data => {
+			key: this.props.sheet,
+			callback: data => {
 				this.setState({
-					data: fire_data
+					data: data
 				});
 			},
 			simpleSheet: true
@@ -36,10 +32,12 @@ export class WildfireTracker extends Component {
 	render() {
 		return (
 			<CircleMap id="mapview"
+				attribution={this.props.attribution}
 				center={this.state.center}
 				data={this.state.data}
 				maxZoom={this.state.maxZoom}
 				minZoom={this.state.minZoom}
+				tiles={this.props.tiles}
 				zoom={this.state.zoom}>
 			</CircleMap>
 		);
