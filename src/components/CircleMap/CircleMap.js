@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CircleMarker, Map, Popup, TileLayer, Tooltip} from 'react-leaflet';
+import { CircleMarker, Map, TileLayer, Tooltip} from 'react-leaflet';
 import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 // import range from './range';
 
@@ -22,6 +22,8 @@ export class CircleMap extends Component {
 		// TO DO
 		// reorder array by CURRENT_SI, largest -> smallest
 
+		
+
 		return (
 			<Map 
 				center={this.props.center} 
@@ -39,15 +41,15 @@ export class CircleMap extends Component {
 						center={[d.LATITUDE, d.LONGITUDE]} 
 						className={`circle-marker ${classField}`}
 						color='#FFFFFF'
-						fillColor={d[this.props.circleMarkerClassField] ? fills[classField] : 'darkgrey'}
+						// fillColor={d[this.props.circleMarkerClassField] ? fills[classField] : 'darkgrey'}
 						fillOpacity='0.7'
 						radius={mapRange(extent, range, d.CURRENT_SI)}
 						stroke={false}
 						weight='1'>
-								<Tooltip>
-									<WildfireTooltip data={d}></WildfireTooltip>
-								</Tooltip>
-						</CircleMarker>
+							<Tooltip>
+								<WildfireTooltip data={d}></WildfireTooltip>
+							</Tooltip>
+					</CircleMarker>
 				})}
 			</Map>
 		);

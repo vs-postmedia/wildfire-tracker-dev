@@ -1,6 +1,7 @@
 import React from 'react';
-import WildfireTracker from '../WildfireTracker/WildfireTracker';
 import './App.css';
+import WildfireTracker from '../WildfireTracker/WildfireTracker';
+
 
 // google sheet that stores fire data
 const googleSheetURL = 'https://docs.google.com/spreadsheets/d/1mg71j-P91H_PpA9OufEPIRrDgpK80nWpN1CKH9LlIBk/edit?usp=sharing';
@@ -13,7 +14,7 @@ const attribution = 'attribution="&copy;<a href=&quot;http://osm.org/copyright&q
 function App() {
 	return (
 	  	<div className="App">
-	  	<h1>B.C. Wildfire Tracker</h1>
+	  		<h1>B.C. Wildfire Tracker</h1>
 			<WildfireTracker 
 				sheet={googleSheetURL}
 				tiles={map_url}

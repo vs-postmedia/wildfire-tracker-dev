@@ -7,14 +7,19 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-#root h1 {
+.App h1 {
 	font-family: Shift-BoldItalic, serif;
+	font-size: 2rem;
 	margin-bottom: 0.5rem;
 }
-#root h3 {
+.App h2 {
+	font-family: Shift-Bold, serif;
+	margin: 15px 0;
+}
+.App h3 {
 	font-family: Shift-Bold, serif;
 }
 
-#root p {
+.App p {
 	font-family: BentonSansCond-Regular, Helvetica, sans-serif;
 }

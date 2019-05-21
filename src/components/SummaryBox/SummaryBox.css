@@ -1,0 +1,39 @@
+.summary-box {
+	margin: 0 auto;
+	max-width: 750px;
+	text-align: center;
+}
+.summary-box .stat-box {
+	display: grid;
+	grid-template-columns: 22% 22% 25% 30%;
+}
+.summary-box .big-num {
+	font-family: 'Shift-Bold', serif;
+	font-size: 2.75rem;
+	font-weight: 800;
+	margin: 0;
+	opacity: 0.8;
+}
+.summary-box .label {
+	font-size: 1.1rem;
+	line-height: 1.25rem;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+.summary-box .last-update {
+	font-family: 'BentonSansCond-RegItalic', sans-serif;
+	font-style: italic;
+	font-size: 0.8em;
+	margin-top: 30px;
+}
+
+
+@media (min-width: 500px) {
+	.summary-box .big-num {
+		font-size: 3.5rem;
+	}
+	.summary-box .label {
+		font-size: 1.5rem;
+	}
+}

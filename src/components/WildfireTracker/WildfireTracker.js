@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Aux from '../Aux/Aux';
 import Tabletop from 'tabletop';
 import CircleMap from '../CircleMap/CircleMap';
+import SummaryBox from '../SummaryBox/SummaryBox';
 import './WildfireTracker.css';
 
 
@@ -9,19 +11,19 @@ export class WildfireTracker extends Component {
 		super(props);
 
 		this.state = {
-			center: [51.584179, -120.652423],
+			center: [54.184179, -125.652423],
 			classField: 'FIRE_STATU',
 			data: [],
 			maxZoom: 8,
 			minZoom: 3,
-			zoom: 6
+			zoom: 5
 		}
 	}
 	componentDidMount() {
 		// load data from Google sheet
 		Tabletop.init({
 			key: this.props.sheet,
-			callback: data => {
+			callback: (data, tabletop) => {
 				this.setState({
 					data: data
 				});
@@ -32,16 +34,21 @@ export class WildfireTracker extends Component {
 
 	render() {
 		return (
-			<CircleMap id="mapview"
-				attribution={this.props.attribution}
-				center={this.state.center}
-				circleMarkerClassField={this.state.classField}
-				data={this.state.data}
-				maxZoom={this.state.maxZoom}
-				minZoom={this.state.minZoom}
-				tiles={this.props.tiles}
-				zoom={this.state.zoom}>
-			</CircleMap>
+			<Aux>
+				<CircleMap id="mapview"
+					attribution={this.props.attribution}
+					center={this.state.center}
+					circleMarkerClassField={this.state.classField}
+					data={this.state.data}
+					maxZoom={this.state.maxZoom}
+					minZoom={this.state.minZoom}
+					tiles={this.props.tiles}
+					zoom={this.state.zoom}>
+				</CircleMap>
+				<SummaryBox
+					data={this.state.data}>
+				</SummaryBox>
+			</Aux>
 		);
 	}
 }
