@@ -28,6 +28,7 @@ new CronJob('15 * * * *', function() {
 	downloadAndUnzip();
 }, null, true, 'America/Los_Angeles');
 
+downloadAndUnzip();
 
 // pretty self explanitory
 function downloadAndUnzip() {
@@ -36,27 +37,26 @@ function downloadAndUnzip() {
 		.on('error', err => {
 			console.log(err);
 		})
-		.pipe(unzip.Extract({ path: shapefileDirectory }))
-		.on('finish', () => {
-			// console.log('Unzipped!');
-			parseShapefile(current_fires_shp);
-		});
+		.pipe(
+			unzip.Extract({ path: shapefileDirectory })
+				.on('finish', () => {
+					console.log('Unzipped!');
+					parseShapefile(current_fires_shp);
+				})
+		);
 }
-
 
 // runs on each row of data
 function parseFireData(data) {
 	let fire = data.properties;
-	fire.center = data.geometry.coordinates;
+	// fire.center = data.geometry.coordinates;
+	fire.last_update = returnCurrentTimestamp();
 	fire.ignition_date = returnHumanReadableDate(fire.IGNITION_D);
 	
 	// this is an array so doesn't transfer to google sheet
 	delete fire.IGNITION_D;
 
 	fireArray.push(fire);
-	
-	// TO DO
-	// 1. normalize CURRENT_SI to a range between X-XX
 }
 
 function parseShapefile(shapefile) {
@@ -73,11 +73,22 @@ function parseShapefile(shapefile) {
 		);
 }
 
+function returnCurrentTimestamp() {
+	const timestamp = new Date();
+	const month = returnUTCMonth(timestamp.getUTCMonth());
+
+	return `${month} ${timestamp.getUTCDate()}, ${timestamp.getUTCFullYear()} at ${timestamp.toLocaleTimeString()}`
+}
+
 function returnHumanReadableDate(object) {
+	const month = returnUTCMonth(object.month);
+	return `${month} ${object.day}, ${object.year}`;
+}
+
+function returnUTCMonth(month_num) {
 	const month_lookup = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-	const month = month_lookup[parseInt(object.month) - 1];
-	return `${month} ${object.day}, ${object.year}`;
+	return month_lookup[parseInt(month_num)];
 }
 
 

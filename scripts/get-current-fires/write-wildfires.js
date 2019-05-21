@@ -2,6 +2,8 @@
 // https://docs.google.com/spreadsheets/d/1mg71j-P91H_PpA9OufEPIRrDgpK80nWpN1CKH9LlIBk/edit?usp=sharing
 const async = require('async');
 const GoogleSpreadsheet = require('google-spreadsheet');
+// const gSheetHelper = require('../modules/google-sheets-helper');
+
 const creds = require('../modules/vs-wildfire-tracker-c63b0d5442bd.json');
 const spreadsheet_id = '1mg71j-P91H_PpA9OufEPIRrDgpK80nWpN1CKH9LlIBk';
 
@@ -37,7 +39,9 @@ function writeWildfire(data, spreadsheet_id) {
 					if (err) throw err;
 
 					const fire = data.shift();
-					console.log(`Fire ID ${fire.FIRE_ID} written`);
+					if (fire) {
+						console.log(`Fire ID ${fire.FIRE_ID} written`);
+					}
 					
 					if (fire) {
 						// settimeout required to give previous connection enough time to close. otherwise the following network error is generated:
@@ -52,7 +56,7 @@ function writeWildfire(data, spreadsheet_id) {
 			}
 
 			doc.getInfo((err, info) => {
-				const sheet = info.worksheets[1];
+				const sheet = info.worksheets[info.worksheets.length - 1];
 				const fire = data.shift();
 				
 				addRow(data, fire, sheet);
