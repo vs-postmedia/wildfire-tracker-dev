@@ -5,3 +5,17 @@
 	right: 0;
 	top: 0;
 }
+
+.path.new {
+	fill: 'red';
+}
+
+.path.out {
+	fill: 'darkgrey';
+}
+.path.being-held {
+	fill: 'orange';
+}
+.path.under-control {
+	fill: 'steelblue';
+}

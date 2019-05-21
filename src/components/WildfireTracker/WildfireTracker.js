@@ -10,6 +10,7 @@ export class WildfireTracker extends Component {
 
 		this.state = {
 			center: [51.584179, -120.652423],
+			classField: 'FIRE_STATU',
 			data: [],
 			maxZoom: 8,
 			minZoom: 3,
@@ -34,6 +35,7 @@ export class WildfireTracker extends Component {
 			<CircleMap id="mapview"
 				attribution={this.props.attribution}
 				center={this.state.center}
+				circleMarkerClassField={this.state.classField}
 				data={this.state.data}
 				maxZoom={this.state.maxZoom}
 				minZoom={this.state.minZoom}
