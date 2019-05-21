@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { CircleMarker, Map, TileLayer, Tooltip} from 'react-leaflet';
 import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
-// import range from './range';
 
 import './CircleMap.css';
 
@@ -12,17 +11,11 @@ export class CircleMap extends Component {
 		const range = this.props.range ? this.props.range : [3,50];
 		const extent = getExtent(this.props.data);
 
-		const fills = {
-			'being-held': 'orange',
-			'new': 'red',
-			'out': 'darkgrey',
-			'under-control': 'steelblue'
-		}
-
-		// TO DO
 		// reorder array by CURRENT_SI, largest -> smallest
+		this.props.data.sort((a,b) => {
+			return b.CURRENT_SI - a.CURRENT_SI;
+		});
 
-		
 
 		return (
 			<Map 
@@ -41,11 +34,10 @@ export class CircleMap extends Component {
 						center={[d.LATITUDE, d.LONGITUDE]} 
 						className={`circle-marker ${classField}`}
 						color='#FFFFFF'
-						// fillColor={d[this.props.circleMarkerClassField] ? fills[classField] : 'darkgrey'}
 						fillOpacity='0.7'
 						radius={mapRange(extent, range, d.CURRENT_SI)}
-						stroke={false}
-						weight='1'>
+						stroke={true}
+						weight='0.5'>
 							<Tooltip>
 								<WildfireTooltip data={d}></WildfireTooltip>
 							</Tooltip>
