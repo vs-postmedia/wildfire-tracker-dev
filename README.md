@@ -1,4 +1,4 @@
-# wildfire-tracker-dev
+ # wildfire-tracker-dev
 Development build for the wildfire tracker.
 
 Built with create-react-app.
@@ -15,3 +15,11 @@ Scrapes the fire summary table at `http://bcfireinfo.for.gov.bc.ca/hprScripts/Wi
 
 `active-fire-scraper`
 Scrapes fire details from the relevant fire page, based on the FIRE_ID found in the `get-current-fires`. Data for each fire is scraped and stored in a separate worksheet in Google Sheets.
+
+
+
+###
+DEV TO DO
+
+1. stat-boxes as toggles for fire components
+2. add "fires near me" search box (by postal?)
