@@ -2,6 +2,7 @@ const fs = require('fs');
 const unzip = require('unzip');
 const request = require('request');
 const shp2json = require('shp2json');
+var CronJob = require('cron').CronJob;
 const JSONStream = require('JSONStream');
 const writeWildfire = require('./write-wildfires');
 
@@ -19,7 +20,14 @@ const spreadsheet_id = '1mg71j-P91H_PpA9OufEPIRrDgpK80nWpN1CKH9LlIBk';
 
 let fireArray = [];
 
-downloadAndUnzip()
+new CronJob('15 * * * *', function() {
+	const date = new Date();
+
+	console.log(`Current time is ${date.getHours()}:${date.getMinutes()}`);
+	
+	downloadAndUnzip();
+}, null, true, 'America/Los_Angeles');
+
 
 // pretty self explanitory
 function downloadAndUnzip() {
@@ -41,14 +49,14 @@ function parseFireData(data) {
 	let fire = data.properties;
 	fire.center = data.geometry.coordinates;
 	fire.ignition_date = returnHumanReadableDate(fire.IGNITION_D);
-
+	
+	// this is an array so doesn't transfer to google sheet
 	delete fire.IGNITION_D;
 
+	fireArray.push(fire);
+	
 	// TO DO
 	// 1. normalize CURRENT_SI to a range between X-XX
-
-
-	fireArray.push(fire);
 }
 
 function parseShapefile(shapefile) {

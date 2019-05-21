@@ -16,21 +16,9 @@ function writeWildfire(data, spreadsheet_id) {
 				step();
 			});
 		},
-		// function deleteWorksheet(step) {
-		// 	doc.getInfo((err, info) => {
-		// 		const sheet = info.worksheets[0];
-		// 		sheet.del(() => {
-		// 			console.log('sheet deleted');
-		// 			step();
-		// 		});
-		// 	});
-		// },
 		function createWorksheet(step) {
 			const headers = Object.keys(data[0]);
 			
-			// get the worksheet 
-			// doc.getInfo((err, info) => {
-				// const sheet = info.worksheets[0];
 			doc.addWorksheet({
 				title: `current-wildfires-${Date.now()}`,
 			}, (err, sheet) => {
@@ -45,12 +33,11 @@ function writeWildfire(data, spreadsheet_id) {
 		},
 		function updateWildfire(step) {
 			const addRow = function(data, fire, sheet) {
-				console.log(fire)
-
 				sheet.addRow(fire, (err, row) => {
 					if (err) throw err;
 
 					const fire = data.shift();
+					console.log(`Fire ID ${fire.FIRE_ID} written`);
 					
 					if (fire) {
 						// settimeout required to give previous connection enough time to close. otherwise the following network error is generated:
@@ -76,7 +63,7 @@ function writeWildfire(data, spreadsheet_id) {
 				const sheet = info.worksheets[0];
 				
 				sheet.del(() => {
-					console.log('sheet deleted');
+					console.log('Previous sheet deleted');
 				});
 			});
 		}
