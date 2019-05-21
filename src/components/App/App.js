@@ -13,6 +13,7 @@ const attribution = 'attribution="&copy;<a href=&quot;http://osm.org/copyright&q
 function App() {
 	return (
 	  	<div className="App">
+	  	<h1>B.C. Wildfire Tracker</h1>
 			<WildfireTracker 
 				sheet={googleSheetURL}
 				tiles={map_url}
