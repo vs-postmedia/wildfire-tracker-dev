@@ -1,5 +1,6 @@
 {
-  "name": "wildfire-tracker",
+  "name": "bc-wildfire-tracker",
+  "homepage" : "https://vs-postmedia.github.io/wildfire-tracker/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
