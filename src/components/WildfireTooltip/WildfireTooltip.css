@@ -1,0 +1,21 @@
+.leaflet-tooltip {
+	white-space: normal;
+}
+.wf-tooltip {
+	width: 225px;
+}
+.wf-tooltip h3 {
+	font-family: 'BentonSansCond-Bold', sans-serif;
+	font-size: 1.25rem;
+	font-weight: 800;
+	margin: 5px 0;
+}
+
+.wf-tooltip p {
+	margin: 3px 0;
+}
+
+.wf-tooltip .status {
+	font-family: 'BentonSansCond-Bold', sans-serif;
+	font-weight: 800;
+}

@@ -3,12 +3,17 @@
 	max-width: 750px;
 	text-align: center;
 }
+.summary-box h2 {
+	font-family: 'BentonSansCond-Bold', sans-serif;
+	font-weight: 800;
+	margin: 0 0 5px 0;
+}
 .summary-box .stat-box {
 	display: grid;
 	grid-template-columns: 22% 22% 25% 30%;
 }
 .summary-box .big-num {
-	font-family: 'Shift-Bold', serif;
+	font-family: 'Beon-Bold', serif;
 	font-size: 2.75rem;
 	font-weight: 800;
 	margin: 0;

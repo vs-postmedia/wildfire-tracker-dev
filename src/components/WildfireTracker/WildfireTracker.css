@@ -2,23 +2,19 @@
 	font-size: 1.8rem;
 	margin: 10px 0;
 }
-.stat-box .new,
-.leaflet-container .new {
+.new {
 	fill: #DD2D25;
 	color: #DD2D25;
 }
-.stat-box .out,
-.leaflet-container .out {
+.out {
 	fill: #6D6E70;
 	color: #6D6E70;
 }
-.stat-box .being-held,
-.leaflet-container .being-held {
+.being-held {
 	fill: #F26B21;
 	color: #F26B21;
 }
-.stat-box .under-control,
-.leaflet-container .under-control {
+.under-control {
 	fill: #0062A3;
 	color: #0062A3;
 }
