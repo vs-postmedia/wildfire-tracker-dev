@@ -23,3 +23,6 @@ DEV TO DO
 
 1. stat-boxes as toggles for fire components
 2. add "fires near me" search box (by postal?)
+3. Confirm spot fire definition. 0.01 hectares, I think, not km2
+4. Update basemap
+5. Fix attribution
