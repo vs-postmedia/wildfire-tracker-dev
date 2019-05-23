@@ -5,17 +5,29 @@ import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 import './CircleMap.css';
 
 
-export class CircleMap extends Component {	
+export class CircleMap extends Component {
+	getExtent(data) {
+		let fire_size = [];
+
+		data.forEach(d => {
+			fire_size.push(parseFloat(d.CURRENT_SI));
+		});
+
+		return [Math.min(...fire_size), Math.max(...fire_size)];
+	}
+
+	mapRange(from, to, s) {
+		return to[0] + (s - from[0]) * (to[1] - to[0]) / (from[1] - from[0]);
+	}
+
 	render() {
-		console.log(this.props);
 		const range = this.props.range ? this.props.range : [3,50];
-		const extent = getExtent(this.props.data);
+		const extent = this.getExtent(this.props.data);
 
 		// reorder array by CURRENT_SI, largest -> smallest
 		this.props.data.sort((a,b) => {
 			return b.CURRENT_SI - a.CURRENT_SI;
 		});
-
 
 		return (
 			<Map 
@@ -35,7 +47,7 @@ export class CircleMap extends Component {
 						className={`circle-marker ${classField}`}
 						color='#FFFFFF'
 						fillOpacity='0.7'
-						radius={mapRange(extent, range, d.CURRENT_SI)}
+						radius={this.mapRange(extent, range, d.CURRENT_SI)}
 						stroke={true}
 						weight='0.5'>
 							<Tooltip>
@@ -47,20 +59,6 @@ export class CircleMap extends Component {
 		);
 	}
 }
-
-const getExtent = function(data) {
-	let fire_size = [];
-
-	data.forEach(d => {
-		fire_size.push(parseFloat(d.CURRENT_SI));
-	});
-
-	return [Math.min(...fire_size), Math.max(...fire_size)];
-}
-
-const mapRange = function(from, to, s) {
-  return to[0] + (s - from[0]) * (to[1] - to[0]) / (from[1] - from[0]);
-};
 
 
 export default CircleMap;
