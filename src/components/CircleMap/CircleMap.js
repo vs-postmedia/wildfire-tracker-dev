@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { CircleMarker, Map, TileLayer, Tooltip} from 'react-leaflet';
+import { CircleMarker, Map, TileLayer, Tooltip } from 'react-leaflet';
 import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 
 import './CircleMap.css';
 
 
 export class CircleMap extends Component {
+	componentDidMount() {
+		this.extent_calcuted = false;
+		this.range = this.props.range ? this.props.range : [3,50];
+	}
+
 	getExtent(data) {
 		let fire_size = [];
 
@@ -21,9 +26,12 @@ export class CircleMap extends Component {
 	}
 
 	render() {
-		const range = this.props.range ? this.props.range : [3,50];
-		const extent = this.getExtent(this.props.data);
-
+		// we only want to calculate the extent once, otherwise the circle size changes when toggling by fire_type, which is confusing
+		if (!this.extent_calcuted) {
+			this.extent = this.getExtent(this.props.data);
+			this.extent_calcuted = true;
+		}
+		
 		// reorder array by CURRENT_SI, largest -> smallest
 		this.props.data.sort((a,b) => {
 			return b.CURRENT_SI - a.CURRENT_SI;
@@ -47,7 +55,7 @@ export class CircleMap extends Component {
 						className={`circle-marker ${classField}`}
 						color='#FFFFFF'
 						fillOpacity='0.7'
-						radius={this.mapRange(extent, range, d.CURRENT_SI)}
+						radius={this.mapRange(this.extent, this.range, d.CURRENT_SI)}
 						stroke={true}
 						weight='0.5'>
 							<Tooltip>

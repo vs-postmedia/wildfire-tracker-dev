@@ -41,10 +41,10 @@ export class SummaryBox extends Component {
 
 	render() {
 		const fire_stats = this.calculateFireStats(this.props.data);
-		console.log(fire_stats, this.props.data)
+		// console.log(fire_stats, this.props.data)
 
 		return (
-			<div className="summary-box">
+			<div className="summary-box" onClick={this.props.onClick}>
 				<h2>Latest wildfire stats</h2>
 		
 				<div className="stat-box">

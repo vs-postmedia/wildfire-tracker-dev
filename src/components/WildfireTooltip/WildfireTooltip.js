@@ -6,7 +6,7 @@ const WildfireTooltip = (props) => {
 		<div className="wf-tooltip">
 			<h3>{props.data.GEOGRAPHIC}</h3>
 			<p className={`status ${props.data.FIRE_STATU.toLowerCase().replace(/\s/g, '-')}`}>Status: {props.data.FIRE_STATU}</p>
-			<p>{`A fire that is currently ${checkSize(props)} square kilometres started on ${props.data.ignition_date}.`}</p>
+			<p>{`A fire of ${checkSize(props)} square kilometres started on ${props.data.ignition_date}.`}</p>
 
 			<p>Suspected cause: {formatFireCause(props.data.FIRE_CAUSE)}</p>
 		</div>
@@ -19,7 +19,7 @@ function checkSize(props) {
 }
 
 function formatFireCause(text) {
-	return text == '' ? 'unknown' : text.toLowerCase();
+	return text === '' ? 'unknown' : text.toLowerCase();
 }
 
 export default WildfireTooltip;
