@@ -25,7 +25,7 @@ export class SummaryBox extends Component {
 		stats.last_update = this.props.data.length > 0 ? this.props.data[0].last_update : 'Not available';
 
 		for (let i = 0; i < data.length; ++i) {
-			if (data[i].FIRE_STATU === 'New') {
+			if (data[i].FIRE_STATU === 'New' | data[i].FIRE_STATU == 'Out of Control') {
 				stats.new_fires++;
 			} else if (data[i].FIRE_STATU === 'Being Held') {
 				stats.held_fires++;

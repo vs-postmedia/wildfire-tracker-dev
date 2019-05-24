@@ -48,7 +48,7 @@ export class CircleMap extends Component {
 					minZoom={this.props.minZoom}/>
 				
 				{this.props.data.map(d => {
-					const classField = d[this.props.circleMarkerClassField].toLowerCase().replace(/\s/g, '-');
+					let classField = d[this.props.circleMarkerClassField].toLowerCase().replace(/\s/g, '-');
 
 					return <CircleMarker key={d.FIRE_ID} 
 						center={[d.LATITUDE, d.LONGITUDE]} 

@@ -2,7 +2,8 @@
 	font-size: 1.8rem;
 	margin: 10px 0;
 }
-.new {
+.new,
+.out-of-control {
 	fill: #DD2D25;
 	color: #DD2D25;
 }

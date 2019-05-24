@@ -36,6 +36,26 @@ export class WildfireTracker extends Component {
 		});
 	}
 
+	filterFireData(fire_class) {
+		console.log(fire_class);
+
+		// currently, 'new' & 'out-of-control' fires are listed as new. Not sure if this is ideal. 
+		if (fire_class === 'new') {
+			let data_array = [];
+			this.state.data_all.forEach(d => {
+				const fire_status = d.FIRE_STATU.replace(/\s/g, '-').toLowerCase();
+
+				if (fire_status === fire_class | fire_status === 'out-of-control') {
+					data_array.push(d);
+				}
+			});
+
+			return data_array;
+		} else {
+			return this.state.data_all.filter(d => d.FIRE_STATU.replace(/\s/g, '-').toLowerCase() === fire_class);
+		}
+	}
+
 	toggleFireTypeHandler(e) {
 		let fire_data;
 		let fire_class = e.target.className.split(' ')[1];
@@ -44,19 +64,13 @@ export class WildfireTracker extends Component {
 			fire_data = this.state.data_all;
 			fire_class = null;
 		} else {
-			fire_data = this.state.data_all.filter(d => d.FIRE_STATU.replace(/\s/g, '-').toLowerCase() === fire_class);
+			fire_data = this.filterFireData(fire_class);
 		}
 
 		this.setState({
 			data_displayed: fire_class,
 			data: fire_data
 		});
-	}
-
-	titleCase(str) {
-		return str.replace(/\w\S*/g, function(txt) {
-        	return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    	});
 	}
 
 	render() {
