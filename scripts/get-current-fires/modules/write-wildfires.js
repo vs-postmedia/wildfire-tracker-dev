@@ -4,7 +4,7 @@ const async = require('async');
 const GoogleSpreadsheet = require('google-spreadsheet');
 // const gSheetHelper = require('../modules/google-sheets-helper');
 
-const creds = require('../modules/vs-wildfire-tracker-c63b0d5442bd.json');
+const creds = require('./vs-wildfire-tracker-c63b0d5442bd.json');
 const spreadsheet_id = '1mg71j-P91H_PpA9OufEPIRrDgpK80nWpN1CKH9LlIBk';
 
 
