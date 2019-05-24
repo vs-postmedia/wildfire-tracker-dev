@@ -22,7 +22,7 @@ export class SummaryBox extends Component {
 		stats.km_burned = (hectares_burned / 100).toFixed(0);
 		stats.total_fires = data.length + 1;
 
-		stats.last_update = this.props.data.length > 0 ? this.props.data[0].last_update : 'Not available';
+		stats.last_update = this.props.data.length > 0 ? this.returnCurrentTime(this.props.data[0].last_update) : 'Not available';
 
 		for (let i = 0; i < data.length; ++i) {
 			if (data[i].FIRE_STATU === 'New' | data[i].FIRE_STATU == 'Out of Control') {
@@ -37,6 +37,19 @@ export class SummaryBox extends Component {
 		}
 
 		return stats;
+	}
+
+	returnCurrentTime(ts) {
+		const timestamp = new Date(ts);
+		const month = this.returnUTCMonth(timestamp.getUTCMonth());
+
+		return `${month} ${timestamp.getUTCDate()}, ${timestamp.getUTCFullYear()} at ${timestamp.toLocaleTimeString()}`
+	}
+
+	returnUTCMonth(month_num) {
+		const month_lookup = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+		return month_lookup[parseInt(month_num)];
 	}
 
 	render() {

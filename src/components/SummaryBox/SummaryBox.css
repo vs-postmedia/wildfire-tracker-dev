@@ -11,6 +11,7 @@
 .summary-box .stat-box {
 	display: grid;
 	grid-template-columns: 22% 22% 25% 30%;
+	cursor: pointer;
 }
 .summary-box .big-num {
 	font-family: 'Beon-Bold', serif;
