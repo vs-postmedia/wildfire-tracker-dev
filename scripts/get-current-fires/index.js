@@ -2,10 +2,10 @@ const fs = require('fs');
 const unzip = require('unzip');
 const request = require('request');
 const shp2json = require('shp2json');
-var CronJob = require('cron').CronJob;
+// var CronJob = require('cron').CronJob;
 const JSONStream = require('JSONStream');
 const writeWildfire = require('./modules/write-wildfires');
-const writeWildfire = require('./modules/scrape-fire');
+// const writeWildfire = require('./modules/scrape-fire');
 
 
 // DIRECTORIES & URLS
@@ -25,13 +25,13 @@ let fire_links = [];
 // kick things off
 downloadAndUnzip();
 // run very hour at quarter past
-new CronJob('15 * * * *', function() {
-	const date = new Date();
+// new CronJob('15 * * * *', function() {
+// 	const date = new Date();
 
-	console.log(`Current time is ${date.getHours()}:${date.getMinutes()}`);
+// 	console.log(`Current time is ${date.getHours()}:${date.getMinutes()}`);
 	
-	downloadAndUnzip();
-}, null, true, 'America/Los_Angeles');
+// 	downloadAndUnzip();
+// }, null, true, 'America/Los_Angeles');
 
 
 
@@ -61,6 +61,11 @@ function parseFireData(data) {
 	
 	fire.last_update = Date.now();
 	fire.ignition_date = returnHumanReadableDate(fire.IGNITION_D);
+	
+	// CURRENT_SI needs a value & sometimes comes back empty
+	if (fire.CURRENT_SI === null) {
+		fire.CURRENT_SI = 0;
+	}
 	fireArray.push(fire);
 
 	// collect links for 'Fires of note'
@@ -81,7 +86,7 @@ function parseShapefile(shapefile) {
 					parseFireData(d);
 				})
 				.on('end', d => {
-					// writeWildfire(fireArray, spreadsheet_id);
+					writeWildfire(fireArray, spreadsheet_id);
 				})
 		);
 }
