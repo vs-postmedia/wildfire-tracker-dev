@@ -40,7 +40,7 @@ export class SummaryBox extends Component {
 	}
 
 	returnCurrentTime(ts) {
-		const timestamp = new Date(ts);
+		const timestamp = new Date(parseInt(ts));
 		const month = this.returnUTCMonth(timestamp.getUTCMonth());
 
 		return `${month} ${timestamp.getUTCDate()}, ${timestamp.getUTCFullYear()} at ${timestamp.toLocaleTimeString()}`
