@@ -1,3 +1,6 @@
+
+scripts/get-current-fires/current-fires/*
+
 .DS_Store
 # build directory
 build/
