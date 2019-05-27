@@ -6,7 +6,7 @@
 .summary-box h2 {
 	font-family: 'BentonSansCond-Bold', sans-serif;
 	font-weight: 800;
-	margin: 0 0 5px 0;
+	margin: 5px 0;
 }
 .summary-box .stat-box {
 	display: grid;
@@ -21,6 +21,7 @@
 	opacity: 0.8;
 }
 .summary-box .label {
+	color: #6D6E70;
 	font-size: 1.1rem;
 	line-height: 1.25rem;
 	margin: 0;
