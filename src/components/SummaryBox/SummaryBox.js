@@ -41,12 +41,12 @@ export class SummaryBox extends Component {
 
 	returnCurrentTime(ts) {
 		const timestamp = new Date(parseInt(ts));
-		const month = this.returnUTCMonth(timestamp.getUTCMonth());
+		const month = this.returnMonth(timestamp.getUTCMonth());
 
-		return `${month} ${timestamp.getUTCDate()}, ${timestamp.getUTCFullYear()} at ${timestamp.toLocaleTimeString()}`
+		return `${month} ${timestamp.toLocaleDateString().split('/')[1]}, ${timestamp.getUTCFullYear()} at ${timestamp.toLocaleTimeString()}`
 	}
 
-	returnUTCMonth(month_num) {
+	returnMonth(month_num) {
 		const month_lookup = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 		return month_lookup[parseInt(month_num)];
