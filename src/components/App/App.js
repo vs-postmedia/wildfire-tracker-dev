@@ -1,6 +1,7 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
-import WildfireTracker from '../WildfireTracker/WildfireTracker';
+import WildfireMap from '../WildfireMap/WildfireMap';
 
 
 // google sheet that stores fire data
@@ -15,14 +16,22 @@ const attribution = '&copy;<a href=&quot;http://osm.org/copyright&quot;>OpenStre
 
 function App() {
 	return (
-	  	<div className="App">
-	  		<h1>B.C. Wildfire Tracker</h1>
-			<WildfireTracker 
-				sheet={googleSheetURL}
-				tiles={map_url}
-				attribution={attribution}>
-			</WildfireTracker>
-	  	</div>
+		<BrowserRouter>
+		  	<div className="App">
+		  		<h1>B.C. Wildfire Tracker</h1>
+		  		<Route path='/' exact 
+		  			render={(props) => (
+		  				<WildfireMap {...props}
+							sheet={googleSheetURL}
+							tiles={map_url}
+							attribution={attribution}>
+						</WildfireMap>
+		  			)} 
+		  		/>
+		  		
+				{/**/}
+		  	</div>
+	  	</BrowserRouter>
 	);
 }
 

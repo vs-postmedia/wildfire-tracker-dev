@@ -54,7 +54,6 @@ export class SummaryBox extends Component {
 
 	render() {
 		const fire_stats = this.calculateFireStats(this.props.data);
-		// console.log(fire_stats, this.props.data)
 
 		return (
 			<div className="summary-box" onClick={this.props.onClick}>
@@ -88,8 +87,3 @@ export class SummaryBox extends Component {
 }
 
 export default SummaryBox;
-
-		// <div className="stat">
-		// 				<p className="big-num">{fire_stats.km_burned}</p>
-		// 				<p className="label">Square km<br/>burned</p>
-		// 			</div>
