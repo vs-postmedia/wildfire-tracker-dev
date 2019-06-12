@@ -1,0 +1,43 @@
+.main-card {
+	margin-bottom: 2rem;
+}
+
+.main-card header p {
+	margin-bottom: 15px;
+}
+.main-card h2 {
+	margin-bottom: 3px;
+}
+
+.main-card p {
+	font-size: 0.9rem;
+	margin: 3px 0;
+}
+.main-card .status-box {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+.main-card .status-box>div {
+	flex-wrap: wrap;
+}
+.main-card .status-box .num {
+	font-family: Shift-Bold, serif;
+	font-size: 2.35rem;
+	margin: 0;
+}
+.main-card .status-box .label {
+	margin: 0;
+	text-transform: uppercase;
+}
+
+
+.main-card .stat-box .icon {
+	background-color: steelblue;
+	height: 40px;
+	width: 40px;
+}
+.main-card .map {
+	background: red;
+	height: 125px;
+}

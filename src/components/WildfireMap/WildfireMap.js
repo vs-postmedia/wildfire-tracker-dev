@@ -76,6 +76,7 @@ export class WildfireTracker extends Component {
 	render() {
 		return (
 			<Aux>
+				<h1>B.C. Wildfire Tracker</h1>
 				<CircleMap id="mapview"
 					attribution={this.props.attribution}
 					center={this.state.center}
