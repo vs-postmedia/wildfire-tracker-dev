@@ -1,6 +1,8 @@
  # wildfire-tracker-dev
 Development build for the wildfire tracker.
 
+Based off of current fire locations found at: `https://catalogue.data.gov.bc.ca/dataset/fire-locations-current`
+
 Built with create-react-app.
 
 ###
