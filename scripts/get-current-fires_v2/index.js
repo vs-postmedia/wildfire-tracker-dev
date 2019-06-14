@@ -41,13 +41,18 @@ let fire_links = [];
 updateWildfireData();
 
 // run every hour at quarter past
-new CronJob('15 * * * *', function() { updateWildfireData(); }, null, true, 'America/Los_Angeles');
+// new CronJob('15 * * * *', function() { updateWildfireData(); }, null, true, 'America/Los_Angeles');
 
 
 
 
 // pretty self explanitory
-function updateWildfireData() {
+async function updateWildfireData() {
+	// get RSS feed for fires of note
+	const fon_ids = await parseRssFeed(wildfire_rss_feed);
+
+	console.log(fon_ids)
+
 	// download and unzip
 	request
 		.get(current_fire_url)
@@ -61,13 +66,12 @@ function updateWildfireData() {
 			// hack-y....
 			setTimeout(() => {
 				// convert shape to json
-				parseShapefile(current_fires_shp);
+				parseShapefile(current_fires_shp, fon_ids);
 			}, 10000);
 			
 		});
 
-	// get RSS feed for fires of note
-	parseRssFeed(wildfire_rss_feed);
+	
 }
 
 async function parseRssFeed(rss_feed) {
@@ -75,20 +79,23 @@ async function parseRssFeed(rss_feed) {
 		let feed = await parser.parseURL(rss_feed);
 
 		feed.items.forEach(item => {
-			fire_links.push(item.link);
+			const fire_id = parseInt(item.link.split('ID=')[1]);
+			fire_links.push(fire_id);
 		});
 
-		updateFiresOfNote(fire_links);
+		// updateFiresOfNote(fire_links);
+		return fire_links;
 	} catch(err) {
 		console.log(err);
 	}
 }
 
 // runs on each row of data
-function parseFireData(data) {
+function parseFireData(data, fon_ids) {
 	let fire = data.properties;
-	
+
 	fire.last_update = Date.now();
+	fire.fon = fon_ids.includes(parseInt(fire.FIRE_NT_ID));
 	fire.ignition_date = returnHumanReadableDate(fire.IGNITION_D);
 	fireArray.push(fire);
 
@@ -96,17 +103,17 @@ function parseFireData(data) {
 	delete fire.IGNITION_D;
 }
 
-function parseShapefile(shapefile) {
+function parseShapefile(shapefile, fon_ids) {
 	const jStream = JSONStream.parse(['features', true]);
 
 	shp2json.fromShpFile(shapefile)
 		.pipe(jStream
 				.on('data', d => {
-					parseFireData(d);
+					parseFireData(d, fon_ids);
 				})
 				.on('end', d => {
 					// write fires to google sheet
-					// writeWildfire(fireArray, spreadsheet_id);
+					writeWildfire(fireArray, spreadsheet_id);
 				})
 				.on('error', err => {
 					console.log(err);
