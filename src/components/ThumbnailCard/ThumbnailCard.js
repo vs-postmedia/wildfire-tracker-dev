@@ -4,7 +4,7 @@ import './ThumbnailCard.css';
 const ThumbnailCard = (props) => {
 	const fire = props.data;
 
-	console.log(fire)
+	// console.log(fire)
 	return (
 		<div className='thumbnail-card' onClick={() => props.listClickHandler(fire)}>
 			<h3>{fire.fire_name.split(' (')[0]}</h3>

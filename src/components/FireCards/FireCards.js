@@ -27,8 +27,7 @@ export class FireCards extends Component {
 			key: this.props.sheet,
 			callback: (data, tabletop) => {
 				const fire_data = this.parseSearchParams(data);
-
-				this.setState(fire_data);
+				// this.setState(fire_data);
 				this.fetchFireData(fire_data);
 			},
 			simpleSheet: true
@@ -38,26 +37,39 @@ export class FireCards extends Component {
 
 
 	fetchFireData(data) {
-		const fire_ids = data.fon.map(d => {
+		let fire_ids = data.fon.map(d => {
 			return d.FIRE_NT_ID;
-		})
+		});
+
+		// this sheet has the FON data from the RSS Feed
+		fire_ids.push('fon_ids');
 
 		Tabletop.init({
 			key: this.props.fonSheet,
 			callback: (data, tabletop) => {
+				
+				const fon_ids = data.fon_ids.elements.map(d => d.ids);
 				let fon = [];
-				let current_state_data = this.state.data;
+				// let current_state_data = this.state.data;
 
 				// loop through the object returned & push the google sheets data into an array
 				for (let fire in data) {
-					data[fire].elements[0].fire_id = fire;
-					fon.push(data[fire].elements[0]);
+					const fire_item = data[fire].elements[0];
+					fire_item.fire_id = fire;
+
+					if (fon_ids.includes(fire_item.fire_id)) {
+						fon.push(fire_item);
+					}
 				}
+
+				// main fire card
+				const main_fire_data = this.getMainFire(fon, this.state.fire_id);
 	
 				// update our state with the new data
 				this.setState({
-					data: [...fon, ...current_state_data],
-					main_fire_data: this.getMainFire(fon, this.state.fire_id)
+					// data: [...fon, ...current_state_data],
+					fon: fon,
+					main_fire_data: main_fire_data
 				});
 			},
 			simpleSheet: false,
@@ -71,7 +83,6 @@ export class FireCards extends Component {
 
 	getFireCentreID(fire_centre) {
 		const id = fire_centers.filter(d => {
-			console.log(d, fire_centre)
 			return d.name.toLowerCase() === fire_centre ? d.id : null;
 		});
 
@@ -83,7 +94,18 @@ export class FireCards extends Component {
 	}
 
 	getMainFire(fon, fire_id) {
-		return fon.filter(d => d.fire_id === fire_id);
+		let main_fire_id;
+
+		// if there's no fire_id assigned from the URL, take the most recent fire from the list
+		if (!fire_id) {
+			main_fire_id = fon.pop();
+		} else {
+			main_fire_id = fon.filter(d => d.fire_id === fire_id);
+		}
+
+		// const main_fire_id = !fire_id ? fon.pop() : fon.filter(d => d.fire_id === fire_id);
+
+		return main_fire_id;
 	}
 
 	listClickHandler(fire) {
@@ -137,7 +159,7 @@ export class FireCards extends Component {
 				<CardList 
 					data={this.state.data}
 					fire_id={this.state.fire_id}
-					main_fire={this.state.main_fire_data}
+					main_fire_data={this.state.main_fire_data}
 					onClick={this.listClickHandler}
 					listClickHandler={this.listClickHandler}>
 				</CardList>

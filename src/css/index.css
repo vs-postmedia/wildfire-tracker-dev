@@ -26,4 +26,5 @@ a {
 
 .App p {
 	font-family: BentonSansCond-Regular, Helvetica, sans-serif;
+	line-height: 1.25rem;
 }

@@ -10,26 +10,17 @@ const CardList = (props) => {
 	const data = props.data.sort((a,b) => {
 		return parseInt(b.fire_id) - parseInt(a.fire_id);
 	});
- 
+ 	console.log(data, props.main_fire_data)
 	// get fire by ID in URL or latest fire
-	const main_card = props.main_fire !== null ? props.main_fire : data[0];
+	const main_card = props.main_fire_data !== null ? props.main_fire_data : data.pop();
 
-	if (main_card && main_card.length > 0) {
+
+
+	if (main_card) {
+		// console.log(main_card, main_card.length)
 		return (
 			<Aux>
 				<MainCard className='main-card' data={main_card}></MainCard>
-				
-				<div className='card-list'>
-					<h2 className='subhead'>Fires of Note</h2>
-					<ul>
-			 			{ data.map(d => {
-			 				return <ThumbnailCard 
-			 					key={d.fire_id}
-			 					data={d} 
-			 					listClickHandler={props.listClickHandler}></ThumbnailCard>
-						})}
-					</ul>
-				</div>
 			</Aux>
 		)
 	} else {
@@ -41,3 +32,17 @@ const CardList = (props) => {
 
 
 export default CardList;
+
+// { data.length > 0 &&
+// 	<div className='card-list'>
+// 		<h2 className='subhead'>Fires of Note</h2>
+// 		<ul>
+//  			{ data.map(d => {
+//  				return <ThumbnailCard 
+//  					key={d.fire_id}
+//  					data={d} 
+//  					listClickHandler={props.listClickHandler}></ThumbnailCard>
+// 			})}
+// 		</ul>
+// 	</div>
+// }

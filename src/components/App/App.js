@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
-import WildfireMap from '../WildfireMap/WildfireMap';
+import WildfireTracker from '../WildfireTracker/WildfireTracker';
 import FireCards from '../FireCards/FireCards';
+
+import './App.css';
 
 
 // google sheet that stores fire data
@@ -22,11 +23,12 @@ function App() {
 		  	<div className="App">
 		  		<Route path='/' exact 
 		  			render={(props) => (
-		  				<WildfireMap {...props}
+		  				<WildfireTracker {...props}
+						  	fonSheet={firesOfNoteURL}
 							sheet={currentFiresURL}
 							tiles={map_url}
 							attribution={attribution}>
-						</WildfireMap>
+						</WildfireTracker>
 		  			)} 
 		  		/>
 		  		<Route path='/fire-centre'
@@ -43,3 +45,12 @@ function App() {
 }
 
 export default App;
+
+/*
+<WildfireMap {...props}
+	fonSheet={firesOfNoteURL}
+	sheet={currentFiresURL}
+	tiles={map_url}
+	attribution={attribution}>
+</WildfireMap>
+*/

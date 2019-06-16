@@ -48,6 +48,7 @@ export class CircleMap extends Component {
 					minZoom={this.props.minZoom}/>
 				
 				{this.props.data.map(d => {
+					let radius = this.range ? this.mapRange(this.extent, this.range, d.CURRENT_SI) : 0
 					let classField = d[this.props.circleMarkerClassField].toLowerCase().replace(/\s/g, '-');
 
 					return <CircleMarker key={d.FIRE_ID} 
@@ -55,7 +56,7 @@ export class CircleMap extends Component {
 						className={`circle-marker ${classField}`}
 						color='#FFFFFF'
 						fillOpacity='0.7'
-						radius={this.mapRange(this.extent, this.range, d.CURRENT_SI)}
+						radius={radius}
 						stroke={true}
 						weight='0.5'>
 							<Tooltip>

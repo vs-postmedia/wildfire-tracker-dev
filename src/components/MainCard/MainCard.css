@@ -16,17 +16,27 @@
 .main-card .status-box {
 	display: flex;
 	justify-content: center;
+	margin-bottom: 20px;
 	text-align: center;
 }
 .main-card .status-box>div {
 	flex-wrap: wrap;
 }
-.main-card .status-box .num {
-	font-family: Shift-Bold, serif;
+.main-card .status-box .big-num {
 	font-size: 2.35rem;
 	margin: 0;
 }
+.main-card .status-box .big-num.active {
+	color: red;
+}
+.main-card .status-box .big-num.under-control {
+	color: steelblue;
+}
+.main-card .status-box .big-num.held {
+	color: orange;
+}
 .main-card .status-box .label {
+	color: #6e6e6e;
 	margin: 0;
 	text-transform: uppercase;
 }
