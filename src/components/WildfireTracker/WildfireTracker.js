@@ -36,6 +36,8 @@ export class WildfireTracker extends Component {
 	}
 
 	fetchFireData(data) {
+		const all_fires = data;
+
 		let fire_ids = data.map(d => {
 			return d.FIRE_NT_ID;
 		});
@@ -48,8 +50,13 @@ export class WildfireTracker extends Component {
 				// loop through the object returned & push the google sheets data into an array
 				for (let fire in data) {
 					const fon = data[fire].elements[0];
+					// google sheet returns an object of objects with the key being the fire ID
 					fon.fire_id = fire;
-					fires_of_note.push(fon)
+
+					// merge fon details with basic fire data
+					const fire_merged = this.mergeFireDetails(fon, all_fires);
+
+					fires_of_note.push(fire_merged)
 				}
 
 				// update our state with the new data
@@ -78,6 +85,18 @@ export class WildfireTracker extends Component {
 		} else {
 			return this.state.data_all.filter(d => d.FIRE_STATU.replace(/\s/g, '-').toLowerCase() === fire_class);
 		}
+	}
+
+	mergeFireDetails(fon, fires) {
+		let fire_data;
+
+		fires.forEach(d => {
+			if (d.FIRE_NT_ID === fon.fire_id) {
+				fire_data = {...fon, ...d};
+			}
+		});
+
+		return fire_data;
 	}
 
 	toggleFireTypeHandler(e) {

@@ -1,0 +1,53 @@
+.main-card {
+	margin-bottom: 2rem;
+}
+
+.main-card header p {
+	margin-bottom: 15px;
+}
+.main-card h3 {
+	margin-bottom: 3px;
+}
+
+.main-card p {
+	font-size: 0.9rem;
+	margin: 3px 0;
+}
+.main-card .status-box {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+	text-align: center;
+}
+.main-card .status-box>div {
+	flex-wrap: wrap;
+}
+.main-card .status-box .big-num {
+	font-size: 2.35rem;
+	margin: 0;
+}
+.main-card .status-box .big-num.active {
+	color: red;
+}
+.main-card .status-box .big-num.under-control {
+	color: steelblue;
+}
+.main-card .status-box .big-num.held {
+	color: orange;
+}
+.main-card .status-box .label {
+	color: #6e6e6e;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+
+.main-card .stat-box .icon {
+	background-color: steelblue;
+	height: 40px;
+	width: 40px;
+}
+.main-card #mapview {
+	background: red;
+	height: 125px;
+}
