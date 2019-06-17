@@ -11,6 +11,10 @@ a {
     -webkit-tap-highlight-color: transparent;
 }
 
+.App {
+	margin: 0 auto;
+	max-width: 750px;
+}
 .App h1 {
 	font-family: Shift-BoldItalic, serif;
 	font-size: 2rem;
