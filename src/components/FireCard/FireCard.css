@@ -47,7 +47,7 @@
 	height: 40px;
 	width: 40px;
 }
-.main-card #mapview {
-	background: red;
+.main-card #fon-mapview,
+.main-card .leaflet-container {
 	height: 125px;
 }

@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+// import { BrowserRouter, Route } from 'react-router-dom';
 import WildfireTracker from '../WildfireTracker/WildfireTracker';
-import FireCards from '../FireCards/FireCards';
 
 import './App.css';
 
@@ -19,7 +18,20 @@ const attribution = '&copy;<a href=&quot;http://osm.org/copyright&quot;>OpenStre
 
 function App() {
 	return (
-		<BrowserRouter>
+		<WildfireTracker
+	  	fonSheet={firesOfNoteURL}
+		sheet={currentFiresURL}
+		tiles={map_url}
+		attribution={attribution}>
+	</WildfireTracker>
+
+	);
+}
+
+export default App;
+
+/*
+<BrowserRouter>
 		  	<div className="App">
 		  		<Route path='/' exact 
 		  			render={(props) => (
@@ -41,16 +53,4 @@ function App() {
 		  		/>
 		  	</div>
 	  	</BrowserRouter>
-	);
-}
-
-export default App;
-
-/*
-<WildfireMap {...props}
-	fonSheet={firesOfNoteURL}
-	sheet={currentFiresURL}
-	tiles={map_url}
-	attribution={attribution}>
-</WildfireMap>
 */

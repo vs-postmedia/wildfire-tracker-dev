@@ -1,17 +1,23 @@
 import React from 'react';
-// import CircleMap from '../CircleMap/CircleMap';
+import CircleMap from '../CircleMap/CircleMap';
 
 import './FireCard.css';
 
 const FireCard = (props) => {
-	const fire = props.data[0];
-	console.log(props)
-	// const resource_list = fire.resources.split(',');
-	const status_list = fire.status_details.substr(0, fire.status_details.indexOf(' ,'));
+	const fire = props.data;
 	
-	// // split status & resources into key/value pairs
+	// split resources into key/value pairs
+	// const resource_list = fire.resources.split(',');
 	// const resources = mapToObject(resource_list);
-	const status = mapToObject([status_list]);
+
+	const map_options = {
+		center: [fire.LATITUDE.toString(), fire.LONGITUDE.toString()],
+		classField: 'fon',
+		maxZoom: 8,
+		minZoom: 4,
+		radius: 10,
+		zoom: 5
+	};
 
 	return (
 		<div className='main-card'>
@@ -40,22 +46,34 @@ const FireCard = (props) => {
 					<p>{`Size: ${fire.size}`}</p>
 				</div>
 			</div>
-			<div id='mapview'></div>
+			
+			<CircleMap id="fon-mapview"
+				attribution={props.attribution}
+				center={map_options.center}
+				circleMarkerClassField={map_options.classField}
+				data={[fire]}
+				maxZoom={map_options.maxZoom}
+				minZoom={map_options.minZoom}
+				radius={map_options.radius}
+				range={[5,5]}
+				tiles={props.tiles}
+				zoom={map_options.zoom}>
+			</CircleMap>
 			<p>{fire.status_details.split(' ,,')[0].split(',For')[0]}</p>
 		</div>
 	);
 }
 
-function mapToObject(arr) {
-	const obj = arr.map(d => {
-		return {
-			value: parseInt(d.substr(0, d.indexOf(' '))),
-			label: d.substr(d.indexOf(' ') + 1)
-		};
-	});
+// function mapToObject(arr) {
+// 	const obj = arr.map(d => {
+// 		return {
+// 			value: parseInt(d.substr(0, d.indexOf(' '))),
+// 			label: d.substr(d.indexOf(' ') + 1)
+// 		};
+// 	});
 
-	return obj;
-}
+// 	return obj;
+// }
 
 export default FireCard;
 

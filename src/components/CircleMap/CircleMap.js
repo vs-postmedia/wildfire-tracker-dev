@@ -14,10 +14,10 @@ export class CircleMap extends Component {
 	getExtent(data) {
 		let fire_size = [];
 
+
 		data.forEach(d => {
 			fire_size.push(parseFloat(d.CURRENT_SI));
 		});
-
 		return [Math.min(...fire_size), Math.max(...fire_size)];
 	}
 
@@ -48,8 +48,16 @@ export class CircleMap extends Component {
 					minZoom={this.props.minZoom}/>
 				
 				{this.props.data.map(d => {
-					let radius = this.range ? this.mapRange(this.extent, this.range, d.CURRENT_SI) : 0
-					let classField = d[this.props.circleMarkerClassField].toLowerCase().replace(/\s/g, '-');
+					let radius;
+
+					if (this.props.data.length > 1) {
+						radius = this.range ? this.mapRange(this.extent, this.range, d.CURRENT_SI) : 0						
+					} else {
+						radius = this.props.radius;
+					}
+					
+					const circleMarkerClass = d[this.props.circleMarkerClassField]? d[this.props.circleMarkerClassField] : 'fire-of-note';
+					const classField = circleMarkerClass.toLowerCase().replace(/\s/g, '-');
 
 					return <CircleMarker key={d.FIRE_ID} 
 						center={[d.LATITUDE, d.LONGITUDE]} 

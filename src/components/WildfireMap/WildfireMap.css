@@ -19,6 +19,10 @@
 	fill: #0062A3;
 	color: #0062A3;
 }
+.fire-of-note {
+	fill: purple;
+	color: purple;
+}
 
 @media (min-width: 500px) {
 	.App h1 {
