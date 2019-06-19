@@ -2,12 +2,12 @@ import React from 'react';
 import FireCard from '../FireCard/FireCard';
 import fire_centers from '../../data/fire-centers.json';
 
-// import './FiresOfNote.css';
+import './FiresOfNote.css';
 
 const FiresOfNote = (props) => {
 	return (
 		<div className='fon'>
-			<h2>Fires of Note</h2>
+			<h1>Fires of Note</h1>
 			{
 				fire_centers.map((d, i) => {
 					let card;
