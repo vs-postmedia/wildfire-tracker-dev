@@ -2,7 +2,7 @@ import React from 'react';
 import FireCard from '../FireCard/FireCard';
 import fire_centers from '../../data/fire-centers.json';
 
-import './FiresOfNote.css';
+// import './FiresOfNote.css';
 
 const FiresOfNote = (props) => {
 	return (
@@ -15,7 +15,7 @@ const FiresOfNote = (props) => {
 
 					if (fon.length > 0) {
 						card = (
-							<FireCard className='main-card' 
+							<FireCard className='fire-card' 
 								attribution={props.attribution}
 								data={props.data[i]}
 								fireCenter={d.id}

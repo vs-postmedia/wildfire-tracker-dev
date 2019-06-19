@@ -20,7 +20,8 @@ const FireCard = (props) => {
 	};
 
 	return (
-		<div className='main-card'>
+		<div className='fire-card'>
+			<div className='row'>
 			<div className='text'>
 				<header>
 					<h3>{fire.fire_name.split(' (')[0]}</h3>
@@ -32,18 +33,28 @@ const FireCard = (props) => {
 						<p className='label'>Status</p>
 					</div>
 					{ fire.containment.length > 0 &&
-						<div className='contain'>
+						<div className='containment-item'>
 							<h2 className='big-num'>fire.containment</h2>
 							<p className='label'>Contained</p>
 						</div>
 					}
 				</div>
 
-				<p className='started-date'>{`Started ${fire.discovered.split('day, ')[1]}`}</p>
+				
 				
 				<div className='stat-box'>
-					<span className='size icon'></span>
-					<p>{`Size: ${fire.size}`}</p>
+					<div className='stat'>
+						<span className='started icon'></span>
+						<p className='started-date'>{`Started ${fire.discovered.split('day, ')[1]}`}</p>
+					</div>
+					<div className='stat'>
+						<span className='size icon'></span>
+						<p>{`Size: ${fire.size}`}</p>
+					</div>
+					<div className='stat'>
+						<span className='cause icon'></span>
+						<p>{`Cause: ${fire.cause}`}</p>
+					</div>
 				</div>
 			</div>
 			
@@ -59,21 +70,12 @@ const FireCard = (props) => {
 				tiles={props.tiles}
 				zoom={map_options.zoom}>
 			</CircleMap>
-			<p>{fire.status_details.split(' ,,')[0].split(',For')[0]}</p>
+			</div>
+			<p className="row">{fire.status_details.split(' ,,')[0].split(',For')[0]}</p>
 		</div>
 	);
 }
 
-// function mapToObject(arr) {
-// 	const obj = arr.map(d => {
-// 		return {
-// 			value: parseInt(d.substr(0, d.indexOf(' '))),
-// 			label: d.substr(d.indexOf(' ') + 1)
-// 		};
-// 	});
-
-// 	return obj;
-// }
 
 export default FireCard;
 

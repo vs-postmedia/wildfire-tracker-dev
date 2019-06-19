@@ -1,53 +1,81 @@
-.main-card {
+.fire-card {
 	margin-bottom: 2rem;
 }
 
-.main-card header p {
+.fire-card header p {
 	margin-bottom: 15px;
 }
-.main-card h3 {
+.fire-card h3 {
 	margin-bottom: 3px;
 }
 
-.main-card p {
+.fire-card p {
 	font-size: 0.9rem;
 	margin: 3px 0;
 }
-.main-card .status-box {
+.fire-card .status-box {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 20px;
 	text-align: center;
 }
-.main-card .status-box>div {
+.fire-card .status-box>div {
 	flex-wrap: wrap;
 }
-.main-card .status-box .big-num {
+.fire-card .status-box .big-num {
 	font-size: 2.35rem;
 	margin: 0;
 }
-.main-card .status-box .big-num.active {
+.fire-card .status-box .big-num.active {
 	color: red;
 }
-.main-card .status-box .big-num.under-control {
+.fire-card .status-box .big-num.under-control {
 	color: steelblue;
 }
-.main-card .status-box .big-num.held {
+.fire-card .status-box .big-num.held {
 	color: orange;
 }
-.main-card .status-box .label {
+.fire-card .status-box .label {
 	color: #6e6e6e;
 	margin: 0;
 	text-transform: uppercase;
 }
 
 
-.main-card .stat-box .icon {
+.fire-card .stat-box {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+.fire-card .stat {
+
+}
+.fire-card .stat-box .icon {
 	background-color: steelblue;
 	height: 40px;
 	width: 40px;
 }
-.main-card #fon-mapview,
-.main-card .leaflet-container {
-	height: 125px;
+.fire-card #fon-mapview,
+.fire-card .leaflet-container {
+	height: 200px;
+}
+
+@media screen and (min-width: 450px) {
+	.fire-card .row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+	.fire-card h3 {
+		margin-top: auto;
+	}
+	.fire-card .row > div {
+		flex: 1;
+	}
+	.fire-card #fon-mapview,
+	.fire-card .leaflet-container {
+	}
+	.fire-card .status-box {
+		margin-top: 2.25rem;
+	}
 }
