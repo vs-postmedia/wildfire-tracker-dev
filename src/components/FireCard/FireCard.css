@@ -74,6 +74,7 @@
 	}
 	.fire-card #fon-mapview,
 	.fire-card .leaflet-container {
+		height: 200px;
 	}
 	.fire-card .status-box {
 		margin-top: 2.25rem;
