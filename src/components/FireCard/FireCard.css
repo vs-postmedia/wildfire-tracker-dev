@@ -27,7 +27,7 @@
 	margin: 0;
 }
 .fire-card .status-box .big-num.active {
-	color: red;
+	color: #DD2D25;
 }
 .fire-card .status-box .big-num.under-control {
 	color: steelblue;
