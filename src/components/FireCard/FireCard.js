@@ -75,7 +75,7 @@ const FireCard = (props) => {
 		</div>
 	);
 }
-
+	
 
 export default FireCard;
 
