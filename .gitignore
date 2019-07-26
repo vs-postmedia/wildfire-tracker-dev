@@ -1,6 +1,6 @@
 
-scripts/get-current-fires/current-fires
-scripts/get-current-fires_v2/current-fires
+scripts/get-current-fires/current-fires/*
+scripts/get-current-fires_v2/current-fires/*
 
 .DS_Store
 # build directory
