@@ -16,7 +16,7 @@
 .fire-card .status-box {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	text-align: center;
 }
 .fire-card .status-box>div {
@@ -48,7 +48,13 @@
 	justify-content: space-around;
 }
 .fire-card .stat {
-
+	text-align: center;
+}
+.fire-card .stat-box .stat strong {
+	font-weight: 800;
+}
+.fire-card .stat-box .stat p {
+	margin: 0;
 }
 .fire-card .stat-box .icon {
 	background-color: steelblue;

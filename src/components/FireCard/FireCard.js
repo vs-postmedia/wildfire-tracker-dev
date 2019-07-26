@@ -45,15 +45,18 @@ const FireCard = (props) => {
 				<div className='stat-box'>
 					<div className='stat'>
 						<span className='started icon'></span>
-						<p className='started-date'>{`Started ${fire.discovered.split('day, ')[1]}`}</p>
+						<p><strong>Started:</strong></p> 
+						<p className='started-date'>{`${fire.discovered.split('day, ')[1]}`}</p>
 					</div>
 					<div className='stat'>
 						<span className='size icon'></span>
-						<p>{`Size: ${fire.size}`}</p>
+						<p><strong>Size:</strong></p> 
+						<p>{`${haToKm(fire.CURRENT_SI)} km square`}</p>
 					</div>
 					<div className='stat'>
 						<span className='cause icon'></span>
-						<p>{`Cause: ${fire.cause}`}</p>
+						<p><strong>Cause:</strong></p> 
+						<p>{`${fire.cause}`}</p>
 					</div>
 				</div>
 			</div>
@@ -75,7 +78,11 @@ const FireCard = (props) => {
 		</div>
 	);
 }
-	
+
+function haToKm(number) {
+	let size = (number / 100).toFixed(2);
+	return size;
+}
 
 export default FireCard;
 
