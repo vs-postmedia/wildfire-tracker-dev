@@ -8,7 +8,7 @@ const FireCard = (props) => {
 
 	const map_options = {
 		center: [fire.LATITUDE.toString(), fire.LONGITUDE.toString()],
-		classField: 'fon',
+		classField: 'fire-of-note',
 		maxZoom: 8,
 		minZoom: 4,
 		radius: 10,
@@ -36,8 +36,6 @@ const FireCard = (props) => {
 					}
 				</div>
 
-				
-				
 				<div className='stat-box'>
 					<div className='stat'>
 						<span className='started icon'></span>
