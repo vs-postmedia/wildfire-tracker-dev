@@ -42,8 +42,6 @@ export class WildfireTracker extends Component {
 			return d.FIRE_NT_ID;
 		});
 
-		fire_ids.push('794')
-
 		Tabletop.init({
 			key: this.props.fonSheet,
 			debug: false,
