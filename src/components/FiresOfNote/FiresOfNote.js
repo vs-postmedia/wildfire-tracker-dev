@@ -11,10 +11,12 @@ const FiresOfNote = (props) => {
 			<p>Wildfires of note are those which are highly visible or that pose a potential threat to public safety. The wildfires are categorizes by fire centres.</p>
 			<p>The province of B.C. is divided into six regional fire centres: Cariboo, Coastal, Kamloops, Northwest, Prince George and Southeast.</p>
 
+
 			{
 				fire_centers.map((d, i) => {
 					let card;
 					const fon = props.data.filter(fire => fire.FIRE_CENTR === d.id);
+
 
 					if (fon.length > 0) {
 						card = (

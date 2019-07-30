@@ -54,22 +54,22 @@ async function updateWildfireData() {
 	console.log(fon_ids)
 
 	// download and unzip
-	request
-		.get(current_fire_url)
-		.on('error', err => {
-			console.log(err);
-		})
-		.pipe(unzip.Extract({ path: shapefileDirectory }))
-		.on('finish', () => {
-			console.log('Shapefile downloaded & unzipped');
+	// request
+	// 	.get(current_fire_url)
+	// 	.on('error', err => {
+	// 		console.log(err);
+	// 	})
+	// 	.pipe(unzip.Extract({ path: shapefileDirectory }))
+	// 	.on('finish', () => {
+	// 		console.log('Shapefile downloaded & unzipped');
 
-			// hack-y....
-			setTimeout(() => {
-				// convert shape to json
-				parseShapefile(current_fires_shp, fon_ids);
-			}, 10000);
+	// 		// hack-y....
+	// 		setTimeout(() => {
+	// 			// convert shape to json
+	// 			parseShapefile(current_fires_shp, fon_ids);
+	// 		}, 10000);
 			
-		});
+	// 	});
 
 	
 }

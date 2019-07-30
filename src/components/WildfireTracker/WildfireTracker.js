@@ -42,14 +42,17 @@ export class WildfireTracker extends Component {
 			return d.FIRE_NT_ID;
 		});
 
+		fire_ids.push('794')
+
 		Tabletop.init({
 			key: this.props.fonSheet,
+			debug: false,
 			callback: (data, tabletop) => {
 				let fires_of_note = [];
-
 				// loop through the object returned & push the google sheets data into an array
 				for (let fire in data) {
-					const fon = data[fire].elements[0];
+					// const fon = data[fire].elements[0];
+					const fon = data[fire].elements.pop();
 					// google sheet returns an object of objects with the key being the fire ID
 					fon.fire_id = fire;
 
@@ -59,9 +62,9 @@ export class WildfireTracker extends Component {
 					fires_of_note.push(fire_merged)
 				}
 
-				// update our state with the new data
+				// update our state with the new data – not sure why but undefined popus up in  the array sometimes then everything breaks.
 				this.setState({
-					data_fon: fires_of_note
+					data_fon: fires_of_note.filter(fon => fon !== undefined)
 				});
 			},
 			simpleSheet: false,

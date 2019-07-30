@@ -5,10 +5,6 @@ import './FireCard.css';
 
 const FireCard = (props) => {
 	const fire = props.data;
-	
-	// split resources into key/value pairs
-	// const resource_list = fire.resources.split(',');
-	// const resources = mapToObject(resource_list);
 
 	const map_options = {
 		center: [fire.LATITUDE.toString(), fire.LONGITUDE.toString()],
