@@ -68,11 +68,11 @@ const FireCard = (props) => {
 				zoom={map_options.zoom}>
 			</CircleMap>
 			</div>
-			<p className="row">{fire.status_details.split(' ,,')[0].split(',For')[0]}</p>
+			
 		</div>
 	);
 }
-
+// <p className="row">{fire.status_details.split(' ,,')[0].split(',For')[0]}</p>
 function haToKm(number) {
 	let size = (number / 100).toFixed(2);
 	return size;

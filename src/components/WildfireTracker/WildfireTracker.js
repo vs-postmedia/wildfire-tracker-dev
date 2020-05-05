@@ -22,14 +22,42 @@ export class WildfireTracker extends Component {
 		Axios.get(this.props.currentData)
 			.then(resp => {
 				// get a list of fires of note then go grab the data from the corresponding google sheet
-				const fon_list = resp.data.filter(d => d.FIRE_STATU === 'Fire of Note');
-				// this.fetchFireData(fon_list);
+				// const fon_list = resp.data.filter(d => d.FIRE_STATU === 'Fire of Note');
+				// we don't always have fires of note
 
-				console.log(resp.data)
+				const fon_list = resp.data;
+				if (fon_list.length > 0) this.setupFiresOfNote(fon_list);
+				
+
 				// update our state with the new data
 				this.setState({
 					data: resp.data,
 					data_all: resp.data
+				});
+			});
+	}
+
+	setupFiresOfNote(data) {
+		const all_fires = data;
+
+		Axios.get(this.props.fonData)
+			.then(resp => {
+				const data = resp.data;
+				let fires_of_note = [];
+
+				// loop through the object returned & push the FON data into an array
+				for (let fire in data) {
+					// merge fon details with basic fire data
+					const fire_merged = this.mergeFireDetails(data[fire], all_fires);
+
+					fires_of_note.push(fire_merged)
+				}
+
+				console.log(fires_of_note)
+
+				// update our state with the new data – not sure why but undefined pops up in the array sometimes then everything breaks.
+				this.setState({
+					data_fon: fires_of_note.filter(fon => fon !== undefined)
 				});
 			});
 	}

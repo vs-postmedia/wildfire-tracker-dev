@@ -15,7 +15,8 @@ const FiresOfNote = (props) => {
 				fire_centers.map((d, i) => {
 					let card;
 					const fon = props.data.filter(fire => {
-						return fire.FIRE_CENTR === d.id
+						// return fire.FIRE_CENTR === d.id;
+						return parseInt(fire.ZONE) === parseInt(d.id);
 					});
 
 					if (fon.length > 0) {
