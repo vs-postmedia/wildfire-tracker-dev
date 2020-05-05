@@ -6,7 +6,8 @@ import './App.css';
 
 
 // google sheet that stores fire data
-const currentFiresURL = `https://docs.google.com/spreadsheets/d/1mg71j-P91H_PpA9OufEPIRrDgpK80nWpN1CKH9LlIBk/edit?usp=sharing&${Date.now()}`;
+// const currentFiresURL = `https://docs.google.com/spreadsheets/d/1mg71j-P91H_PpA9OufEPIRrDgpK80nWpN1CKH9LlIBk/edit?usp=sharing&${Date.now()}`;
+const currentFiresURL = 'https://storage.googleapis.com/wildfire_data/wildfires.json';
 // google sheet that stores fires of note
 const firesOfNoteURL = 'https://docs.google.com/spreadsheets/d/1QLomki7aY5ZF4zhETtC40GRnSO7BcnwpqJMQxbUSLPQ/edit?usp=sharing';
 
@@ -19,12 +20,11 @@ const attribution = '&copy;<a href=&quot;http://osm.org/copyright&quot;>OpenStre
 function App() {
 	return (
 		<WildfireTracker
-	  	fonSheet={firesOfNoteURL}
-		sheet={currentFiresURL}
-		tiles={map_url}
-		attribution={attribution}>
-	</WildfireTracker>
-
+		  	fonSheet={firesOfNoteURL}
+			currentData={currentFiresURL}
+			tiles={map_url}
+			attribution={attribution}>
+		</WildfireTracker>
 	);
 }
 

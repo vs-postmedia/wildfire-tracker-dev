@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Aux from '../Aux/Aux';
+import Axios from 'axios'
 import Tabletop from 'tabletop';
 import WildfireMap from '../WildfireMap/WildfireMap';
 import FiresOfNote from '../FiresOfNote/FiresOfNote';
@@ -18,21 +19,19 @@ export class WildfireTracker extends Component {
 	}
 
 	componentDidMount() {
-		Tabletop.init({
-			key: this.props.sheet,
-			callback: (data, tabletop) => {
+		Axios.get(this.props.currentData)
+			.then(resp => {
 				// get a list of fires of note then go grab the data from the corresponding google sheet
-				const fon_list = data.filter(d => d.FIRE_STATU === 'Fire of Note');
-				this.fetchFireData(fon_list);
+				const fon_list = resp.data.filter(d => d.FIRE_STATU === 'Fire of Note');
+				// this.fetchFireData(fon_list);
 
+				console.log(resp.data)
 				// update our state with the new data
 				this.setState({
-					data: data,
-					data_all: data
+					data: resp.data,
+					data_all: resp.data
 				});
-			},
-			simpleSheet: true
-		});
+			});
 	}
 
 	fetchFireData(data) {

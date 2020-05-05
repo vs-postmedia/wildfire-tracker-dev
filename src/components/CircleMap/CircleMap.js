@@ -55,6 +55,8 @@ export class CircleMap extends Component {
 					} else {
 						radius = this.props.radius;
 					}
+
+					radius = Math.log(radius) * 2.5;
 					
 					const circleMarkerClass = d[this.props.circleMarkerClassField]? d[this.props.circleMarkerClassField] : 'fire-of-note';
 					const classField = circleMarkerClass.toLowerCase().replace(/\s/g, '-');

@@ -12,7 +12,7 @@ SCRIPTS
 Downloads the current fire shapefile from `https://pub.data.gov.bc.ca/datasets/2790e3f7-6395-4230-8545-04efb5a18800/prot_current_fire_points.zip`
 Unzips & converts to geojson, adds date in human-readable format then uploads to a Google Sheet `https://docs.google.com/spreadsheets/d/1mg71j-P91H_PpA9OufEPIRrDgpK80nWpN1CKH9LlIBk/edit?usp=sharing` for access from the wildfire-tracker app.
 
-Script is hosted as Heroku app – fast-forest-46102 – & runs every hour.
+Script is hosted as Heroku app – `fast-forest-46102` – & runs every hour.
 
 
 `active-fire-scraper`
