@@ -1,5 +1,7 @@
 .fire-card {
 	margin-bottom: 2rem;
+	overflow-y: auto;
+	padding: 0 25px;
 }
 
 .fire-card header p {
