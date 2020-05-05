@@ -1,5 +1,4 @@
 import React from 'react';
-// import { BrowserRouter, Route } from 'react-router-dom';
 import WildfireTracker from '../WildfireTracker/WildfireTracker';
 import './App.css';
 

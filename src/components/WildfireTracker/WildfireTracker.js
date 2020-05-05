@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import Aux from '../Aux/Aux';
+import React, { Component, Fragment } from 'react';
 import Axios from 'axios'
-import Tabletop from 'tabletop';
 import WildfireMap from '../WildfireMap/WildfireMap';
 import FiresOfNote from '../FiresOfNote/FiresOfNote';
 
@@ -53,48 +51,11 @@ export class WildfireTracker extends Component {
 					fires_of_note.push(fire_merged)
 				}
 
-				console.log(fires_of_note)
-
 				// update our state with the new data – not sure why but undefined pops up in the array sometimes then everything breaks.
 				this.setState({
 					data_fon: fires_of_note.filter(fon => fon !== undefined)
 				});
 			});
-	}
-
-	fetchFireData(data) {
-		const all_fires = data;
-
-		let fire_ids = data.map(d => {
-			return d.FIRE_NT_ID;
-		});
-
-		Tabletop.init({
-			key: this.props.fonSheet,
-			debug: false,
-			callback: (data, tabletop) => {
-				let fires_of_note = [];
-				// loop through the object returned & push the google sheets data into an array
-				for (let fire in data) {
-					// const fon = data[fire].elements[0];
-					const fon = data[fire].elements.pop();
-					// google sheet returns an object of objects with the key being the fire ID
-					fon.fire_id = fire;
-
-					// merge fon details with basic fire data
-					const fire_merged = this.mergeFireDetails(fon, all_fires);
-
-					fires_of_note.push(fire_merged)
-				}
-
-				// update our state with the new data – not sure why but undefined popus up in  the array sometimes then everything breaks.
-				this.setState({
-					data_fon: fires_of_note.filter(fon => fon !== undefined)
-				});
-			},
-			simpleSheet: false,
-			wanted: fire_ids
-		});
 	}
 
 	filterFireData(fire_class) {
@@ -147,7 +108,7 @@ export class WildfireTracker extends Component {
 
 	render() {
 		return (
-			<Aux>
+			<Fragment>
 				<WildfireMap 
 					attribution={this.props.attribution}
 					data={this.state.data}
@@ -161,7 +122,7 @@ export class WildfireTracker extends Component {
 					data={this.state.data_fon}
 					tiles={this.props.tiles}
 				></FiresOfNote>
-			</Aux>
+			</Fragment>
 		);
 	}
 }

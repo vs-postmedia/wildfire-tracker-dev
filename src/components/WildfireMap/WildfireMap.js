@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import Aux from '../Aux/Aux';
+import React, { Component, Fragment } from 'react';
 import CircleMap from '../CircleMap/CircleMap';
 import SummaryBox from '../SummaryBox/SummaryBox';
 import './WildfireMap.css';
@@ -16,7 +15,7 @@ export class WildfireTracker extends Component {
 
 	render() {
 		return (
-			<Aux>
+			<Fragment>
 				<h1>B.C. Wildfire Tracker</h1>
 				<CircleMap id="mapview"
 					attribution={this.props.attribution}
@@ -32,7 +31,7 @@ export class WildfireTracker extends Component {
 					data={this.props.data_all}
 					toggleFireTypeHandler={this.props.toggleFireTypeHandler}>
 				</SummaryBox>
-			</Aux>
+			</Fragment>
 		);
 	}
 }
