@@ -11,9 +11,11 @@ import './FiresOfNote.css';
 // slider params
 const settings = {
 	autoplay: false,
+	autoplaySpeed: 6000,
 	centerMode: true,
 	centerPadding: '25px',
 	dots: true,
+	draggable: false,
 	infinite: true,
 	lazyLoad: 'ondemand',
 	speed: 500,
@@ -47,7 +49,7 @@ const FiresOfNote = (props) => {
 								</FireCard>
 							)
 						} else {
-							card = <p>No fires of note</p>
+							card = <p className="no-fires">No fires of note</p>
 						}
 
 						return (
