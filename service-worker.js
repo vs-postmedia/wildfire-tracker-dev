@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/wildfire-tracker-dev/precache-manifest.417aab8d128fbc4a78351c55a8b42828.js"
+  "/wildfire-tracker-dev/precache-manifest.4e53a3f2fabae730384877605526a7bf.js"
 );
 
 self.addEventListener('message', (event) => {
