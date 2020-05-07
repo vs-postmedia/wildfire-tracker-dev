@@ -27,7 +27,7 @@ const FiresOfNote = (props) => {
 	return (
 		<div className='fon'>
 			<h1>Wildfires of Note</h1>
-			<p>Wildfires of note are those which are highly visible or that pose a potential threat to public safety. The wildfires are categorizes by fire centres.</p>
+			<p>Wildfires of note are those which are highly visible or that pose a potential threat to public safety. The wildfires are categorized by fire centres.</p>
 			<p>The province of B.C. is divided into six regional fire centres: Cariboo, Coastal, Kamloops, Northwest, Prince George and Southeast.</p>
 			<Slider {...settings}>
 				{
