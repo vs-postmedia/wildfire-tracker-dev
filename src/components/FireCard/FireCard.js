@@ -15,6 +15,8 @@ const FireCard = (props) => {
 		zoom: 5
 	};
 
+	console.log()
+
 	return (
 		<div className='fire-card'>
 			<div className='row'>
@@ -25,7 +27,7 @@ const FireCard = (props) => {
 				</header>
 				<div className='status-box'>
 					<div className='status-item'>
-						<h2 className={`${fire.status.replace(/\s/g, '-').toLowerCase()} big-num`}>{fire.status}</h2>
+						<h2 className={`${fire.FIRE_STATU.replace(/\s/g, '-').toLowerCase()} big-num`}>{fire.FIRE_STATU}</h2>
 						<p className='label'>Status</p>
 					</div>
 					{ fire.containment.length > 0 &&
