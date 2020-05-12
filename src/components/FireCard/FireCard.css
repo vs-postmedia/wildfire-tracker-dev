@@ -64,7 +64,7 @@
 }
 .fire-card #fon-mapview,
 .fire-card .leaflet-container {
-	height: 150px;
+	height: 275px;
 }
 
 @media screen and (min-width: 450px) {

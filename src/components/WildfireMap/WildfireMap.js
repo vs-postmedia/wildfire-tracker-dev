@@ -6,7 +6,7 @@ import './WildfireMap.css';
 
 export class WildfireTracker extends Component {
 	map_options = {
-		center: [54.184179, -125.652423],
+		center: [53.184179, -125.652423],
 		classField: 'FIRE_STATU',
 		maxZoom: 8,
 		minZoom: 3,
