@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
+import './InsetMap.css';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibmdyaWZmaXRocy1wb3N0bWVkaWEiLCJhIjoiY2p5eWluaDR1MHoycTNpbnZhYnE1ZGJ5YyJ9.ky9G5qVIJn0gz_y7tULp6Q';
 
 
 class InsetMap extends Component {
 	mapRef = React.createRef();
 	map;
+	// prep the popup
+	popup = new mapboxgl.Popup({
+		closeButton: false,
+		closeOnClick: false
+	});
 
+	constructor(props) {
+		super(props);
+
+		// bind popup to main component
+		this.showPopup = this.showPopup.bind(this);
+		this.hidePopup = this.hidePopup.bind(this);
+	}
 
 	componentDidMount() {
-		console.log(this.props)
+		console.log(this.props.data)
+		const data = this.props.data;
+		const id = this.props.data.properties.FIRE_NUMBE;
+
+		// API key
+		mapboxgl.accessToken = this.props.config.accessToken;
+		
 		this.map = new mapboxgl.Map({
 			// container: this.mapRef.current,
 			container: 'fon-mapview',
@@ -18,13 +36,71 @@ class InsetMap extends Component {
 			center: [this.props.center[1], this.props.center[0]],
       		zoom: this.props.zoom
 		});
+
+		// add fire perimeter polygon
+		this.map.on('load', () => {
+			this.map.addSource('fire_perim', {
+				type: 'geojson',
+				data: data
+			});
+
+			this.map.addLayer({
+				id: id,
+				type: 'fill',
+				source: 'fire_perim',
+				paint: {
+					'fill-color': '#DD2D25',
+					'fill-opacity': 0.4
+				}
+			});
+
+			// show & hide the popup
+			this.map.on('mouseenter', id, this.showPopup);
+			this.map.on('mouseleave', id, this.hidePopup);
+
+			// troublehsoot
+			this.map.on('mousemove', e => {
+				document.getElementById('info').innerHTML =
+				// e.point is the x, y coordinates of the mousemove event relative
+				// to the top-left corner of the map
+				JSON.stringify(e.point) +
+				'<br />' +
+				// e.lngLat is the longitude, latitude geographical position of the event
+				JSON.stringify(e.lngLat.wrap());
+			});
+		});
+	}
+
+	hidePopup() {
+		this.map.getCanvas().style.cursor = '';
+		this.popup.remove();
+	}
+
+	setupPopupText(properties) {
+		return `<div className="popup-text"><h3>${properties.FIRE_NT_NM}</h3><p>${properties.cause_detail}</p></div>`
+	}
+
+	showPopup(e) {
+		// change cursor style as UI indicator
+		this.map.getCanvas().style.cursor = 'pointer';
+		// popup content to be displayed
+		const text = this.setupPopupText(e.features[0].properties);
+
+		console.log(text)
+
+		// set coords based on mouse position
+		this.popup.setLngLat(e.lngLat)
+			.setHTML(text)
+			.addTo(this.map)
 	}
 
 	render() {	
 		return (
 			<div>
 				<div ref={this.map}></div>
+				<pre id="info"></pre>
 			</div>
+			
 		);
 	}
 }
