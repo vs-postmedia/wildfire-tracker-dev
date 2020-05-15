@@ -22,7 +22,6 @@ class InsetMap extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props.data)
 		const data = this.props.data;
 		const id = this.props.data.properties.FIRE_NUMBE;
 
@@ -74,8 +73,6 @@ class InsetMap extends Component {
 		this.map.getCanvas().style.cursor = 'pointer';
 		// popup content to be displayed
 		const text = this.setupPopupText(e.features[0].properties);
-
-		console.log(text)
 
 		// set coords based on mouse position
 		this.popup.setLngLat(e.lngLat)
