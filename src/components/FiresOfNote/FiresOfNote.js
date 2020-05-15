@@ -33,13 +33,14 @@ const FiresOfNote = (props) => {
 				{
 					fire_centers.map((d, i) => {
 						let card;
-						const fon = props.data.filter(fire => parseInt(fire.ZONE) === parseInt(d.id));
+						const fon = props.data.filter(fire => parseInt(fire.properties.ZONE) === parseInt(d.id));
 
 						if (fon.length > 0) {
 							card = fon.map((d, i) => {
 								return (
 									<FireCard className='fire-card' 
 										attribution={props.attribution}
+										config={props.config}
 										data={fon[i]}
 										fireCenter={d.id}
 										key={`fire-card-${i}`}

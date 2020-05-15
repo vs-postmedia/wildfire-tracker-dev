@@ -59,10 +59,15 @@ export class WildfireTracker extends Component {
 					// find the matching perimeter data
 					const perimeter = perim_data.filter(d => d.properties.FIRE_NUMBE === fire_merged.FIRE_NUMBE);
 					// add permieter data
-					fire_merged.geometry = perimeter[0].geometry;
+					perimeter[0].properties = fire_merged;
+					// fire_merged.geometry = perimeter[0].geometry;
 
-					fires_of_note.push(fire_merged);
+					fires_of_note.push(perimeter[0]);
+
+					// console.log(perimeter[0])
 				}
+
+
 
 				// update our state with the new data – not sure why but undefined pops up in the array sometimes then everything breaks.
 				this.setState({
@@ -125,6 +130,7 @@ export class WildfireTracker extends Component {
 			<Fragment>
 				<WildfireMap 
 					attribution={this.props.attribution}
+					config={this.props.mapboxConfig}
 					data={this.state.data}
 					data_all={this.state.data_all}
 					tiles={this.props.tiles}
@@ -133,6 +139,7 @@ export class WildfireTracker extends Component {
 
 				<FiresOfNote
 					attribution={this.props.attribution}
+					config={this.props.mapboxConfig}
 					data={this.state.data_fon}
 					tiles={this.props.tiles}
 				></FiresOfNote>

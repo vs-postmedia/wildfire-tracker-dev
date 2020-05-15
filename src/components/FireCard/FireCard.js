@@ -1,11 +1,10 @@
 import React from 'react';
 import InsetMap from '../InsetMap/InsetMap';
-// import CircleMap from '../CircleMap/CircleMap';
 
 import './FireCard.css';
 
 const FireCard = (props) => {
-	const fire = props.data;
+	const fire = props.data.properties;
 
 	const map_options = {
 		center: [fire.LATITUDE.toString(), fire.LONGITUDE.toString()],
@@ -13,10 +12,8 @@ const FireCard = (props) => {
 		maxZoom: 8,
 		minZoom: 4,
 		radius: 10,
-		zoom: 5
+		zoom: 10
 	};
-
-	console.log()
 
 	return (
 		<div className='fire-card'>
@@ -61,7 +58,8 @@ const FireCard = (props) => {
 			
 			<InsetMap
 				center={map_options.center}
-				data={fire}
+				config={props.config}
+				data={props.data}
 				maxZoom={map_options.maxZoom}
 				minZoom={map_options.minZoom}
 				range={[5,5]}

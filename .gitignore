@@ -1,4 +1,4 @@
-data/mapbox-config.js
+mapbox-config.js
 scripts/get-current-fires/current-fires/*
 scripts/get-current-fires_v2/current-fires/*
 

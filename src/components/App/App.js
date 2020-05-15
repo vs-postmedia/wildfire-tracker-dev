@@ -1,6 +1,8 @@
 import React from 'react';
 import WildfireTracker from '../WildfireTracker/WildfireTracker';
 import './App.css';
+import mapboxConfig from '../../data/mapbox-config';
+
 
 // Wildfires url
 const currentFiresURL = 'https://storage.googleapis.com/wildfire_data/wildfires.json';
@@ -15,12 +17,15 @@ const attribution = '&copy;<a href=&quot;http://osm.org/copyright&quot;>OpenStre
 
 
 
+
+
 function App() {
 	return (
 		<WildfireTracker
 		  	fonData={firesOfNoteURL}
 			currentData={currentFiresURL}
 			firePerimeters={firePerimeters}
+			mapboxConfig={mapboxConfig}
 			tiles={map_url}
 			attribution={attribution}>
 		</WildfireTracker>
