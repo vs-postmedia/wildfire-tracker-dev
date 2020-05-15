@@ -30,8 +30,8 @@ class InsetMap extends Component {
 		
 		this.map = new mapboxgl.Map({
 			// container: this.mapRef.current,
-			container: 'fon-mapview',
-			style: 'mapbox://styles/mapbox/outdoors-v11',
+			container: this.props.container,
+			style: this.props.mapboxStyle,
 			center: [this.props.center[1], this.props.center[0]],
       		zoom: this.props.zoom
 		});

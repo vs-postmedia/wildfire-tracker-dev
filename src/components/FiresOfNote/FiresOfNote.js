@@ -41,10 +41,11 @@ const FiresOfNote = (props) => {
 									<FireCard className='fire-card' 
 										attribution={props.attribution}
 										config={props.config}
+										container='fon-mapview'
 										data={fon[i]}
 										fireCenter={d.id}
 										key={`fire-card-${i}`}
-										tiles={props.tiles}>
+										mapboxStyle={props.mapboxStyle}>
 									</FireCard>
 								)	
 							});

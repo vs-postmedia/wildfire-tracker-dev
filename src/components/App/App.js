@@ -12,6 +12,7 @@ const firesOfNoteURL = 'https://storage.googleapis.com/wildfire_data/fon.json';
 const firePerimeters = 'https://storage.googleapis.com/wildfire_data/perimeters.json';
 
 // map tiles & attribution
+const mapboxStyle = 'mapbox://styles/mapbox/outdoors-v11';
 const map_url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const attribution = '&copy;<a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors';
 
@@ -26,6 +27,7 @@ function App() {
 			currentData={currentFiresURL}
 			firePerimeters={firePerimeters}
 			mapboxConfig={mapboxConfig}
+			mapboxStyle={mapboxStyle}
 			tiles={map_url}
 			attribution={attribution}>
 		</WildfireTracker>

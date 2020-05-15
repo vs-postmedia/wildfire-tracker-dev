@@ -133,6 +133,7 @@ export class WildfireTracker extends Component {
 					config={this.props.mapboxConfig}
 					data={this.state.data}
 					data_all={this.state.data_all}
+					mapboxStyle={this.props.mapboxStyle}
 					tiles={this.props.tiles}
 					toggleFireTypeHandler={this.toggleFireTypeHandler}>
 				</WildfireMap>
@@ -141,7 +142,7 @@ export class WildfireTracker extends Component {
 					attribution={this.props.attribution}
 					config={this.props.mapboxConfig}
 					data={this.state.data_fon}
-					tiles={this.props.tiles}
+					mapboxStyle={this.props.mapboxStyle}
 				></FiresOfNote>
 			</Fragment>
 		);

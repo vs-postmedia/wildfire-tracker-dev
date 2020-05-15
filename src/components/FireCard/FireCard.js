@@ -59,11 +59,12 @@ const FireCard = (props) => {
 			<InsetMap
 				center={map_options.center}
 				config={props.config}
+				container={props.container}
 				data={props.data}
+				mapboxStyle={props.mapboxStyle}
 				maxZoom={map_options.maxZoom}
 				minZoom={map_options.minZoom}
 				range={[5,5]}
-				tiles={props.tiles}
 				zoom={map_options.zoom}>
 			</InsetMap>
 			
