@@ -54,7 +54,6 @@ const FireCard = (props) => {
 					</div>
 				</div>
 			</div>
-			<div id="fon-mapview"></div>
 			
 			<InsetMap
 				center={map_options.center}

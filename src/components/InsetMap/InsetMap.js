@@ -83,7 +83,7 @@ class InsetMap extends Component {
 	render() {	
 		return (
 			<div>
-				<div ref={this.map}></div>
+				<div ref={this.map} id={this.props.container}></div>
 				<pre id="info"></pre>
 			</div>
 			
