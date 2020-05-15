@@ -6,6 +6,8 @@ import './App.css';
 const currentFiresURL = 'https://storage.googleapis.com/wildfire_data/wildfires.json';
 // Fires of note
 const firesOfNoteURL = 'https://storage.googleapis.com/wildfire_data/fon.json';
+// Fire perimeters
+const firePerimeters = 'https://storage.googleapis.com/wildfire_data/perimeters.json';
 
 // map tiles & attribution
 const map_url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -18,6 +20,7 @@ function App() {
 		<WildfireTracker
 		  	fonData={firesOfNoteURL}
 			currentData={currentFiresURL}
+			firePerimeters={firePerimeters}
 			tiles={map_url}
 			attribution={attribution}>
 		</WildfireTracker>

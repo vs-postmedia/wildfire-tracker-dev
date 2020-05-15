@@ -77,10 +77,12 @@
 		margin-top: auto;
 	}
 	.fire-card .row > div {
-		flex: 1;
+		flex-basis: 50%;
+		flex-grow: 1;
 	}
 	.fire-card #fon-mapview,
 	.fire-card .leaflet-container {
+		flex-basis: 50%;
 		height: 200px;
 	}
 	.fire-card .status-box {

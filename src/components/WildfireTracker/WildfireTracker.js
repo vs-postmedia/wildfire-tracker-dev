@@ -25,7 +25,6 @@ export class WildfireTracker extends Component {
 
 				const fon_list = resp.data;
 				if (fon_list.length > 0) this.setupFiresOfNote(fon_list);
-				
 
 				// update our state with the new data
 				this.setState({
@@ -36,25 +35,40 @@ export class WildfireTracker extends Component {
 	}
 
 	setupFiresOfNote(data) {
+		const promises = [];
 		const all_fires = data;
 
-		Axios.get(this.props.fonData)
-			.then(resp => {
-				const data = resp.data;
+		promises.push(Axios.get(this.props.fonData));
+		promises.push(Axios.get(this.props.firePerimeters));
+
+		Axios.all(promises)
+			.then(results => {
 				let fires_of_note = [];
 
-				// loop through the object returned & push the FON data into an array
-				for (let fire in data) {
-					// merge fon details with basic fire data
-					const fire_merged = this.mergeFireDetails(data[fire], all_fires);
+				// separate our results
+				const fon_data = results.filter(d => d.config.url.includes('fon.json'));
+				let perim_data = results.filter(d => d.config.url.includes('perimeters.json'));
+				perim_data = perim_data[0].data;
 
-					fires_of_note.push(fire_merged)
+				// loop through the object returned & push the FON data into an array
+				for (let fon in fon_data) {
+					const data = fon_data[fon].data;
+					
+					// merge fon details with basic fire data
+					const fire_merged = this.mergeFireDetails(data[fon], all_fires);
+					// find the matching perimeter data
+					const perimeter = perim_data.filter(d => d.properties.FIRE_NUMBE === fire_merged.FIRE_NUMBE);
+					// add permieter data
+					fire_merged.geometry = perimeter[0].geometry;
+
+					fires_of_note.push(fire_merged);
 				}
 
 				// update our state with the new data – not sure why but undefined pops up in the array sometimes then everything breaks.
 				this.setState({
 					data_fon: fires_of_note.filter(fon => fon !== undefined)
 				});
+				
 			});
 	}
 

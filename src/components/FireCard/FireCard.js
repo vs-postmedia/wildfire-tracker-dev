@@ -1,5 +1,6 @@
 import React from 'react';
-import CircleMap from '../CircleMap/CircleMap';
+import InsetMap from '../InsetMap/InsetMap';
+// import CircleMap from '../CircleMap/CircleMap';
 
 import './FireCard.css';
 
@@ -56,19 +57,18 @@ const FireCard = (props) => {
 					</div>
 				</div>
 			</div>
+			<div id="fon-mapview"></div>
 			
-			<CircleMap id="fon-mapview"
-				attribution={props.attribution}
+			<InsetMap
 				center={map_options.center}
-				circleMarkerClassField={map_options.classField}
-				data={[fire]}
+				data={fire}
 				maxZoom={map_options.maxZoom}
 				minZoom={map_options.minZoom}
-				radius={map_options.radius}
 				range={[5,5]}
 				tiles={props.tiles}
 				zoom={map_options.zoom}>
-			</CircleMap>
+			</InsetMap>
+			
 			</div>
 			
 		</div>
@@ -84,3 +84,17 @@ export default FireCard;
 
 
 
+/*
+<CircleMap id="fon-mapview"
+	attribution={props.attribution}
+	center={map_options.center}
+	circleMarkerClassField={map_options.classField}
+	data={[fire]}
+	maxZoom={map_options.maxZoom}
+	minZoom={map_options.minZoom}
+	radius={map_options.radius}
+	range={[5,5]}
+	tiles={props.tiles}
+	zoom={map_options.zoom}>
+</CircleMap>
+*/
