@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
-// import { CircleMarker, Map, TileLayer, Tooltip } from 'react-leaflet';
 import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 
 import './CircleMap.css';
@@ -18,12 +17,11 @@ export class CircleMap extends Component {
 		super(props);
 
 		// bind popup to main component
-		// this.showPopup = this.showPopup.bind(this);
-		// this.hidePopup = this.hidePopup.bind(this);
+		this.showPopup = this.showPopup.bind(this);
+		this.hidePopup = this.hidePopup.bind(this);
 	}
 
 	componentDidMount() {
-		const data = this.props.data;
 		// extents for circles
 		this.extent_calcuted = false;
 		// set the min/max sizes for circles
@@ -37,12 +35,7 @@ export class CircleMap extends Component {
 			style: this.props.mapboxStyle,
 			center: [this.props.center[1], this.props.center[0]],
       		zoom: this.props.zoom
-		});
-
-		if (data.length > 0) {
-			// this.prepData(data);
-		}
-		
+		});		
 	}
 
 	getExtent(data) {
@@ -52,6 +45,11 @@ export class CircleMap extends Component {
 			fire_size.push(parseFloat(d.properties.CURRENT_SI));
 		});
 		return [Math.min(...fire_size), Math.max(...fire_size)];
+	}
+
+	hidePopup() {
+		this.map.getCanvas().style.cursor = '';
+		this.popup.remove();
 	}
 
 	mapRange(extent, range, value) {
@@ -68,13 +66,30 @@ export class CircleMap extends Component {
 		// calculate circle size
 		data.features.forEach((d,i) => {
 			const radius = this.mapRange(this.extent, this.range, d.properties.CURRENT_SI);
-			d.properties.radius = Math.log(radius) * 3;
+			d.properties.radius = Math.log(radius) * 4;
 		});
 
 		// reorder array by CURRENT_SI, largest -> smallest
 		data.features.sort((a,b) => {
 			return b.CURRENT_SI - a.CURRENT_SI;
 		});
+	}
+
+	setupPopupText(properties) {
+		console.log(properties)
+		return WildfireTooltip(properties)
+	}
+
+	showPopup(e) {
+		// change cursor style as UI indicator
+		this.map.getCanvas().style.cursor = 'pointer';
+		// popup content to be displayed
+		const text = this.setupPopupText(e.features[0].properties);
+
+		// set coords based on mouse position
+		this.popup.setLngLat(e.lngLat)
+			.setHTML(text)
+			.addTo(this.map)
 	}
 
 	render() {
@@ -120,9 +135,9 @@ export class CircleMap extends Component {
 					}
 				});
 
-				// // show & hide the popup
-				// this.map.on('mouseenter', id, this.showPopup);
-				// this.map.on('mouseleave', id, this.hidePopup);
+				// show & hide the popup
+				this.map.on('mouseenter', 'wildfires', this.showPopup);
+				this.map.on('mouseleave', 'wildfires', this.hidePopup);
 			});
 		}
 

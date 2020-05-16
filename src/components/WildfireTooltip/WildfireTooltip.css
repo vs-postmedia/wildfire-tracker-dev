@@ -1,22 +1,22 @@
-.leaflet-tooltip {
+.mapboxgl-popup-content {
 	white-space: normal;
 }
-.wf-tooltip {
+.mapboxgl-popup-content {
 	width: 175px;
 }
-.wf-tooltip h3 {
+.mapboxgl-popup-content h3 {
 	font-family: 'BentonSansCond-Bold', sans-serif;
 	font-size: 1.25rem;
 	font-weight: 800;
 	margin: 5px 0;
 }
 
-.wf-tooltip p {
+.mapboxgl-popup-content p {
 	margin: 3px 0;
 	line-height: 1.25;
 }
 
-.wf-tooltip .status {
+.mapboxgl-popup-content .status {
 	font-family: 'BentonSansCond-Bold', sans-serif;
 	font-weight: 800;
 }

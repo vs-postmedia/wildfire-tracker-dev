@@ -14,5 +14,4 @@ Data is pulled from Heroku app – `fast-forest-46102` – that runs once a day
 ###
 DEV TO DO
 
-1. fon inset map should show fire perimeter
 999. MAYBE (BUT PROBABLY NOT): add "fires near me" search box (by postal?)

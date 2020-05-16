@@ -1,5 +1,4 @@
-#mapview.mapboxgl-map,
-.leaflet-container {
+#mapview.mapboxgl-map {
 	height: 375px;
 	left: 0;
 	right: 0;
