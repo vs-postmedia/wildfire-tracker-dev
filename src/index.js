@@ -4,12 +4,12 @@ import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
 // FONTS
-// import './fonts/BentonSansCond-Regular.otf';
-// import './fonts/BentonSansCond-RegItalic.otf';
-// import './fonts/BentonSansCond-Bold.otf';
-// import './fonts/BentonSansCond-BoldItalic.otf';
-// import './fonts/Shift-Bold.otf';
-// import './fonts/Shift-BoldItalic.otf';
+import './fonts/BentonSansCond-Regular.otf';
+import './fonts/BentonSansCond-RegItalic.otf';
+import './fonts/BentonSansCond-Bold.otf';
+import './fonts/BentonSansCond-BoldItalic.otf';
+import './fonts/Shift-Bold.otf';
+import './fonts/Shift-BoldItalic.otf';
 
 // import './fonts/Shift-Book.otf';
 // import './fonts/Shift-BookItalic.otf';
