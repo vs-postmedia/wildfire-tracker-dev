@@ -35,33 +35,36 @@ const SummaryBox = (props) => {
 }
 
 function calculateFireStats(props) {
-	const data = props.data;
-
 	let stats = {
 		out_fires: 0,
 		new_fires: 0,
 		held_fires: 0,
-		controlled_fires: 0
+		controlled_fires: 0,
+		last_update: 'Waiting for data...'
 	}
+	
+	if (props.data.features) {
+		const data = props.data.features;
 
-	let hectares_burned = data.reduce((sum, item) => {
-		return sum + parseFloat(item.CURRENT_SI);
-	}, 0);
+		let hectares_burned = data.reduce((sum, item) => {
+			return sum + parseFloat(item.properties.CURRENT_SI);
+		}, 0);
 
-	stats.km_burned = (hectares_burned / 100).toFixed(0);
-	stats.total_fires = data.length + 1;
+		stats.km_burned = (hectares_burned / 100).toFixed(0);
+		stats.total_fires = data.length + 1;
 
-	stats.last_update = data.length > 0 ? returnCurrentTime(data[0].last_update) : 'Not available';
+		stats.last_update = data.length > 0 ? returnCurrentTime(data[0].properties.last_update) : 'Not available';
 
-	for (let i = 0; i < props.data.length; ++i) {
-		if (data[i].FIRE_STATU === 'New' | data[i].FIRE_STATU === 'Out of Control') {
-			stats.new_fires++;
-		} else if (data[i].FIRE_STATU === 'Being Held') {
-			stats.held_fires++;
-		} else if (data[i].FIRE_STATU === 'Under Control') {
-			stats.controlled_fires++;
-		} else {
-			stats.out_fires++;
+		for (let i = 0; i < data.length; ++i) {
+			if (data[i].properties.FIRE_STATU === 'New' | data[i].properties.FIRE_STATU === 'Out of Control') {
+				stats.new_fires++;
+			} else if (data[i].properties.FIRE_STATU === 'Being Held') {
+				stats.held_fires++;
+			} else if (data[i].properties.FIRE_STATU === 'Under Control') {
+				stats.controlled_fires++;
+			} else {
+				stats.out_fires++;
+			}
 		}
 	}
 

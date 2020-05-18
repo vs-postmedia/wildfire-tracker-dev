@@ -7,6 +7,7 @@ import './CircleMap.css';
 
 export class CircleMap extends Component {
 	map;
+	state = {};
 	// prep the popup
 	popup = new mapboxgl.Popup({
 		closeButton: false,
@@ -22,6 +23,8 @@ export class CircleMap extends Component {
 	}
 
 	componentDidMount() {
+		const data = this.props.data;
+
 		// extents for circles
 		this.extent_calcuted = false;
 		// set the min/max sizes for circles
@@ -31,11 +34,28 @@ export class CircleMap extends Component {
 		mapboxgl.accessToken = this.props.config.accessToken;
 		
 		this.map = new mapboxgl.Map({
-			container: this.props.container,
+			// container: this.props.container,
+			container: this.mapContainer,
 			style: this.props.mapboxStyle,
 			center: [this.props.center[1], this.props.center[0]],
       		zoom: this.props.zoom
-		});		
+		});
+
+		// render the map
+		if (data.features) {
+			this.renderMap(data);
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.state.mapIsLoaded) {
+			if (this.props.data !== prevProps.data) {
+			    this.map.getSource('wildfires').setData(this.props.data);
+			}
+		} else {
+			this.renderMap(this.props.data);
+		}
+		
 	}
 
 	getExtent(data) {
@@ -76,8 +96,7 @@ export class CircleMap extends Component {
 	}
 
 	setupPopupText(properties) {
-		console.log(properties)
-		return WildfireTooltip(properties)
+		return WildfireTooltip(properties);
 	}
 
 	showPopup(e) {
@@ -92,57 +111,59 @@ export class CircleMap extends Component {
 			.addTo(this.map)
 	}
 
-	render() {
-		const data = this.props.data;
+	renderMap(data) {
+		this.prepData(data);
 
-		if (data.features) {
-			this.prepData(data);
-
-			// add fire perimeter polygon
-			this.map.on('load', () => {
-				this.map.addSource('wildfires', {
-					type: 'geojson',
-					data: data
-				});
-
-				this.map.addLayer({
-					id: 'wildfires',
-					type: 'circle',
-					source: 'wildfires',
-					paint: {
-						'circle-color': [
-							'match',
-							['get', 'FIRE_STATU'],
-							'New',
-							'#DD2D25',
-							'Being Held',
-							'#F26B21',
-							'Under Control',
-							'#0062A3',
-							'Out',
-							'#6D6E70',
-							/* other */ 'green'
-						],
-						'circle-opacity': 0.7,
-						// probably a better way to do this...
-						'circle-radius': [
-							'*',
-							['get', 'radius'],
-							1
-						],
-						'circle-stroke-width': 0.5,
-						'circle-stroke-color': '#FFF'
-					}
-				});
-
-				// show & hide the popup
-				this.map.on('mouseenter', 'wildfires', this.showPopup);
-				this.map.on('mouseleave', 'wildfires', this.hidePopup);
+		// add fire perimeter polygon
+		this.map.on('load', () => {
+			this.map.addSource('wildfires', {
+				type: 'geojson',
+				data: data
 			});
-		}
 
+			this.map.addLayer({
+				id: 'wildfires',
+				type: 'circle',
+				source: 'wildfires',
+				paint: {
+					'circle-color': [
+						'match',
+						['get', 'FIRE_STATU'],
+						'New',
+						'#DD2D25',
+						'Being Held',
+						'#F26B21',
+						'Under Control',
+						'#0062A3',
+						'Out',
+						'#6D6E70',
+						/* other */ 'green'
+					],
+					'circle-opacity': 0.7,
+					// probably a better way to do this...
+					'circle-radius': [
+						'*',
+						['get', 'radius'],
+						1
+					],
+					'circle-stroke-width': 0.5,
+					'circle-stroke-color': '#FFF'
+				}
+			});
+
+			// show & hide the popup
+			this.map.on('mouseenter', 'wildfires', this.showPopup);
+			this.map.on('mouseleave', 'wildfires', this.hidePopup);
+		});
+
+		this.setState({
+			mapIsLoaded: true
+		});
+	}
+
+	render() {
 		return (
-			<div id={this.props.container}></div>
+			<div ref={el => this.mapContainer = el} />
 		);
 	}
 }
