@@ -12,6 +12,6 @@ Data is pulled from Heroku app – `fast-forest-46102` – that runs once a day
 
 
 ###
-DEV TO DO
+EMBED
 
-999. MAYBE (BUT PROBABLY NOT): add "fires near me" search box (by postal?)
+<iframe src="https://vs-postmedia.github.io/wildfire-tracker-dev/" frameborder="0" height="1000" scrolling="yes"></iframe>

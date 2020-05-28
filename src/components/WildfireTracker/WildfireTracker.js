@@ -51,15 +51,19 @@ export class WildfireTracker extends Component {
 
 					// find the matching perimeter data
 					const perimeter = perim_data.filter(d => d.properties.FIRE_NUMBE === fire_merged.fire_number);
-					// add permieter data
-					perimeter[0].properties = fire_merged;
+					
+					if (perimeter.length > 0) {
+						// add permieter data
+						perimeter[0].properties = fire_merged;
 
-					fires_of_note.push(perimeter[0]);
+						fires_of_note.push(perimeter[0]);	
+					}
+					
 				}
 
-				// update our state with the new data – not sure why but undefined pops up in the array sometimes then everything breaks.
+				// update our state with the new data 
 				this.setState({
-					data_fon: fires_of_note //.filter(fon => fon !== undefined)
+					data_fon: fires_of_note
 				});
 				
 			});
