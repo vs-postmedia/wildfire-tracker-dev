@@ -10,8 +10,8 @@ import './FiresOfNote.css';
 
 // slider params
 const settings = {
-	autoplay: false,
-	autoplaySpeed: 6000,
+	autoplay: true,
+	autoplaySpeed: 7500,
 	centerMode: true,
 	centerPadding: '25px',
 	dots: true,
