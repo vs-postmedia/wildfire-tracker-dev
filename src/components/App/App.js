@@ -5,11 +5,11 @@ import mapboxConfig from '../../data/mapbox-config';
 
 
 // Wildfires url
-const currentFiresURL = 'https://storage.googleapis.com/wildfire_data/wildfires.json';
+const currentFiresURL = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/wildfires.json';
 // Fires of note
-const firesOfNoteURL = 'https://storage.googleapis.com/wildfire_data/fon.json';
+const firesOfNoteURL = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/fon.json';
 // Fire perimeters
-const firePerimeters = 'https://storage.googleapis.com/wildfire_data/perimeters.json';
+const firePerimeters = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/perimeters.json';
 
 // map tiles & attribution
 const mapboxStyle = 'mapbox://styles/mapbox/outdoors-v11';
