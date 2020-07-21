@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/wildfire-tracker-dev/static/css/main.7b6f89aa.chunk.css",
-    "main.js": "/wildfire-tracker-dev/static/js/main.cfe27b06.chunk.js",
-    "main.js.map": "/wildfire-tracker-dev/static/js/main.cfe27b06.chunk.js.map",
+    "main.js": "/wildfire-tracker-dev/static/js/main.22d8b5e0.chunk.js",
+    "main.js.map": "/wildfire-tracker-dev/static/js/main.22d8b5e0.chunk.js.map",
     "runtime-main.js": "/wildfire-tracker-dev/static/js/runtime-main.bac39c72.js",
     "runtime-main.js.map": "/wildfire-tracker-dev/static/js/runtime-main.bac39c72.js.map",
     "static/css/2.57917d53.chunk.css": "/wildfire-tracker-dev/static/css/2.57917d53.chunk.css",
     "static/js/2.680b4687.chunk.js": "/wildfire-tracker-dev/static/js/2.680b4687.chunk.js",
     "static/js/2.680b4687.chunk.js.map": "/wildfire-tracker-dev/static/js/2.680b4687.chunk.js.map",
     "index.html": "/wildfire-tracker-dev/index.html",
-    "precache-manifest.3297fcaa6a0348b1bc2298d8e58c7cfd.js": "/wildfire-tracker-dev/precache-manifest.3297fcaa6a0348b1bc2298d8e58c7cfd.js",
+    "precache-manifest.80ec530250b9f16c6139162feb094ad7.js": "/wildfire-tracker-dev/precache-manifest.80ec530250b9f16c6139162feb094ad7.js",
     "service-worker.js": "/wildfire-tracker-dev/service-worker.js",
     "static/css/2.57917d53.chunk.css.map": "/wildfire-tracker-dev/static/css/2.57917d53.chunk.css.map",
     "static/css/main.7b6f89aa.chunk.css.map": "/wildfire-tracker-dev/static/css/main.7b6f89aa.chunk.css.map",
@@ -22,6 +22,6 @@
     "static/css/2.57917d53.chunk.css",
     "static/js/2.680b4687.chunk.js",
     "static/css/main.7b6f89aa.chunk.css",
-    "static/js/main.cfe27b06.chunk.js"
+    "static/js/main.22d8b5e0.chunk.js"
   ]
 }
