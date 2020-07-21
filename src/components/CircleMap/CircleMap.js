@@ -131,6 +131,8 @@ export class CircleMap extends Component {
 						['get', 'FIRE_STATU'],
 						'New',
 						'#DD2D25',
+						'Out of Control',
+						'#DD2D25',
 						'Being Held',
 						'#F26B21',
 						'Under Control',
