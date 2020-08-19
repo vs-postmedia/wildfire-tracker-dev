@@ -114,7 +114,7 @@ export class CircleMap extends Component {
 	renderMap(data) {
 		this.prepData(data);
 
-		// add fire perimeter polygon
+		// add fire location
 		this.map.on('load', () => {
 			this.map.addSource('wildfires', {
 				type: 'geojson',

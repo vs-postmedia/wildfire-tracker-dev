@@ -1,10 +1,14 @@
 .fire-card {
 	margin-bottom: 2rem;
 	overflow-y: auto;
+	padding: 0 20px;
 }
 
 .fire-card header p {
 	margin-bottom: 15px;
+}
+.fire-card header p:first-letter {
+	text-transform: capitalize;
 }
 .fire-card h3 {
 	margin-bottom: 3px;
@@ -62,7 +66,7 @@
 	height: 40px;
 	width: 40px;
 }
-.fire-card #fon-mapview,
+.fire-card .fon-mapview,
 .fire-card .leaflet-container {
 	height: 275px;
 }

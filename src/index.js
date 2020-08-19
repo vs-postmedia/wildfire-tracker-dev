@@ -11,13 +11,6 @@ import './fonts/BentonSansCond-BoldItalic.otf';
 import './fonts/Shift-Bold.otf';
 import './fonts/Shift-BoldItalic.otf';
 
-// import './fonts/Shift-Book.otf';
-// import './fonts/Shift-BookItalic.otf';
-// import './fonts/Shift-Extralight.otf';
-// import './fonts/Shift-ExtralightItalic.otf';
-// import './fonts/Shift-Medium.otf';
-// import './fonts/Shift-MediumItalic.otf';
-// import './fonts/Shift-Semibold-Italic_400.otf';
 
 // CSS
 import './css/index.css';

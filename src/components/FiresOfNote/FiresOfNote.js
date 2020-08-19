@@ -10,7 +10,7 @@ import './FiresOfNote.css';
 
 // slider params
 const settings = {
-	autoplay: true,
+	// autoplay: true,
 	autoplaySpeed: 7500,
 	centerMode: true,
 	centerPadding: '25px',
@@ -33,9 +33,7 @@ const FiresOfNote = (props) => {
 				{
 					fire_centers.map((d, i) => {
 						let card;
-						const fon = props.data.filter(fire => {
-							return parseInt(fire.properties.ZONE) === parseInt(d.id)
-						});
+						const fon = props.data.filter(fire => parseInt(fire.properties.ZONE) === parseInt(d.id));
 
 						if (fon.length > 0) {
 							card = fon.map((d, i) => {
@@ -43,10 +41,10 @@ const FiresOfNote = (props) => {
 									<FireCard className='fire-card' 
 										attribution={props.attribution}
 										config={props.config}
-										container='fon-mapview'
+										container={fon[i].properties.FIRE_NUMBE}
 										data={fon[i]}
 										fireCenter={d.id}
-										key={`fire-card-${i}`}
+										key={`fire-card-${fon[i].properties.FIRE_NUMBE}`}
 										mapboxStyle={props.mapboxStyle}>
 									</FireCard>
 								)	

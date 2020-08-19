@@ -27,7 +27,8 @@ class InsetMap extends Component {
 
 		// API key
 		mapboxgl.accessToken = this.props.config.accessToken;
-		
+
+		console.log(this.props)
 		this.map = new mapboxgl.Map({
 			// container: this.mapRef.current,
 			container: this.props.container,
@@ -36,27 +37,78 @@ class InsetMap extends Component {
       		zoom: this.props.zoom
 		});
 
-		// add fire perimeter polygon
-		this.map.on('load', () => {
-			this.map.addSource('fire_perim', {
-				type: 'geojson',
-				data: data
-			});
+		/// not every fire has a perimeter
+		if (data.type === 'Feature') {
+			console.log(data)
+			// add fire perimeter polygon
+			this.map.on('load', () => {
 
-			this.map.addLayer({
-				id: id,
-				type: 'fill',
-				source: 'fire_perim',
-				paint: {
-					'fill-color': '#DD2D25',
-					'fill-opacity': 0.4
-				}
-			});
+				this.map.addSource('fire_perim', {
+					type: 'geojson',
+					data: data
+				});
 
-			// show & hide the popup
-			this.map.on('mouseenter', id, this.showPopup);
-			this.map.on('mouseleave', id, this.hidePopup);
-		});
+				console.log(this.map)
+
+				this.map.addLayer({
+					id: id,
+					type: 'fill',
+					source: 'fire_perim',
+					paint: {
+						'fill-color': '#DD2D25',
+						'fill-opacity': 0.4
+					}
+				});
+
+				// show & hide the popup
+				this.map.on('mouseenter', id, this.showPopup);
+				this.map.on('mouseleave', id, this.hidePopup);
+			});
+		} else {
+			this.map.on('load', () => {
+				this.map.addSource(data.properties.fire_number, {
+					'type': 'geojson',
+					'data': {
+						'type': 'FeatureCollection',
+						'features': [{
+							// feature for fire location
+							'type': 'Feature',
+							'geometry': {
+								'type': 'Point',
+								'coordinates': [
+									data.properties.LONGITUDE,
+									data.properties.LATITUDE
+								]
+							},
+							'properties': {
+								'title': data.properties.FIRE_NT_NM,
+								'radius': data.properties.radius * 2
+							}
+						}]
+					}
+				});
+
+				this.map.addLayer({
+					id: data.properties.fire_number,
+					type: 'circle',
+					source: data.properties.fire_number,
+					paint: {
+						'circle-color': 'green',
+						'circle-opacity': 0.7,
+						'circle-radius': [
+							'*',
+							['get', 'radius'],
+							1
+						],
+						'circle-stroke-width': 0.5,
+						'circle-stroke-color': '#FFF'
+					}
+				});
+				// show & hide the popup
+				this.map.on('mouseenter', id, this.showPopup);
+				this.map.on('mouseleave', id, this.hidePopup);
+			});
+		}
 	}
 
 	hidePopup() {
@@ -83,7 +135,7 @@ class InsetMap extends Component {
 	render() {	
 		return (
 			<div>
-				<div ref={this.map} id={this.props.container}></div>
+				<div ref={this.map} id={this.props.container} className="fon-mapview"></div>
 				<pre id="info"></pre>
 			</div>
 			

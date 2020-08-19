@@ -39,27 +39,31 @@ export class WildfireTracker extends Component {
 
 				// separate our results
 				const fon_data = results.filter(d => d.config.url.includes('fon.json'));
-				let perim_data = results.filter(d => d.config.url.includes('perimeters.json'));
-				perim_data = perim_data[0].data;
+				const perimeters = results.filter(d => d.config.url.includes('perimeters.json'));
+				const perim_data = perimeters[0].data;
 
 				// loop through the object returned & push the FON data into an array
-				for (let fon in fon_data) {
-					const data = fon_data[fon].data;
-					
+				fon_data[0].data.forEach((d,i) => {
 					// merge fon details with basic fire data
-					const fire_merged = this.mergeFireDetails(data[fon], all_fires.features);
+					const fire_merged = this.mergeFireDetails(d, all_fires.features);
 
 					// find the matching perimeter data
-					const perimeter = perim_data.filter(d => d.properties.FIRE_NUMBE === fire_merged.fire_number);
-					
+					const perimeter = perim_data.filter(d => {
+						return d.properties.FIRE_NUMBE === fire_merged.FIRE_NUMBE;
+					});
+										
 					if (perimeter.length > 0) {
-						// add permieter data
+						// add perimeter data
 						perimeter[0].properties = fire_merged;
-
-						fires_of_note.push(perimeter[0]);	
+						// fire_merged.perimeter = perimeter[0].properties;
+					} else {
+						perimeter.push({
+							properties: fire_merged,
+							type: 'non-feature'
+						});
 					}
-					
-				}
+					fires_of_note.push(perimeter[0]);
+				})
 
 				// update our state with the new data 
 				this.setState({
