@@ -26,9 +26,10 @@ const SummaryBox = (props) => {
 
 				<div className="stat">
 					<p className="big-num out">{fire_stats.out_fires}</p>
-					<p className="label">Out</p>
+					<p className="label">Out*</p>
 				</div>
 			</div>
+			<p className="note">*Tap toggles view</p>
 			<p className="last-update">Last updated: {fire_stats.last_update}</p>
 		</div>
 	);
@@ -56,7 +57,7 @@ function calculateFireStats(props) {
 		stats.last_update = data.length > 0 ? returnCurrentTime(data[0].properties.last_update) : 'Not available';
 
 		for (let i = 0; i < data.length; ++i) {
-			if (data[i].properties.FIRE_STATU === 'New' | data[i].properties.FIRE_STATU === 'Out of Control') {
+			if (data[i].properties.FIRE_STATU === 'New' | data[i].properties.FIRE_STATU === 'Out of Control' | data[i].properties.FIRE_STATU === 'Fire of Note') {
 				stats.new_fires++;
 			} else if (data[i].properties.FIRE_STATU === 'Being Held') {
 				stats.held_fires++;

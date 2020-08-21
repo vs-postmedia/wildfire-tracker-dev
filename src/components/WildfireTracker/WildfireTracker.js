@@ -14,10 +14,16 @@ export class WildfireTracker extends Component {
 	componentDidMount() {
 		Axios.get(this.props.currentData)
 			.then(resp => {
+				// filter "out" fires so they don't overwhelm map
+				const noOut = {
+					type: 'FeatureCollection',
+					features: resp.data.features.filter(d => d.properties.FIRE_STATU !== 'Out')
+				};
+
 				// update our state with the new data
 				this.setState({
-					data: resp.data,
-					data_all: resp.data
+					data: noOut,
+					data_all: resp.data,
 				});
 
 				this.setupFiresOfNote(resp.data);
@@ -86,6 +92,8 @@ export class WildfireTracker extends Component {
 			});
 
 			return data_array;
+		// } else if (fire_class === 'out') {
+		// 	console.log('OUT')
 		} else {
 			return this.state.data_all.features.filter(d => d.properties.FIRE_STATU.replace(/\s/g, '-').toLowerCase() === fire_class);
 		}
@@ -109,9 +117,15 @@ export class WildfireTracker extends Component {
 		};
 		let fire_class = e.target.className.split(' ')[1];
 
+
 		if (fire_class === this.state.data_displayed) {
-			fire_data = this.state.data_all;
+			// keep 
+			fire_data.features = this.state.data_all.features.filter(d => d.properties.FIRE_STATU !== 'Out');
+			// reset
 			fire_class = null;
+		} else if (fire_class === 'out') {
+			console.log('OUT')
+			fire_data = this.state.data_all;
 		} else {
 			fire_data.features = this.filterFireData(fire_class);
 		}

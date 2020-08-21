@@ -139,7 +139,7 @@ export class CircleMap extends Component {
 						'#0062A3',
 						'Out',
 						'#6D6E70',
-						/* other */ 'green'
+						/* other */ '#F6B31C'
 					],
 					'circle-opacity': 0.7,
 					// probably a better way to do this...

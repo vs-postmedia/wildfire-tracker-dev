@@ -4,13 +4,16 @@ import SummaryBox from '../SummaryBox/SummaryBox';
 import './WildfireMap.css';
 
 
+let zoom = window.innerWidth > 400 ? 5 : 4;
+let center = window.innerWidth > 400 ? [51.184179, -121.752423] : [52.184179, -121.752423];
+
 export class WildfireTracker extends Component {
 	map_options = {
-		center: [53.184179, -125.652423],
+		center: center,
 		classField: 'FIRE_STATU',
 		maxZoom: 8,
 		minZoom: 3,
-		zoom: 4
+		zoom: zoom
 	}
 
 	render() {

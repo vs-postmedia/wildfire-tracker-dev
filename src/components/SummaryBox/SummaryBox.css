@@ -3,7 +3,7 @@
 	max-width: 750px;
 	text-align: center;
 }
-.summary-box h2 {
+.App .summary-box h2 {
 	font-family: 'BentonSansCond-Bold', sans-serif;
 	font-weight: 800;
 	margin: 5px 0;
@@ -23,13 +23,20 @@
 }
 .summary-box .label {
 	color: #6D6E70;
-	font-size: 1.1rem;
+	font-size: 0.95rem;
 	line-height: 1.25rem;
 	margin: 0;
 	padding-bottom: 5px;
 	text-transform: uppercase;
 }
 
+.summary-box .note {
+	color: #898B8E;
+	font-family: 'BentonSansCond-RegItalic', sans-serif;
+	font-size: 0.9rem;
+	margin: 0;
+	text-align: right;
+}
 .summary-box .last-update {
 	font-family: 'BentonSansCond-RegItalic', sans-serif;
 	font-style: italic;
