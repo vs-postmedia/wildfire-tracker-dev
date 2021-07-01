@@ -26,7 +26,7 @@ export class WildfireTracker extends Component {
 					data_all: resp.data,
 				});
 
-				// this.setupFiresOfNote(resp.data);
+				this.setupFiresOfNote(resp.data);
 			});
 
 		this.toggleFireTypeHandler = this.toggleFireTypeHandler.bind(this);
@@ -34,54 +34,35 @@ export class WildfireTracker extends Component {
 
 	setupFiresOfNote(data) {
 		const promises = [];
-		const all_fires = data;
 
 		promises.push(Axios.get(this.props.fonData));
 		promises.push(Axios.get(this.props.firePerimeters));
 
 		Axios.all(promises)
 			.then(results => {
-				let fires_of_note = [];
-
 				// separate our results
-				const fon_data = results.filter(d => d.config.url.includes('fon.json'));
-				const perimeters = results.filter(d => d.config.url.includes('perimeters.json'));
+				const fon_data = results.filter(d => d.config.url.includes('fon.json'))[0].data;
+				const perim_data = results.filter(d => d.config.url.includes('perimeters.json'))[0].data;
 
-				const perim_data = perimeters[0].data;
+				// get fons from the main data set & merge the details
+				const fires_of_note = data.features.filter(d => {
+					if (d.properties.FIRE_STATU === 'Fire of Note') {
+						// get details of the fire of note
+						const fon = fon_data.filter(fon => fon.fire_id === d.properties.FIRE_NT_ID)[0];
 
-				// loop through the object returned & push the FON data into an array
-				fon_data[0].data.forEach((d,i) => {
-					
-					// merge fon details with basic fire data
-					const fire_merged = this.mergeFireDetails(d, all_fires.features);
+						// merge data
+						d.properties = {...fon, ...d.properties};
 
-					// console.log(d, fire_merged)
-					// console.log('--------------------------------')
-
-					// find the matching perimeter data
-					const perimeter = perim_data.filter(d => {
-						// console.log(fire_merged, d.properties)
-						return fire_merged !== undefined ? d.properties.FIRE_NUMBE === fire_merged.FIRE_NUMBE : [];
-					});
-										
-					if (perimeter.length > 0) {
-						// add perimeter data
-						perimeter[0].properties = fire_merged;
-						// fire_merged.perimeter = perimeter[0].properties;
-					} else {
-						perimeter.push({
-							properties: fire_merged,
-							type: 'non-feature'
-						});
+						return d;
 					}
-					fires_of_note.push(perimeter[0]);
-				})
+				});
+
+				console.log(fires_of_note)
 
 				// update our state with the new data 
 				this.setState({
 					data_fon: fires_of_note
 				});
-				
 			});
 	}
 
@@ -103,22 +84,6 @@ export class WildfireTracker extends Component {
 		} else {
 			return this.state.data_all.features.filter(d => d.properties.FIRE_STATU.replace(/\s/g, '-').toLowerCase() === fire_class);
 		}
-	}
-
-	mergeFireDetails(fon, all_fires) {
-		let fire_data;
-
-		// console.log(fon, all_fires)
-
-
-		all_fires.forEach(d => {
-			// console.log(d.properties.FIRE_NUMBE, fon.FIRE_NUMBE)
-			if (d.properties.FIRE_ID === fon.fire_id) {
-				fire_data = {...fon, ...d.properties};
-			}
-		});
-
-		return fire_data;
 	}
 
 	toggleFireTypeHandler(e) {
@@ -158,18 +123,15 @@ export class WildfireTracker extends Component {
 					tiles={this.props.tiles}
 					toggleFireTypeHandler={this.toggleFireTypeHandler}>
 				</WildfireMap>
+
+				<FiresOfNote
+					config={this.props.mapboxConfig}
+					data={this.state.data_fon}
+					mapboxStyle={this.props.mapboxStyle}
+				></FiresOfNote>
 			</Fragment>
 		);
 	}
 }
 
 export default WildfireTracker;
-
-/*
-
-<FiresOfNote
-	config={this.props.mapboxConfig}
-	data={this.state.data_fon}
-	mapboxStyle={this.props.mapboxStyle}
-></FiresOfNote>
-*/

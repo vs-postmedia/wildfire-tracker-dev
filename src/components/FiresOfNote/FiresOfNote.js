@@ -10,7 +10,7 @@ import './FiresOfNote.css';
 
 // slider params
 const settings = {
-	autoplay: true,
+	autoplay: false,
 	autoplaySpeed: 7500,
 	centerMode: true,
 	centerPadding: '25px',
@@ -24,6 +24,7 @@ const settings = {
 };
 
 const FiresOfNote = (props) => {
+	console.log(props)
 	return (
 		<div className='fon'>
 			<h1>Wildfires of Note</h1>
@@ -33,7 +34,8 @@ const FiresOfNote = (props) => {
 				{
 					fire_centers.map((d, i) => {
 						let card;
-						const fon = props.data.filter(fire => parseInt(fire.properties.ZONE) === parseInt(d.id));
+						const fon = props.data.filter(fire => parseInt(fire.properties.FIRE_CENTR) === parseInt(d.id));
+						console.log(fon.lengthl)
 
 						if (fon.length > 0) {
 							card = fon.map((d, i) => {

@@ -20,6 +20,7 @@ const FireCard = (props) => {
 			<div className='row'>
 				<div className='text'>
 					<header>
+						{/*<h3 className='big-num'>{fire.fire_name.split(' (')[0]}</h3>*/}
 						<h3 className='big-num'>{fire.fire_name.split(' (')[0]}</h3>
 						<p>{fire.location}</p>
 					</header>
