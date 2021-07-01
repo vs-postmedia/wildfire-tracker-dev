@@ -26,7 +26,7 @@ export class WildfireTracker extends Component {
 					data_all: resp.data,
 				});
 
-				this.setupFiresOfNote(resp.data);
+				// this.setupFiresOfNote(resp.data);
 			});
 
 		this.toggleFireTypeHandler = this.toggleFireTypeHandler.bind(this);
@@ -46,16 +46,22 @@ export class WildfireTracker extends Component {
 				// separate our results
 				const fon_data = results.filter(d => d.config.url.includes('fon.json'));
 				const perimeters = results.filter(d => d.config.url.includes('perimeters.json'));
+
 				const perim_data = perimeters[0].data;
 
 				// loop through the object returned & push the FON data into an array
 				fon_data[0].data.forEach((d,i) => {
+					
 					// merge fon details with basic fire data
 					const fire_merged = this.mergeFireDetails(d, all_fires.features);
 
+					// console.log(d, fire_merged)
+					// console.log('--------------------------------')
+
 					// find the matching perimeter data
 					const perimeter = perim_data.filter(d => {
-						return d.properties.FIRE_NUMBE === fire_merged.FIRE_NUMBE;
+						// console.log(fire_merged, d.properties)
+						return fire_merged !== undefined ? d.properties.FIRE_NUMBE === fire_merged.FIRE_NUMBE : [];
 					});
 										
 					if (perimeter.length > 0) {
@@ -102,8 +108,12 @@ export class WildfireTracker extends Component {
 	mergeFireDetails(fon, all_fires) {
 		let fire_data;
 
+		// console.log(fon, all_fires)
+
+
 		all_fires.forEach(d => {
-			if (d.properties.FIRE_NT_ID === fon.fire_id) {
+			// console.log(d.properties.FIRE_NUMBE, fon.FIRE_NUMBE)
+			if (d.properties.FIRE_ID === fon.fire_id) {
 				fire_data = {...fon, ...d.properties};
 			}
 		});
@@ -148,15 +158,18 @@ export class WildfireTracker extends Component {
 					tiles={this.props.tiles}
 					toggleFireTypeHandler={this.toggleFireTypeHandler}>
 				</WildfireMap>
-
-				<FiresOfNote
-					config={this.props.mapboxConfig}
-					data={this.state.data_fon}
-					mapboxStyle={this.props.mapboxStyle}
-				></FiresOfNote>
 			</Fragment>
 		);
 	}
 }
 
 export default WildfireTracker;
+
+/*
+
+<FiresOfNote
+	config={this.props.mapboxConfig}
+	data={this.state.data_fon}
+	mapboxStyle={this.props.mapboxStyle}
+></FiresOfNote>
+*/
