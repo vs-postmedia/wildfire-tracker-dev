@@ -29,8 +29,9 @@ const SummaryBox = (props) => {
 					<p className="label">Out*</p>
 				</div>
 			</div>
-			<p className="note">*Tap toggles view</p>
+			
 			<p className="last-update">Last updated: {fire_stats.last_update}</p>
+			<p className="note">Source: B.C. Wildfire Service. Note: *Tap to toggles views.</p>
 		</div>
 	);
 }

@@ -26,7 +26,7 @@ const FireListing = (props) => {
 			<div className="header">
 				<h2>Fires of Note</h2>
 				<div className="button">
-					<input type="checkbox" id="switch" onChange={toggleSidebar} checked/><label for="switch"></label>
+					<input type="checkbox" id="switch" className="open" onChange={toggleSidebar} /><label for="switch"></label>
 				</div>
 			</div>
 			<ul id="listings" className={`listings ${buttonStatus}`}>
