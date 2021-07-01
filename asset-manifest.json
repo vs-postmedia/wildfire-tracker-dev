@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/wildfire-tracker-dev/static/css/main.92390b8e.chunk.css",
-    "main.js": "/wildfire-tracker-dev/static/js/main.0f777ea1.chunk.js",
-    "main.js.map": "/wildfire-tracker-dev/static/js/main.0f777ea1.chunk.js.map",
+    "main.css": "/wildfire-tracker-dev/static/css/main.e794ccd3.chunk.css",
+    "main.js": "/wildfire-tracker-dev/static/js/main.4a7b07ca.chunk.js",
+    "main.js.map": "/wildfire-tracker-dev/static/js/main.4a7b07ca.chunk.js.map",
     "runtime-main.js": "/wildfire-tracker-dev/static/js/runtime-main.bac39c72.js",
     "runtime-main.js.map": "/wildfire-tracker-dev/static/js/runtime-main.bac39c72.js.map",
-    "static/css/2.57917d53.chunk.css": "/wildfire-tracker-dev/static/css/2.57917d53.chunk.css",
+    "static/css/2.17f20344.chunk.css": "/wildfire-tracker-dev/static/css/2.17f20344.chunk.css",
     "static/js/2.680b4687.chunk.js": "/wildfire-tracker-dev/static/js/2.680b4687.chunk.js",
     "static/js/2.680b4687.chunk.js.map": "/wildfire-tracker-dev/static/js/2.680b4687.chunk.js.map",
     "index.html": "/wildfire-tracker-dev/index.html",
-    "precache-manifest.8fa0c2deb4ef7e767e90342fc3615450.js": "/wildfire-tracker-dev/precache-manifest.8fa0c2deb4ef7e767e90342fc3615450.js",
+    "precache-manifest.1e7a819adfce38b5726431f990cee39f.js": "/wildfire-tracker-dev/precache-manifest.1e7a819adfce38b5726431f990cee39f.js",
     "service-worker.js": "/wildfire-tracker-dev/service-worker.js",
-    "static/css/2.57917d53.chunk.css.map": "/wildfire-tracker-dev/static/css/2.57917d53.chunk.css.map",
-    "static/css/main.92390b8e.chunk.css.map": "/wildfire-tracker-dev/static/css/main.92390b8e.chunk.css.map",
+    "static/css/2.17f20344.chunk.css.map": "/wildfire-tracker-dev/static/css/2.17f20344.chunk.css.map",
+    "static/css/main.e794ccd3.chunk.css.map": "/wildfire-tracker-dev/static/css/main.e794ccd3.chunk.css.map",
     "static/js/2.680b4687.chunk.js.LICENSE.txt": "/wildfire-tracker-dev/static/js/2.680b4687.chunk.js.LICENSE.txt",
     "static/media/index.css": "/wildfire-tracker-dev/static/media/Shift-BoldItalic.5c3edbfd.otf",
     "static/media/slick-theme.css": "/wildfire-tracker-dev/static/media/slick.f97e3bbf.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.bac39c72.js",
-    "static/css/2.57917d53.chunk.css",
+    "static/css/2.17f20344.chunk.css",
     "static/js/2.680b4687.chunk.js",
-    "static/css/main.92390b8e.chunk.css",
-    "static/js/main.0f777ea1.chunk.js"
+    "static/css/main.e794ccd3.chunk.css",
+    "static/js/main.4a7b07ca.chunk.js"
   ]
 }
