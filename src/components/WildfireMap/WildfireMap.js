@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import CircleMap from '../CircleMap/CircleMap';
 import SummaryBox from '../SummaryBox/SummaryBox';
+import FireListing from '../FireListing/FireListing';
 import './WildfireMap.css';
 
 
@@ -30,6 +31,7 @@ export class WildfireTracker extends Component {
 					mapboxStyle={this.props.mapboxStyle}
 					maxZoom={this.map_options.maxZoom}
 					minZoom={this.map_options.minZoom}
+					selectedFeature={this.props.selectedFeature}
 					zoom={this.map_options.zoom}>
 				</CircleMap>
 
@@ -37,9 +39,15 @@ export class WildfireTracker extends Component {
 					data={this.props.data_all}
 					toggleFireTypeHandler={this.props.toggleFireTypeHandler}>
 				</SummaryBox>
+
+				<FireListing
+					data={this.props.data_fon}
+					flyToLocation={this.props.flyToLocation}>
+				</FireListing>
 			</Fragment>
 		);
 	}
 }
+
 
 export default WildfireTracker;

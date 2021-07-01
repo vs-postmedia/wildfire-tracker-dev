@@ -25,3 +25,10 @@
 	font-family: 'BentonSansCond-BoldItalic';
 	src: local('BentonSansCond-BoldItalic'), url('../fonts/BentonSansCond-BoldItalic.otf') format('opentype');
 }
+
+
+:root {
+	--boldB: 'BentonSansCond-Bold';
+	--italicB: 'BentonSansCond-RegItalic';
+	--regB: 'BentonSansCond-Regular';
+}

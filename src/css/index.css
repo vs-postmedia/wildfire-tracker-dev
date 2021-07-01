@@ -1,5 +1,6 @@
 @import './normalize.css';
 @import './fonts.css';
+@import './colors.css';
 
 body {
 	margin: 0;
@@ -22,7 +23,7 @@ a {
 }
 .App h2 {
 	font-family: BentonSansCond-Bold, serif;
-	margin: 15px 0;
+/*	margin: 15px 0;*/
 }
 .App h3 {
 	font-family: BentonSansCond-Bold, serif;

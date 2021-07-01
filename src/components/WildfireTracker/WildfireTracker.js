@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import Axios from 'axios'
 import WildfireMap from '../WildfireMap/WildfireMap';
-import FiresOfNote from '../FiresOfNote/FiresOfNote';
 
 export class WildfireTracker extends Component {
 
 	state = {
 		data: [],
 		data_all: [],
-		data_fon: []
+		data_fon: [],
+		selected_feature: null
 	}
 
 	componentDidMount() {
@@ -29,6 +29,7 @@ export class WildfireTracker extends Component {
 				this.setupFiresOfNote(resp.data);
 			});
 
+		this.flyToLocation = this.flyToLocation.bind(this);
 		this.toggleFireTypeHandler = this.toggleFireTypeHandler.bind(this);
 	}
 
@@ -57,8 +58,6 @@ export class WildfireTracker extends Component {
 					}
 				});
 
-				console.log(fires_of_note)
-
 				// update our state with the new data 
 				this.setState({
 					data_fon: fires_of_note
@@ -84,6 +83,13 @@ export class WildfireTracker extends Component {
 		} else {
 			return this.state.data_all.features.filter(d => d.properties.FIRE_STATU.replace(/\s/g, '-').toLowerCase() === fire_class);
 		}
+	}
+
+	flyToLocation(e) {
+		// console.log(e.target.parentNode.id)
+		this.setState({
+			selected_feature: this.state.data_fon.filter(d => parseInt(d.properties.fire_id) === parseInt(e.target.parentNode.id))[0]
+		});
 	}
 
 	toggleFireTypeHandler(e) {
@@ -117,18 +123,15 @@ export class WildfireTracker extends Component {
 			<Fragment>
 				<WildfireMap 
 					config={this.props.mapboxConfig}
+					selectedFeature={this.state.selected_feature}
 					data={this.state.data}
 					data_all={this.state.data_all}
+					data_fon={this.state.data_fon}
 					mapboxStyle={this.props.mapboxStyle}
 					tiles={this.props.tiles}
+					flyToLocation={this.flyToLocation}
 					toggleFireTypeHandler={this.toggleFireTypeHandler}>
 				</WildfireMap>
-
-				<FiresOfNote
-					config={this.props.mapboxConfig}
-					data={this.state.data_fon}
-					mapboxStyle={this.props.mapboxStyle}
-				></FiresOfNote>
 			</Fragment>
 		);
 	}
