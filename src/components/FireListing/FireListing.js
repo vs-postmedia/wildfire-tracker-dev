@@ -11,7 +11,9 @@ const FireListing = (props) => {
 	// NO FON? HIDE SIDEBAR
 	if (fon.length > 0) {
 		// YES FON
-		list = fon.sort((a,b) => a.CURRENT_SI - b.CURRENT_SI)
+		list = fon.sort((a,b) => {
+				return b.properties.CURRENT_SI - a.properties.CURRENT_SI
+			})
 			.map(d => {
 				return ListItem(d.properties, props.flyToLocation);
 			});	
@@ -26,7 +28,7 @@ const FireListing = (props) => {
 			<div className="header">
 				<h2>Fires of Note</h2>
 				<div className="button">
-					<input type="checkbox" id="switch" className="open" onChange={toggleSidebar} /><label for="switch"></label>
+					<input type="checkbox" id="switch" className="open" onChange={toggleSidebar} /><label htmlFor="switch"></label>
 				</div>
 			</div>
 			<ul id="listings" className={`listings ${buttonStatus}`}>
@@ -37,10 +39,13 @@ const FireListing = (props) => {
 }
 
 function ListItem(data, clickHandler) {
+	const size = Math.round((data.CURRENT_SI / 100) * 10) / 10;
+
+	const sizeText = size > 0.1 ? `${size} sq. km` : 'Spot fire';
 	return (
 		<li key={data.fire_id} id={data.fire_id} className="item" onClick={clickHandler}>
 			<h4 className="title">{data.fire_name.split(' (')[0]}</h4>
-			<p className="size">{data.CURRENT_SI / 100} sq. km</p>
+			<p className="size">{sizeText}</p>
 			<p className="location">{data.location}</p>
 		</li>
 	);
