@@ -1,27 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a99f9492ecfcaf933b0ca12055829015",
+    "revision": "00103d1c9a22a44aecad673638545c6f",
     "url": "/wildfire-tracker-dev/index.html"
   },
   {
-    "revision": "e872fbeb5f3a20939653",
-    "url": "/wildfire-tracker-dev/static/css/2.17f20344.chunk.css"
+    "revision": "978c79dd593d876b1214",
+    "url": "/wildfire-tracker-dev/static/css/main.cf13fca4.chunk.css"
   },
   {
-    "revision": "e47fa86b476ff6f62346",
-    "url": "/wildfire-tracker-dev/static/css/main.e794ccd3.chunk.css"
+    "revision": "763687c6d65256242cce",
+    "url": "/wildfire-tracker-dev/static/js/2.ca9db1f5.chunk.js"
   },
   {
-    "revision": "e872fbeb5f3a20939653",
-    "url": "/wildfire-tracker-dev/static/js/2.680b4687.chunk.js"
+    "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
+    "url": "/wildfire-tracker-dev/static/js/2.ca9db1f5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5ac48c47bb3912b14c2d8de4f56d5ae8",
-    "url": "/wildfire-tracker-dev/static/js/2.680b4687.chunk.js.LICENSE.txt"
-  },
-  {
-    "revision": "e47fa86b476ff6f62346",
-    "url": "/wildfire-tracker-dev/static/js/main.4a7b07ca.chunk.js"
+    "revision": "978c79dd593d876b1214",
+    "url": "/wildfire-tracker-dev/static/js/main.17a4b04a.chunk.js"
   },
   {
     "revision": "dfb2994c4f208b3016e0",
@@ -50,21 +46,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "5c3edbfdeedc59bb35fac3bf1a461926",
     "url": "/wildfire-tracker-dev/static/media/Shift-BoldItalic.5c3edbfd.otf"
-  },
-  {
-    "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
-    "url": "/wildfire-tracker-dev/static/media/slick.b7c9e1e4.woff"
-  },
-  {
-    "revision": "ced611daf7709cc778da928fec876475",
-    "url": "/wildfire-tracker-dev/static/media/slick.ced611da.eot"
-  },
-  {
-    "revision": "d41f55a78e6f49a5512878df1737e58a",
-    "url": "/wildfire-tracker-dev/static/media/slick.d41f55a7.ttf"
-  },
-  {
-    "revision": "f97e3bbf73254b0112091d0192f17aec",
-    "url": "/wildfire-tracker-dev/static/media/slick.f97e3bbf.svg"
   }
 ]);
