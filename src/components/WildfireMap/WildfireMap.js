@@ -6,7 +6,7 @@ import './WildfireMap.css';
 
 
 let zoom = window.innerWidth > 400 ? 5 : 4;
-let center = window.innerWidth > 400 ? [51.184179, -121.752423] : [52.184179, -121.752423];
+let center = window.innerWidth > 400 ? [51.5, -124] : [54, -125];
 
 export class WildfireTracker extends Component {
 	map_options = {

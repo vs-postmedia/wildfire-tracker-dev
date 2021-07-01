@@ -194,6 +194,9 @@ export class CircleMap extends Component {
 				}
 			});
 
+			// Add zoom and rotation controls to the map.
+			this.map.addControl(new mapboxgl.NavigationControl());
+
 			// show & hide the popup
 			this.map.on('mouseenter', 'wildfires', this.showPopup);
 			this.map.on('mouseleave', 'wildfires', this.hidePopup);

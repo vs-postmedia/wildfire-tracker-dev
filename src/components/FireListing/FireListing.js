@@ -2,7 +2,7 @@ import React from 'react';
 import './FireListing.css';
 
 
-
+let buttonStatus = 'open';
 const FireListing = (props) => {
 	// console.log(props.data)
 	let list;
@@ -11,11 +11,13 @@ const FireListing = (props) => {
 	// NO FON? HIDE SIDEBAR
 	if (fon.length > 0) {
 		// YES FON
-		list = fon.map(d => {
-			return ListItem(d.properties, props.flyToLocation);
-		});	
+		list = fon.sort((a,b) => a.CURRENT_SI - b.CURRENT_SI)
+			.map(d => {
+				return ListItem(d.properties, props.flyToLocation);
+			});	
 	} else {
 		// hide sidebar
+		list = <li className="no-fires">Currently there are no fires of note in B.C.</li>
 	}
 
 
@@ -23,8 +25,11 @@ const FireListing = (props) => {
 		<div className="sidebar">
 			<div className="header">
 				<h2>Fires of Note</h2>
+				<div className="button">
+					<input type="checkbox" id="switch" onChange={toggleSidebar} checked/><label for="switch"></label>
+				</div>
 			</div>
-			<ul id="listings" className="listings">
+			<ul id="listings" className={`listings ${buttonStatus}`}>
 				{list}
 			</ul>
 		</div>
@@ -39,6 +44,21 @@ function ListItem(data, clickHandler) {
 			<p className="location">{data.location}</p>
 		</li>
 	);
+}
+
+function toggleSidebar(e) {
+	console.log(e)
+	const sidebar = document.getElementById('listings');
+
+	if (buttonStatus === 'open') {
+		e.target.className = 'closed';
+		sidebar.className = 'listings closed';
+		buttonStatus = 'closed';
+	} else {
+		e.target.className = 'open';
+		sidebar.className = 'listings open';
+		buttonStatus = 'open';
+	}
 }
 
 export default FireListing;
