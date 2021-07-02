@@ -1,9 +1,0 @@
-#fon-mapview .mapboxgl-popup-content {
-	font: 12px/20px 'BentonSansCond', Arial, Helvetica, sans-serif;
-	max-width: 175px;
-	padding: 7px;
-}
-
-#fon-mapview .mapboxgl-popup-content h3 {
-	margin-top: 0;
-}

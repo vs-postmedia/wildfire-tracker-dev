@@ -4,8 +4,11 @@ import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 
 import './CircleMap.css';
 
-// let wmsLayer = 'https://img.nj.gov/imagerywms/Natural2015?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=Natural2015';
-let wmsLayer = 'https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP/ows?service=WMS&crs=EPSG:4326&dpiMode=7&format=image%2Fpng&layers=pub%3AWHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP&styles'
+//srs=EPSG:3857&
+let wmsLayer = 'https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP/ows?service=WMS&request=GetMap&srs=EPSG:3005&\
+format=image/png&height=450&width=750&transparent=true&\
+layers=pub:WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP&\
+bbox=-139.0522011144566932,47.6321414425716867,-110.4276991602271494,60.5985243564883049'
 
 export class CircleMap extends Component {
 	map;
@@ -37,9 +40,12 @@ export class CircleMap extends Component {
 		
 		this.map = new mapboxgl.Map({
 			// container: this.props.container,
-			container: this.mapContainer,
-			style: this.props.mapboxStyle,
 			center: [this.props.center[1], this.props.center[0]],
+			container: this.mapContainer,
+			maxZoom: this.props.maxZoom,
+			minZoom: this.props.minZoom,
+			style: this.props.mapboxStyle,
+			
       		zoom: this.props.zoom
 		});
 
@@ -115,7 +121,6 @@ export class CircleMap extends Component {
 	}
 
 	showPopup(e, sidebarClick) {
-		console.log(e)
 		let coords, text;
 
 		if (sidebarClick) {
@@ -143,18 +148,13 @@ export class CircleMap extends Component {
 
 		// add fire location
 		this.map.on('load', () => {
-			// wildfires
-			this.map.addSource('wildfires', {
-				type: 'geojson',
-				data: data
-			});
 			// BC govt evac & alerts wms layer
 			// this.map.addSource('evacs-alerts', {
-			// 	type: 'raster',
+			// 	'scheme': 'tms',
 			// 	'tiles': [wmsLayer],
-			// 	'tileSize': 256
+			// 	'tileSize': 256,
+			// 	type: 'raster'
 			// });
-
 			// this.map.addLayer({
 			// 	'id': 'wms-layer-id',
 			// 	'type': 'raster',
@@ -162,6 +162,11 @@ export class CircleMap extends Component {
 			// 	'paint': {}
 			// });
 
+			// wildfires
+			this.map.addSource('wildfires', {
+				type: 'geojson',
+				data: data
+			});
 			this.map.addLayer({
 				id: 'wildfires',
 				type: 'circle',

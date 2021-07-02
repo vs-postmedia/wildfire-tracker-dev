@@ -13,7 +13,7 @@ export class WildfireTracker extends Component {
 		center: center,
 		classField: 'FIRE_STATU',
 		maxZoom: 8,
-		minZoom: 3,
+		minZoom: 4,
 		zoom: zoom
 	}
 
