@@ -40,11 +40,12 @@ const FireListing = (props) => {
 
 function ListItem(data, clickHandler) {
 	const size = Math.round((data.CURRENT_SI / 100) * 10) / 10;
+	const name = data.fire_name; // data.fire_name.split(' (')[0]
 
 	const sizeText = size > 0.1 ? `${size} sq. km` : 'Spot fire';
 	return (
 		<li key={data.fire_id} id={data.fire_id} className="item" onClick={clickHandler}>
-			<h4 className="title">{data.fire_name.split(' (')[0]}</h4>
+			<h4 className="title">{name}</h4>
 			<p className="size">{sizeText}</p>
 			<p className="location">{data.location}</p>
 		</li>
