@@ -6,12 +6,11 @@ Based off of current fire locations found at: `https://catalogue.data.gov.bc.ca/
 Built with create-react-app.
 
 ### 
-Data is pulled from Heroku app – `fast-forest-46102` – that runs once a day at 8:30am UTC (1:30am Pacific). Provincial wildfire data is updated daily at midnight.
+Data is pulled from Heroku app – `fast-forest-46102` – that runs once an hour. Provincial wildfire data is updated daily at midnight.
 
 
 
 
 ###
 EMBED
-
-<iframe src="https://vs-postmedia.github.io/wildfire-tracker-dev/" frameborder="0" height="1000" scrolling="yes"></iframe>
+[protected-iframe info="https://vs-postmedia.github.io/wildfire-tracker-dev/" frameborder="0" height="700" scrolling="yes" width="no"]
