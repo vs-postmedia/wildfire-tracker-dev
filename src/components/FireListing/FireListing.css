@@ -149,9 +149,13 @@ label:active:after {
 
 
 @media (min-width: 500px) {
+	.sidebar {
+		height: 70px;
+	}
 	.sidebar h2 {
 		font-size: 1.75rem;
 		line-height: 60px;
 		padding-top: 0;
 	}
+
 }
