@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/wildfire-tracker-dev/static/css/main.8546e543.chunk.css",
-    "main.js": "/wildfire-tracker-dev/static/js/main.e8c65966.chunk.js",
-    "main.js.map": "/wildfire-tracker-dev/static/js/main.e8c65966.chunk.js.map",
+    "main.js": "/wildfire-tracker-dev/static/js/main.0e2da5a0.chunk.js",
+    "main.js.map": "/wildfire-tracker-dev/static/js/main.0e2da5a0.chunk.js.map",
     "runtime-main.js": "/wildfire-tracker-dev/static/js/runtime-main.bac39c72.js",
     "runtime-main.js.map": "/wildfire-tracker-dev/static/js/runtime-main.bac39c72.js.map",
     "static/js/2.ca9db1f5.chunk.js": "/wildfire-tracker-dev/static/js/2.ca9db1f5.chunk.js",
     "static/js/2.ca9db1f5.chunk.js.map": "/wildfire-tracker-dev/static/js/2.ca9db1f5.chunk.js.map",
     "index.html": "/wildfire-tracker-dev/index.html",
-    "precache-manifest.1523fee708e2a09301a93ca4200558a8.js": "/wildfire-tracker-dev/precache-manifest.1523fee708e2a09301a93ca4200558a8.js",
+    "precache-manifest.5acaa61f3c98733010802063b68268ec.js": "/wildfire-tracker-dev/precache-manifest.5acaa61f3c98733010802063b68268ec.js",
     "service-worker.js": "/wildfire-tracker-dev/service-worker.js",
     "static/css/main.8546e543.chunk.css.map": "/wildfire-tracker-dev/static/css/main.8546e543.chunk.css.map",
     "static/js/2.ca9db1f5.chunk.js.LICENSE.txt": "/wildfire-tracker-dev/static/js/2.ca9db1f5.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.bac39c72.js",
     "static/js/2.ca9db1f5.chunk.js",
     "static/css/main.8546e543.chunk.css",
-    "static/js/main.e8c65966.chunk.js"
+    "static/js/main.0e2da5a0.chunk.js"
   ]
 }
