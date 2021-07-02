@@ -149,7 +149,7 @@ label:active:after {
 
 
 @media (min-width: 500px) {
-	.sidebar {
+	.sidebar .header {
 		height: 70px;
 	}
 	.sidebar h2 {
