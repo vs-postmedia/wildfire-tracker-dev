@@ -19,7 +19,7 @@ export class CircleMap extends Component {
 	// prep the popup
 	popup = new mapboxgl.Popup({
 		closeButton: false,
-		closeOnClick: false
+		closeOnClick: true
 	});
 
 	constructor(props) {
