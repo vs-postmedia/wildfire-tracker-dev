@@ -48,7 +48,6 @@ export class CircleMap extends Component {
 			maxZoom: this.props.maxZoom,
 			minZoom: this.props.minZoom,
 			style: this.props.mapboxStyle,
-			
       		zoom: this.props.zoom
 		});
 
@@ -69,7 +68,6 @@ export class CircleMap extends Component {
 
 		// has a feature been selected?
 		if (this.props.selectedFeature && this.props.selectedFeature !== prevProps.data) {
-			console.log(this.props.selectedFeature);
 			this.flyToLocation(this.props.selectedFeature);
 			this.showPopup(this.props.selectedFeature, true)
 		}
@@ -124,6 +122,7 @@ export class CircleMap extends Component {
 	}
 
 	showPopup(e, sidebarClick) {
+		// console.log(e)
 		let coords, text;
 
 		if (sidebarClick) {
@@ -177,13 +176,14 @@ export class CircleMap extends Component {
 			// });
 
 			// Evac and alerts custom mapbox tileset
-			this.map.addSource('evacs-alerts', {
+			this.map.addSource('evacs_alerts', {
 				type: 'vector',
 				url: 'mapbox://ngriffiths-postmedia.ckqmy02um05r021lgvokgjxs1-3fgu5'
 			});
+			// polygons
 			this.map.addLayer({
 				id: 'evac-data',
-				source: 'evacs-alerts',
+				source: 'evacs_alerts',
 				'source-layer': 'Evacs_and_alerts',
 				type: 'fill',
 				paint: {
@@ -198,11 +198,48 @@ export class CircleMap extends Component {
 						'#A7A9AB',
 						'#A7A9AB'
 					],
-					'fill-opacity': 0.75
+					'fill-opacity': 0.6
 				}
 			},
 			// place layer underneath this layer
 			firstSymbolId);
+			// labels
+			this.map.addLayer({
+				id: 'evac-data-text',
+				minzoom: 7,
+				source: 'evacs_alerts',
+				'source-layer': 'Evacs_and_alerts',
+				type: 'symbol',
+				// we don't need to label every single evac zone...
+				filter: ['>', ['get', 'AREA_SQM'], 950000000],
+				layout: {
+					'symbol-placement': 'point',
+					'text-field': [
+						'format',
+						['concat', 'Evacuation ', ['get', 'OA_STATUS']],
+						{
+							'font-scale': 0.9,
+							'font-weight': 800
+						}
+					],
+				},
+				paint: {
+					'text-color': 'rgba(255,255,255,1)',
+					'text-halo-blur': 1,
+					'text-halo-color': [
+						'match',
+						['get', 'OA_STATUS'],
+						'Alert',
+						'#F6B31C',
+						'Order',
+						'#DD2D25',
+						'Tactical',
+						'#A7A9AB',
+						'#A7A9AB' // fallback
+					],
+					'text-halo-width': 1
+				}
+			});
 
 			// wildfires
 			this.map.addSource('wildfires', {
@@ -243,12 +280,16 @@ export class CircleMap extends Component {
 			// place layer underneath this layer
 			firstSymbolId);
 
+			// console.log(this.map.getStyle().layers)
+
 			// Add zoom and rotation controls to the map.
 			this.map.addControl(new mapboxgl.NavigationControl());
 
 			// show & hide the popup
 			this.map.on('mouseenter', 'wildfires', this.showPopup);
 			this.map.on('mouseleave', 'wildfires', this.hidePopup);
+			this.map.on('mouseenter', 'evacs_alerts', this.showPopup);
+			this.map.on('mouseleave', 'evacs_alerts', this.hidePopup);
 		});
 
 		this.setState({
