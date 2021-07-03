@@ -4,11 +4,14 @@ import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 
 import './CircleMap.css';
 
-//srs=EPSG:3857&
-let wmsLayer = 'https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP/ows?service=WMS&request=GetMap&srs=EPSG:3005&\
-format=image/png&height=450&width=750&transparent=true&\
+//srs=EPSG:3857& - mapbox projection
+//srs=EPSG:3005& - wms projection
+let wmsLayer = 'https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP/ows?service=WMS&request=GetMap&crs=EPSG:4326&\
+format=image/png&transparent=true&height=450&width=750&\
 layers=pub:WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP&\
-bbox=-139.0522011144566932,47.6321414425716867,-110.4276991602271494,60.5985243564883049'
+bbox=-139,48,-110,61';
+
+// bbox=-139.0522011144566932,47.6321414425716867,-110.4276991602271494,60.5985243564883049'
 
 export class CircleMap extends Component {
 	map;
@@ -148,6 +151,17 @@ export class CircleMap extends Component {
 
 		// add fire location
 		this.map.on('load', () => {
+			// Find the first symbol layer in the map style so we can keep them on top
+			let firstSymbolId;
+			const layers = this.map.getStyle().layers;
+			
+			for (let i = 0; i < layers.length; i++) {
+				if (layers[i].type === 'symbol') {
+					firstSymbolId = layers[i].id;
+					break;
+				}
+			}
+
 			// BC govt evac & alerts wms layer
 			// this.map.addSource('evacs-alerts', {
 			// 	'scheme': 'tms',
@@ -161,6 +175,34 @@ export class CircleMap extends Component {
 			// 	'source': 'evacs-alerts',
 			// 	'paint': {}
 			// });
+
+			// Evac and alerts custom mapbox tileset
+			this.map.addSource('evacs-alerts', {
+				type: 'vector',
+				url: 'mapbox://ngriffiths-postmedia.ckqmy02um05r021lgvokgjxs1-3fgu5'
+			});
+			this.map.addLayer({
+				id: 'evac-data',
+				source: 'evacs-alerts',
+				'source-layer': 'Evacs_and_alerts',
+				type: 'fill',
+				paint: {
+					'fill-color': [
+						'match',
+						['get', 'OA_STATUS'],
+						'Alert',
+						'#FACE7C',
+						'Order',
+						'#e67154',
+						'Tactical',
+						'#A7A9AB',
+						'#A7A9AB'
+					],
+					'fill-opacity': 0.75
+				}
+			},
+			// place layer underneath this layer
+			firstSymbolId);
 
 			// wildfires
 			this.map.addSource('wildfires', {
@@ -185,7 +227,7 @@ export class CircleMap extends Component {
 						'#0062A3',
 						'Out',
 						'#6D6E70',
-						/* other */ '#F6B31C'
+						/* fallback */ '#9b3f86'
 					],
 					'circle-opacity': 0.7,
 					// probably a better way to do this...
@@ -197,7 +239,9 @@ export class CircleMap extends Component {
 					'circle-stroke-width': 0.5,
 					'circle-stroke-color': '#FFF'
 				}
-			});
+			},
+			// place layer underneath this layer
+			firstSymbolId);
 
 			// Add zoom and rotation controls to the map.
 			this.map.addControl(new mapboxgl.NavigationControl());
