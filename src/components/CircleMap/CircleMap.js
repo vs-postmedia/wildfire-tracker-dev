@@ -4,6 +4,8 @@ import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 
 import './CircleMap.css';
 
+const evacZoomLevel = 6;
+const evacMinSize = 220000000;
 //srs=EPSG:3857& - mapbox projection
 //srs=EPSG:3005& - wms projection
 let wmsLayer = 'https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP/ows?service=WMS&request=GetMap&crs=EPSG:4326&\
@@ -122,7 +124,7 @@ export class CircleMap extends Component {
 	}
 
 	showPopup(e, sidebarClick) {
-		// console.log(e)
+		console.log(e)
 		let coords, text;
 
 		if (sidebarClick) {
@@ -206,12 +208,12 @@ export class CircleMap extends Component {
 			// labels
 			this.map.addLayer({
 				id: 'evac-data-text',
-				minzoom: 7,
+				minzoom: evacZoomLevel,
 				source: 'evacs_alerts',
 				'source-layer': 'Evacs_and_alerts',
 				type: 'symbol',
 				// we don't need to label every single evac zone...
-				filter: ['>', ['get', 'AREA_SQM'], 950000000],
+				filter: ['>', ['get', 'AREA_SQM'], evacMinSize],
 				layout: {
 					'symbol-placement': 'point',
 					'text-field': [
@@ -225,7 +227,7 @@ export class CircleMap extends Component {
 				},
 				paint: {
 					'text-color': 'rgba(255,255,255,1)',
-					'text-halo-blur': 1,
+					'text-halo-blur': .25,
 					'text-halo-color': [
 						'match',
 						['get', 'OA_STATUS'],
