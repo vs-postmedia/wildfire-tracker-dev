@@ -56,7 +56,7 @@ export class WildfireTracker extends Component {
 
 						return d;
 					}
-				});
+				}).filter(d => d.properties.fire_name);
 
 				// update our state with the new data 
 				this.setState({
@@ -78,8 +78,6 @@ export class WildfireTracker extends Component {
 			});
 
 			return data_array;
-		// } else if (fire_class === 'out') {
-		// 	console.log('OUT')
 		} else {
 			return this.state.data_all.features.filter(d => d.properties.FIRE_STATU.replace(/\s/g, '-').toLowerCase() === fire_class);
 		}

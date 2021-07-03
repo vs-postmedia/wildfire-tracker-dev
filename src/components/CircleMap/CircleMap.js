@@ -124,7 +124,7 @@ export class CircleMap extends Component {
 	}
 
 	showPopup(e, sidebarClick) {
-		console.log(e)
+		// console.log(e)
 		let coords, text;
 
 		if (sidebarClick) {
