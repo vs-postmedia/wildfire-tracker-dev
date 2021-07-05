@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import mapboxgl from 'mapbox-gl';
+// import mapboxgl from 'mapbox-gl';
+import maplibregl from 'maplibre-gl';
 import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 
+// CSS
+import './maplibre-gl.css';
 import './CircleMap.css';
 
 const evacZoomLevel = 6;
@@ -19,7 +22,8 @@ export class CircleMap extends Component {
 	map;
 	state = {};
 	// prep the popup
-	popup = new mapboxgl.Popup({
+	// popup = new mapboxgl.Popup({
+	popup = new maplibregl.Popup({
 		closeButton: false,
 		closeOnClick: true
 	});
@@ -41,9 +45,9 @@ export class CircleMap extends Component {
 		this.range = this.props.range ? this.props.range : [3,50];
 
 		// API key
-		mapboxgl.accessToken = this.props.config.accessToken;
+		// mapboxgl.accessToken = this.props.config.accessToken;
 		
-		this.map = new mapboxgl.Map({
+		this.map = new maplibregl.Map({
 			// container: this.props.container,
 			center: [this.props.center[1], this.props.center[0]],
 			container: this.mapContainer,
@@ -179,14 +183,13 @@ export class CircleMap extends Component {
 
 			// Evac and alerts custom mapbox tileset
 			this.map.addSource('evacs_alerts', {
-				type: 'vector',
-				url: 'mapbox://ngriffiths-postmedia.ckqmy02um05r021lgvokgjxs1-3fgu5'
+				type: 'geojson',
+				'data': this.props.evacsAlerts
 			});
 			// polygons
 			this.map.addLayer({
 				id: 'evac-data',
 				source: 'evacs_alerts',
-				'source-layer': 'Evacs_and_alerts',
 				type: 'fill',
 				paint: {
 					'fill-color': [
@@ -202,15 +205,15 @@ export class CircleMap extends Component {
 					],
 					'fill-opacity': 0.6
 				}
-			},
 			// place layer underneath this layer
-			firstSymbolId);
+			}, firstSymbolId);
+			
+			
 			// labels
 			this.map.addLayer({
 				id: 'evac-data-text',
 				minzoom: evacZoomLevel,
 				source: 'evacs_alerts',
-				'source-layer': 'Evacs_and_alerts',
 				type: 'symbol',
 				// we don't need to label every single evac zone...
 				filter: ['>', ['get', 'AREA_SQM'], evacMinSize],
@@ -282,10 +285,8 @@ export class CircleMap extends Component {
 			// place layer underneath this layer
 			firstSymbolId);
 
-			// console.log(this.map.getStyle().layers)
-
 			// Add zoom and rotation controls to the map.
-			this.map.addControl(new mapboxgl.NavigationControl());
+			this.map.addControl(new maplibregl.NavigationControl());
 
 			// show & hide the popup
 			this.map.on('mouseenter', 'wildfires', this.showPopup);

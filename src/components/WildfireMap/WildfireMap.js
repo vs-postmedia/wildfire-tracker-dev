@@ -28,6 +28,7 @@ export class WildfireTracker extends Component {
 					config={this.props.config}
 					container="mapview"
 					data={this.props.data}
+					evacsAlerts={this.props.data_evacs}
 					mapboxStyle={this.props.mapboxStyle}
 					maxZoom={this.map_options.maxZoom}
 					minZoom={this.map_options.minZoom}

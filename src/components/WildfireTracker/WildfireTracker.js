@@ -25,12 +25,26 @@ export class WildfireTracker extends Component {
 					data: noOut,
 					data_all: resp.data,
 				});
-
+				// prep the fires of Note
 				this.setupFiresOfNote(resp.data);
+
+				// download alert & evacuation perimeter data
+				this.fetchEvacs(this.props.evacsAlerts);
 			});
 
 		this.flyToLocation = this.flyToLocation.bind(this);
 		this.toggleFireTypeHandler = this.toggleFireTypeHandler.bind(this);
+	}
+
+	fetchEvacs(url) {
+		Axios.get(url)
+			.then(results => {
+				if (results.status === 200) {
+					this.setState({
+						data_evacs: results.data
+					});
+				}
+			});
 	}
 
 	setupFiresOfNote(data) {
@@ -124,6 +138,7 @@ export class WildfireTracker extends Component {
 					selectedFeature={this.state.selected_feature}
 					data={this.state.data}
 					data_all={this.state.data_all}
+					data_evacs={this.state.data_evacs}
 					data_fon={this.state.data_fon}
 					mapboxStyle={this.props.mapboxStyle}
 					tiles={this.props.tiles}
