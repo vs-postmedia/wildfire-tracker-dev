@@ -6,6 +6,7 @@ import './CircleMap.css';
 
 const evacZoomLevel = 6;
 const evacMinSize = 220000000;
+const evacUrl = 'mapbox://ngriffiths-postmedia.ckqmy02um05r021lgvokgjxs1-3fgu5';
 //srs=EPSG:3857& - mapbox projection
 //srs=EPSG:3005& - wms projection
 let wmsLayer = 'https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP/ows?service=WMS&request=GetMap&crs=EPSG:4326&\
@@ -180,7 +181,7 @@ export class CircleMap extends Component {
 			// Evac and alerts custom mapbox tileset
 			this.map.addSource('evacs_alerts', {
 				type: 'vector',
-				url: 'mapbox://ngriffiths-postmedia.ckqmy02um05r021lgvokgjxs1-3fgu5'
+				url: evacUrl
 			});
 			// polygons
 			this.map.addLayer({
@@ -288,10 +289,21 @@ export class CircleMap extends Component {
 			this.map.addControl(new mapboxgl.NavigationControl());
 
 			// show & hide the popup
+			this.map.on('click', 'wildfires', this.showPopup);
 			this.map.on('mouseenter', 'wildfires', this.showPopup);
 			this.map.on('mouseleave', 'wildfires', this.hidePopup);
-			this.map.on('mouseenter', 'evacs_alerts', this.showPopup);
-			this.map.on('mouseleave', 'evacs_alerts', this.hidePopup);
+			// this.map.on('mouseenter', 'evacs_alerts', this.showPopup);
+			// this.map.on('mouseleave', 'evacs_alerts', this.hidePopup);
+			
+			// Change the cursor to a pointer when the mouse is over the places layer.
+			this.map.on('mouseenter', 'places', function () {
+				this.map.getCanvas().style.cursor = 'pointer';
+			});
+			 
+			// Change it back to a pointer when it leaves.
+			this.map.on('mouseleave', 'places', function () {
+				this.map.getCanvas().style.cursor = '';
+			});
 		});
 
 		this.setState({
