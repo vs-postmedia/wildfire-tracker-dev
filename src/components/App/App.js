@@ -13,7 +13,7 @@ const firePerimeters = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/pe
 const evacsAlertsUrl = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/wildfires/EMRG_OAAA_polygon.json';
 
 // map tiles & attribution
-const mapboxStyle = 'https://api.maptiler.com/maps/streets/style.json?key=d66XIdicygsmvu4cwios';
+const mapboxStyle = 'https://api.maptiler.com/maps/outdoor/style.json?key=d66XIdicygsmvu4cwios';
 
 
 function App() {
