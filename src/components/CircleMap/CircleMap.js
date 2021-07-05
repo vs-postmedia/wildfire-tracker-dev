@@ -9,15 +9,6 @@ import './CircleMap.css';
 
 const evacZoomLevel = 6;
 const evacMinSize = 220000000;
-const evacUrl = 'mapbox://ngriffiths-postmedia.ckqmy02um05r021lgvokgjxs1-3fgu5';
-//srs=EPSG:3857& - mapbox projection
-//srs=EPSG:3005& - wms projection
-let wmsLayer = 'https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP/ows?service=WMS&request=GetMap&crs=EPSG:4326&\
-format=image/png&transparent=true&height=450&width=750&\
-layers=pub:WHSE_HUMAN_CULTURAL_ECONOMIC.EMRG_ORDER_AND_ALERT_AREAS_SP&\
-bbox=-139,48,-110,61';
-
-// bbox=-139.0522011144566932,47.6321414425716867,-110.4276991602271494,60.5985243564883049'
 
 export class CircleMap extends Component {
 	map;
@@ -44,9 +35,6 @@ export class CircleMap extends Component {
 		this.extent_calcuted = false;
 		// set the min/max sizes for circles
 		this.range = this.props.range ? this.props.range : [3,50];
-
-		// API key
-		// mapboxgl.accessToken = this.props.config.accessToken;
 		
 		this.map = new maplibregl.Map({
 			// container: this.props.container,
@@ -168,21 +156,7 @@ export class CircleMap extends Component {
 				}
 			}
 
-			// BC govt evac & alerts wms layer
-			// this.map.addSource('evacs-alerts', {
-			// 	'scheme': 'tms',
-			// 	'tiles': [wmsLayer],
-			// 	'tileSize': 256,
-			// 	type: 'raster'
-			// });
-			// this.map.addLayer({
-			// 	'id': 'wms-layer-id',
-			// 	'type': 'raster',
-			// 	'source': 'evacs-alerts',
-			// 	'paint': {}
-			// });
-
-			// Evac and alerts custom mapbox tileset
+			// Evac and alerts
 			this.map.addSource('evacs_alerts', {
 				type: 'geojson',
 				'data': this.props.evacsAlerts

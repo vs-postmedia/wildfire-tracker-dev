@@ -51,13 +51,13 @@ export class WildfireTracker extends Component {
 		const promises = [];
 
 		promises.push(Axios.get(this.props.fonData));
-		promises.push(Axios.get(this.props.firePerimeters));
+		// promises.push(Axios.get(this.props.firePerimeters));
 
 		Axios.all(promises)
 			.then(results => {
 				// separate our results
 				const fon_data = results.filter(d => d.config.url.includes('fon.json'))[0].data;
-				const perim_data = results.filter(d => d.config.url.includes('perimeters.json'))[0].data;
+				// const perim_data = results.filter(d => d.config.url.includes('perimeters.json'))[0].data;
 
 				// get fons from the main data set & merge the details
 				const fires_of_note = data.features.filter(d => {
