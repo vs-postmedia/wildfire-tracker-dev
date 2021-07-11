@@ -6,12 +6,12 @@ const SummaryBox = (props) => {
 
 	return (
 		<div className="summary-box" onClick={props.toggleFireTypeHandler}>
-			<h2>Latest wildfire stats</h2>
+			{/*<h2>Latest wildfire stats</h2>*/}
 	
 			<div className="stat-box">
 				<div className="stat">
 					<p className="big-num new">{fire_stats.new_fires}</p>
-					<p className="label">New</p>
+					<p className="label">Active</p>
 				</div>
 
 				<div className="stat">
@@ -21,7 +21,7 @@ const SummaryBox = (props) => {
 
 				<div className="stat">
 					<p className="big-num under-control">{fire_stats.controlled_fires}</p>
-					<p className="label">Controlled</p>
+					<p className="label">Control</p>
 				</div>
 
 				<div className="stat">
@@ -31,7 +31,7 @@ const SummaryBox = (props) => {
 			</div>
 			
 			<p className="last-update">Last updated: {fire_stats.last_update}</p>
-			<p className="note">Source: B.C. Wildfire Service. Note: *Tap to toggles views.</p>
+			<p className="note">Source: B.C. Wildfire Service. PM2.5 estimates show maximum daily values from <a href="https://firesmoke.ca/" target="_blank">FireSmoke Canada</a>. NOTE: ‘Active‘ includes fires classified as new, of note, and out of control. *Tap to toggle views.</p>
 		</div>
 	);
 }

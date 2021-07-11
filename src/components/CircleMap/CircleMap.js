@@ -7,6 +7,8 @@ import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 import './maplibre-gl.css';
 import './CircleMap.css';
 
+import firesmoke from '../../data/test.png'
+
 const evacZoomLevel = 6;
 const evacMinSize = 220000000;
 
@@ -156,6 +158,26 @@ export class CircleMap extends Component {
 				}
 			}
 
+			// firesmoke.a
+			this.map.addSource('fire-smoke', {
+				type: 'image',
+				url: this.props.fireSmokeUrl,
+				coordinates: [
+					[-160,70],
+					[-52,70],
+					[ -52,32],
+					[-160,32]
+				]
+			});
+			this.map.addLayer({
+				id: 'fire-smoke',
+				source: 'fire-smoke',
+				type: 'raster',
+				paint: {
+					'raster-opacity': 0.6
+				}
+			}, firstSymbolId);
+
 			// Evac and alerts
 			this.map.addSource('evacs_alerts', {
 				type: 'geojson',
@@ -182,8 +204,7 @@ export class CircleMap extends Component {
 				}
 			// place layer underneath this layer
 			}, firstSymbolId);
-			
-			
+					
 			// labels
 			this.map.addLayer({
 				id: 'evac-data-text',

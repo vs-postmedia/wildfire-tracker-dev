@@ -6,16 +6,27 @@
 .App .summary-box h2 {
 	font-family: 'BentonSansCond-Bold', sans-serif;
 	font-weight: 800;
-	margin: 5px 0;
+	margin: 10px 0;
 }
 .summary-box .stat-box {
+	cursor: pointer;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
-	cursor: pointer;
+	margin: 20px 0 10px 0;
+}
+.summary-box .stat-box .stat {
+	border: 1px solid #FFF;
+	border-radius: 5px;
+	box-shadow: 1px 0px 5px var(--grey04);
+	margin: 0 5%;
+}
+.summary-box .stat-box .stat:hover {
+	border: 1px solid var(--grey04);
+	/*box-shadow: 2px 2px 2px var(--grey04);*/
 }
 .summary-box .big-num {
-	font-family: 'Beon-Bold', serif;
-	font-size: 2.75rem;
+	font-family: 'Shift-Bold', serif;
+	font-size: 2.5rem;
 	font-weight: 800;
 	line-height: 3rem;
 	margin: 0;
@@ -31,16 +42,21 @@
 }
 
 .summary-box .note {
-	color: #898B8E;
+	color: var(--grey02);
 	font-family: 'BentonSansCond-RegItalic', sans-serif;
 	font-size: 0.9rem;
 	margin: 0;
+	text-align: left;
 }
 .summary-box .last-update {
 	font-family: 'BentonSansCond-RegItalic', sans-serif;
 	font-style: italic;
 	font-size: 0.8em;
-	margin-top: 12px;
+	margin: 10px 0;
+}
+
+.summary-box a:visited {
+	color: var(--grey02);
 }
 
 

@@ -140,6 +140,7 @@ export class WildfireTracker extends Component {
 					data_all={this.state.data_all}
 					data_evacs={this.state.data_evacs}
 					data_fon={this.state.data_fon}
+					fireSmokeUrl={this.props.fireSmokeUrl}
 					mapboxStyle={this.props.mapboxStyle}
 					tiles={this.props.tiles}
 					flyToLocation={this.flyToLocation}
