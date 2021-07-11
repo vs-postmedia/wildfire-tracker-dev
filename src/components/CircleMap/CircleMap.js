@@ -9,6 +9,9 @@ import './CircleMap.css';
 
 import firesmoke from '../../data/test.png'
 
+// VARS
+const evacColor = '#E35D42';
+const alertColor = '#F58745';
 const evacZoomLevel = 6;
 const evacMinSize = 220000000;
 
@@ -174,7 +177,7 @@ export class CircleMap extends Component {
 				source: 'fire-smoke',
 				type: 'raster',
 				paint: {
-					'raster-opacity': 0.6
+					'raster-opacity': 0.5
 				}
 			}, firstSymbolId);
 
@@ -193,9 +196,9 @@ export class CircleMap extends Component {
 						'match',
 						['get', 'OA_STATUS'],
 						'Alert',
-						'#FACE7C',
+						alertColor,
 						'Order',
-						'#e67154',
+						evacColor,
 						'Tactical',
 						'#A7A9AB',
 						'#A7A9AB'
@@ -231,9 +234,9 @@ export class CircleMap extends Component {
 						'match',
 						['get', 'OA_STATUS'],
 						'Alert',
-						'#F6B31C',
+						alertColor,
 						'Order',
-						'#DD2D25',
+						evacColor,
 						'Tactical',
 						'#A7A9AB',
 						'#A7A9AB' // fallback
