@@ -55,7 +55,7 @@ function ListItem(data, clickHandler) {
 }
 
 function toggleSidebar(e) {
-	console.log(e)
+	// console.log(e)
 	const sidebar = document.getElementById('listings');
 
 	if (buttonStatus === 'open') {

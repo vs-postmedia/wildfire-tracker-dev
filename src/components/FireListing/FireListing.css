@@ -6,7 +6,7 @@
  /* The page is split between map and sidebar - the sidebar gets 1/3, map
   gets 2/3 of the page. You can adjust this to your personal liking. */
 .sidebar {
-	height: var(--mapHeight);
+	height: calc(var(--mapHeight) - 50px);
 	left: 0;
 	max-width: 200px;
 	overflow: hidden;
