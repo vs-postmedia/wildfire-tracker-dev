@@ -150,6 +150,9 @@ label:active:after {
 
 
 @media (min-width: 500px) {
+	.sidebar {
+		height: calc(var(--mapHeight) - 70px);
+	}
 	.sidebar .header {
 		height: 70px;
 	}

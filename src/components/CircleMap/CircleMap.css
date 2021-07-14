@@ -1,3 +1,6 @@
+:root {
+	--paddingWidth: 5px;
+}
 .maplibregl-map,
 .mapboxgl-map {
 	height: var(--mapHeight);
@@ -11,16 +14,18 @@
 }
 .legend-container .legend-title {
 	background-color: rgba(255,255,255,1);
+	bottom: 25px;
 	font-family: BentonSansCond-Bold, bold;
 	font-size: 0.7rem;
+	max-width: calc(200px - var(--paddingWidth));
 	padding: 3px 0 0 5px;
 	position: absolute;
-	bottom: 25px;
-	width: calc(33% - 5px);
+	width: calc(33% - var(--paddingWidth));
 }
 #firesmoke-legend {
 	bottom: 0;
 	left: 0;
+	max-width: 200px;
 	position: absolute;
 	width: 33%;
 }
@@ -30,4 +35,11 @@
 }
 .super {
 	vertical-align: super;
+}
+
+@media (min-width: 500px) {
+	.legend-container .legend-title {
+		bottom: 40px;
+		font-size: 0.8rem;
+	}
 }
