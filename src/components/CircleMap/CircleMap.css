@@ -5,3 +5,29 @@
 	right: 0;
 	top: 0;
 }
+.map-container,
+.legend-container {
+	position: relative;
+}
+.legend-container .legend-title {
+	background-color: rgba(255,255,255,1);
+	font-family: BentonSansCond-Bold, bold;
+	font-size: 0.7rem;
+	padding: 3px 0 0 5px;
+	position: absolute;
+	bottom: 25px;
+	width: calc(33% - 5px);
+}
+#firesmoke-legend {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	width: 33%;
+}
+
+.sub {
+	vertical-align: sub;
+}
+.super {
+	vertical-align: super;
+}

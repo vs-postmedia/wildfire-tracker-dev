@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 // import mapboxgl from 'mapbox-gl';
 import maplibregl from 'maplibre-gl';
 import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
@@ -6,6 +6,8 @@ import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 // CSS
 import './maplibre-gl.css';
 import './CircleMap.css';
+
+import legend from '../../images/firesmoke-legend-v2.png';
 
 // VARS
 const evacColor = '#E35D42';
@@ -115,6 +117,13 @@ export class CircleMap extends Component {
 				'raster-opacity': 0.5
 			}
 		}, firstSymbolId);
+
+		// add legend
+		this.addFiresmokeLegend();
+	}
+
+	addFiresmokeLegend() {
+
 	}
 
 	addWildfireLayer(data, firstSymbolId) {
@@ -327,7 +336,13 @@ export class CircleMap extends Component {
 
 	render() {
 		return (
-			<div ref={el => this.mapContainer = el} />
+			<Fragment>
+				<div ref={el => this.mapContainer = el} />
+				<div className="legend-container">
+					<p className="legend-title">PM<span className="sub">2.5</span> (µg/m<span className="super">3</span>)</p>
+					<img id="firesmoke-legend" src={legend} />
+				</div>
+			</Fragment>
 		);
 	}
 }
