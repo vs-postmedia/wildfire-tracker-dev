@@ -117,7 +117,7 @@ export class WildfireTracker extends Component {
 			// reset
 			fire_class = null;
 		} else if (fire_class === 'out') {
-			console.log('OUT')
+			// console.log('OUT')
 			fire_data = this.state.data_all;
 		} else {
 			fire_data.features = this.filterFireData(fire_class);

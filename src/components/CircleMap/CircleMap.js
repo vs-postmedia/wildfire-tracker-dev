@@ -7,11 +7,9 @@ import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 import './maplibre-gl.css';
 import './CircleMap.css';
 
-import firesmoke from '../../data/test.png'
-
 // VARS
 const evacColor = '#E35D42';
-const alertColor = '#F58745';
+const alertColor = '#F6B31C';
 const evacZoomLevel = 6;
 const evacMinSize = 220000000;
 
@@ -33,13 +31,140 @@ export class CircleMap extends Component {
 		this.hidePopup = this.hidePopup.bind(this);
 	}
 
+	addEvacsAlerts(evacsAlerts, firstSymbolId) {
+		this.map.addSource('evacs_alerts', {
+			type: 'geojson',
+			'data': evacsAlerts
+		});
+		// polygons
+		this.map.addLayer({
+			id: 'evac-data',
+			source: 'evacs_alerts',
+			type: 'fill',
+			paint: {
+				'fill-color': [
+					'match',
+					['get', 'OA_STATUS'],
+					'Alert',
+					alertColor,
+					'Order',
+					evacColor,
+					'Tactical',
+					'#A7A9AB',
+					'#A7A9AB'
+				],
+				'fill-opacity': 0.7
+			}
+		// place layer underneath this layer
+		}, firstSymbolId);
+
+		// evac/alert labels
+		this.map.addLayer({
+			id: 'evac-data-text',
+			minzoom: evacZoomLevel,
+			source: 'evacs_alerts',
+			type: 'symbol',
+			// we don't need to label every single evac zone...
+			filter: ['>', ['get', 'AREA_SQM'], evacMinSize],
+			layout: {
+				'symbol-placement': 'point',
+				'text-field': [
+					'format',
+					['concat', 'Evacuation ', ['get', 'OA_STATUS']],
+					{
+						'font-scale': 0.9,
+						'font-weight': 800
+					}
+				],
+			},
+			paint: {
+				'text-color': 'rgba(255,255,255,1)',
+				'text-halo-blur': .25,
+				'text-halo-color': [
+					'match',
+					['get', 'OA_STATUS'],
+					'Alert',
+					alertColor,
+					'Order',
+					evacColor,
+					'Tactical',
+					'#A7A9AB',
+					'#A7A9AB' // fallback
+				],
+				'text-halo-width': 1
+			}
+		});
+	}
+
+	addFiresmokeLayer(fireSmokeUrl, firstSymbolId) {
+		// firesmoke
+		this.map.addSource('fire-smoke', {
+			type: 'image',
+			url: fireSmokeUrl,
+			coordinates: [
+				[-160,70],
+				[-52,70],
+				[ -52,32],
+				[-160,32]
+			]
+		});
+		this.map.addLayer({
+			id: 'fire-smoke',
+			source: 'fire-smoke',
+			type: 'raster',
+			paint: {
+				'raster-opacity': 0.5
+			}
+		}, firstSymbolId);
+	}
+
+	addWildfireLayer(data, firstSymbolId) {
+		this.map.addSource('wildfires', {
+			type: 'geojson',
+			data: data
+		});
+		this.map.addLayer({
+			id: 'wildfires',
+			type: 'circle',
+			source: 'wildfires',
+			paint: {
+				'circle-color': [
+					'match',
+					['get', 'FIRE_STATU'],
+					'New',
+					'#DD2D25',
+					'Out of Control',
+					'#DD2D25',
+					'Being Held',
+					'#F26B21',
+					'Under Control',
+					'#0062A3',
+					'Out',
+					'#6D6E70',
+					/* fallback */ '#9b3f86'
+				],
+				'circle-opacity': 0.7,
+				// probably a better way to do this...
+				'circle-radius': [
+					'*',
+					['get', 'radius'],
+					1
+				],
+				'circle-stroke-width': 0.5,
+				'circle-stroke-color': '#FFF'
+			}
+		},
+		// place layer underneath this layer
+		firstSymbolId);
+	}
+
 	componentDidMount() {
 		const data = this.props.data;
 
 		// extents for circles
 		this.extent_calcuted = false;
 		// set the min/max sizes for circles
-		this.range = this.props.range ? this.props.range : [3,50];
+		this.range = this.props.range ? this.props.range : [3.5,75];
 		
 		this.map = new maplibregl.Map({
 			// container: this.props.container,
@@ -161,128 +286,14 @@ export class CircleMap extends Component {
 				}
 			}
 
-			// firesmoke.a
-			this.map.addSource('fire-smoke', {
-				type: 'image',
-				url: this.props.fireSmokeUrl,
-				coordinates: [
-					[-160,70],
-					[-52,70],
-					[ -52,32],
-					[-160,32]
-				]
-			});
-			this.map.addLayer({
-				id: 'fire-smoke',
-				source: 'fire-smoke',
-				type: 'raster',
-				paint: {
-					'raster-opacity': 0.5
-				}
-			}, firstSymbolId);
+			// add firesmoke
+			this.addFiresmokeLayer(this.props.fireSmokeUrl, firstSymbolId);
 
 			// Evac and alerts
-			this.map.addSource('evacs_alerts', {
-				type: 'geojson',
-				'data': this.props.evacsAlerts
-			});
-			// polygons
-			this.map.addLayer({
-				id: 'evac-data',
-				source: 'evacs_alerts',
-				type: 'fill',
-				paint: {
-					'fill-color': [
-						'match',
-						['get', 'OA_STATUS'],
-						'Alert',
-						alertColor,
-						'Order',
-						evacColor,
-						'Tactical',
-						'#A7A9AB',
-						'#A7A9AB'
-					],
-					'fill-opacity': 0.6
-				}
-			// place layer underneath this layer
-			}, firstSymbolId);
-					
-			// labels
-			this.map.addLayer({
-				id: 'evac-data-text',
-				minzoom: evacZoomLevel,
-				source: 'evacs_alerts',
-				type: 'symbol',
-				// we don't need to label every single evac zone...
-				filter: ['>', ['get', 'AREA_SQM'], evacMinSize],
-				layout: {
-					'symbol-placement': 'point',
-					'text-field': [
-						'format',
-						['concat', 'Evacuation ', ['get', 'OA_STATUS']],
-						{
-							'font-scale': 0.9,
-							'font-weight': 800
-						}
-					],
-				},
-				paint: {
-					'text-color': 'rgba(255,255,255,1)',
-					'text-halo-blur': .25,
-					'text-halo-color': [
-						'match',
-						['get', 'OA_STATUS'],
-						'Alert',
-						alertColor,
-						'Order',
-						evacColor,
-						'Tactical',
-						'#A7A9AB',
-						'#A7A9AB' // fallback
-					],
-					'text-halo-width': 1
-				}
-			});
+			this.addEvacsAlerts(this.props.evacsAlerts, firstSymbolId)
 
 			// wildfires
-			this.map.addSource('wildfires', {
-				type: 'geojson',
-				data: data
-			});
-			this.map.addLayer({
-				id: 'wildfires',
-				type: 'circle',
-				source: 'wildfires',
-				paint: {
-					'circle-color': [
-						'match',
-						['get', 'FIRE_STATU'],
-						'New',
-						'#DD2D25',
-						'Out of Control',
-						'#DD2D25',
-						'Being Held',
-						'#F26B21',
-						'Under Control',
-						'#0062A3',
-						'Out',
-						'#6D6E70',
-						/* fallback */ '#9b3f86'
-					],
-					'circle-opacity': 0.7,
-					// probably a better way to do this...
-					'circle-radius': [
-						'*',
-						['get', 'radius'],
-						1
-					],
-					'circle-stroke-width': 0.5,
-					'circle-stroke-color': '#FFF'
-				}
-			},
-			// place layer underneath this layer
-			firstSymbolId);
+			this.addWildfireLayer(data, firstSymbolId)
 
 			// Add zoom and rotation controls to the map.
 			this.map.addControl(new maplibregl.NavigationControl());

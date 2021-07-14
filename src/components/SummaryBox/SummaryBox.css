@@ -22,7 +22,6 @@
 }
 .summary-box .stat-box .stat:hover {
 	border: 1px solid var(--grey04);
-	/*box-shadow: 2px 2px 2px var(--grey04);*/
 }
 .summary-box .big-num {
 	font-family: 'Shift-Bold', serif;

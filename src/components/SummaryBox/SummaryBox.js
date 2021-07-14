@@ -31,7 +31,7 @@ const SummaryBox = (props) => {
 			</div>
 			
 			<p className="last-update">Last updated: {fire_stats.last_update}</p>
-			<p className="note">Source: B.C. Wildfire Service. PM2.5 estimates show maximum daily values from <a href="https://firesmoke.ca/" target="_blank">FireSmoke Canada</a>. NOTE: ‘Active‘ includes fires classified as new, of note, and out of control. *Tap to toggle views.</p>
+			<p className="note">Source: <a href="https://catalogue.data.gov.bc.ca/dataset/fire-locations-current" target="_blank">B.C. Wildfire Service</a>. PM2.5 estimates show maximum daily values from <a href="https://firesmoke.ca/" target="_blank">FireSmoke Canada</a>. NOTE: ‘Active‘ fires include those classified as new, of note, and out of control. *Tap to toggle views.</p>
 		</div>
 	);
 }
