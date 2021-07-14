@@ -60,7 +60,6 @@ export class CircleMap extends Component {
       	// place layer underneath this layer
       	}, firstSymbolId);		
 
-
 		// evac/alert labels
 		this.map.addLayer({
 			id: 'evac-data-text',
@@ -116,7 +115,7 @@ export class CircleMap extends Component {
 			source: 'fire-smoke',
 			type: 'raster',
 			paint: {
-				'raster-opacity': 0.5
+				'raster-opacity': 0.6
 			}
 		}, firstSymbolId);
 
