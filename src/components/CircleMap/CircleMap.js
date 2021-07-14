@@ -17,7 +17,6 @@ export class CircleMap extends Component {
 	map;
 	state = {};
 	// prep the popup
-	// popup = new mapboxgl.Popup({
 	popup = new maplibregl.Popup({
 		closeButton: false,
 		closeOnClick: true
@@ -242,6 +241,25 @@ export class CircleMap extends Component {
 		});
 	}
 
+	setupPopupHandlers() {
+		// show & hide the popup
+		this.map.on('click', 'wildfires', this.showPopup);
+		this.map.on('mouseenter', 'wildfires', this.showPopup);
+		this.map.on('mouseleave', 'wildfires', this.hidePopup);
+		// this.map.on('mouseenter', 'evacs_alerts', this.showPopup);
+		// this.map.on('mouseleave', 'evacs_alerts', this.hidePopup);
+		
+		// Change the cursor to a pointer when the mouse is over the places layer.
+		this.map.on('mouseenter', 'places', function () {
+			this.map.getCanvas().style.cursor = 'pointer';
+		});
+		 
+		// Change it back to a pointer when it leaves.
+		this.map.on('mouseleave', 'places', function () {
+			this.map.getCanvas().style.cursor = '';
+		});
+	}
+
 	setupPopupText(properties) {
 		return WildfireTooltip(properties);
 	}
@@ -298,22 +316,8 @@ export class CircleMap extends Component {
 			// Add zoom and rotation controls to the map.
 			this.map.addControl(new maplibregl.NavigationControl());
 
-			// show & hide the popup
-			this.map.on('click', 'wildfires', this.showPopup);
-			this.map.on('mouseenter', 'wildfires', this.showPopup);
-			this.map.on('mouseleave', 'wildfires', this.hidePopup);
-			// this.map.on('mouseenter', 'evacs_alerts', this.showPopup);
-			// this.map.on('mouseleave', 'evacs_alerts', this.hidePopup);
-			
-			// Change the cursor to a pointer when the mouse is over the places layer.
-			this.map.on('mouseenter', 'places', function () {
-				this.map.getCanvas().style.cursor = 'pointer';
-			});
-			 
-			// Change it back to a pointer when it leaves.
-			this.map.on('mouseleave', 'places', function () {
-				this.map.getCanvas().style.cursor = '';
-			});
+			// event handlers for popup
+			this.setupPopupHandlers();
 		});
 
 		this.setState({
