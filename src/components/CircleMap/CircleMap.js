@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react';
-// import mapboxgl from 'mapbox-gl';
 import maplibregl from 'maplibre-gl';
 import WildfireTooltip from '../WildfireTooltip/WildfireTooltip';
 
@@ -33,45 +32,48 @@ export class CircleMap extends Component {
 	}
 
 	addEvacsAlerts(evacsAlerts, firstSymbolId) {
-		this.map.addSource('evacs_alerts', {
-			type: 'geojson',
-			'data': evacsAlerts
-		});
-		// polygons
-		this.map.addLayer({
-			id: 'evac-data',
-			source: 'evacs_alerts',
-			type: 'fill',
-			paint: {
-				'fill-color': [
-					'match',
-					['get', 'OA_STATUS'],
-					'Alert',
-					alertColor,
-					'Order',
-					evacColor,
-					'Tactical',
-					'#A7A9AB',
-					'#A7A9AB'
-				],
-				'fill-opacity': 0.7
-			}
-		// place layer underneath this layer
-		}, firstSymbolId);
+		// add arcgis source
+		this.map.addSource('evacs_alerts_arcgis', {
+        	type: 'geojson',
+        	data: evacsAlerts
+      	});
+		// add & style layer
+      	this.map.addLayer({
+      	  id: 'evacs_alerts_layer',
+      	  type: 'fill',
+      	  source: 'evacs_alerts_arcgis',
+      	  filter: ['==', ['get', 'EVENT_TYPE'], 'Fire'],
+      	  paint: {
+      	    'fill-color': [
+      	      'match',
+      	      ['get', 'ORDER_ALERT_STATUS'],
+      	      'Alert',
+      	      alertColor,
+      	      'Order',
+      	      evacColor,
+      	      'Tactical',
+      	      '#A7A9AB',
+      	      '#dd2dd5'
+      	    ],
+      	    'fill-opacity': 0.7
+      	  }
+      	// place layer underneath this layer
+      	}, firstSymbolId);		
+
 
 		// evac/alert labels
 		this.map.addLayer({
 			id: 'evac-data-text',
 			minzoom: evacZoomLevel,
-			source: 'evacs_alerts',
+			source: 'evacs_alerts_arcgis',
 			type: 'symbol',
 			// we don't need to label every single evac zone...
-			filter: ['>', ['get', 'AREA_SQM'], evacMinSize],
+			filter: ['>', ['get', 'Shape__Area'], evacMinSize],
 			layout: {
 				'symbol-placement': 'point',
 				'text-field': [
 					'format',
-					['concat', 'Evacuation ', ['get', 'OA_STATUS']],
+					['concat', 'Evacuation ', ['get', 'ORDER_ALERT_STATUS']],
 					{
 						'font-scale': 0.9,
 						'font-weight': 800
@@ -83,7 +85,7 @@ export class CircleMap extends Component {
 				'text-halo-blur': .25,
 				'text-halo-color': [
 					'match',
-					['get', 'OA_STATUS'],
+					['get', 'ORDER_ALERT_STATUS'],
 					'Alert',
 					alertColor,
 					'Order',

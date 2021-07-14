@@ -3,7 +3,7 @@ Development build for the wildfire tracker.
 
 Based off of current fire locations found at: `https://catalogue.data.gov.bc.ca/dataset/fire-locations-current`
 
-Evacs & alerts data: `https://catalogue.data.gov.bc.ca/dataset/evacuation-orders-and-alerts#edc-pow` has to be manually downloaded, simplified &converted to geojson in mapshaper, then uploded to digital ocean.
+Evacs & alerts data: is sources from ArcGIS polygon layer: `https://governmentofbc.maps.arcgis.com/home/item.html?id=acf47697c83748b8ab4e196ec14f9fdd` updates at least once per day & at least 4x per day during peak season.
 
 Fire smoke data from firesmoke.ca.
 fire-smoke.js pulls png from kmz file hosted on firesmoke, reprojects to EPSG:3857 & uploads to digiO.,

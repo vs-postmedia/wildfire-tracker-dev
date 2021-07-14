@@ -4,8 +4,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@esri/arcgis-rest-request": "^3.2.1",
     "axios": "^0.21.1",
+    "install": "^0.13.0",
     "maplibre-gl": "^1.15.0",
+    "npm": "^7.19.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",

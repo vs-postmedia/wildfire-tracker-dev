@@ -11,7 +11,7 @@ const firesOfNoteURL = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/fo
 // Fire perimeters
 const firePerimeters = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/perimeters.json';
 // evacuation order & alert perimeters
-const evacsAlertsUrl = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/wildfires/EMRG_OAAA_polygon.json';
+const evacsAlertsUrl = 'https://services6.arcgis.com/ubm4tcTYICKBpist/arcgis/rest/services/Evacuation_Orders_and_Alerts/FeatureServer/0/query?f=pgeojson&where=1=1&outFields=ORDER_ALERT_STATUS,SHAPE__AREA,EVENT_TYPE';
 // firesmoke png file
 const fireSmokeUrl = 'https://vs-postmedia-data.sfo2.digitaloceanspaces.com/wildfires/fire-smoke-max.png';
 
