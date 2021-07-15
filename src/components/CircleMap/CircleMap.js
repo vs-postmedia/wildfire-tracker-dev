@@ -10,7 +10,8 @@ import legend from '../../images/firesmoke-legend-v2.png';
 
 // VARS
 const evacColor = '#E35D42';
-const alertColor = '#F6B31C';
+const alertColor = '#A7A9AB';
+// const alertColor = '#F6B31C';
 const evacZoomLevel = 6;
 const evacMinSize = 220000000;
 
@@ -53,9 +54,9 @@ export class CircleMap extends Component {
       	      evacColor,
       	      'Tactical',
       	      '#A7A9AB',
-      	      '#dd2dd5'
+      	      '#A7A9AB'
       	    ],
-      	    'fill-opacity': 0.7
+      	    'fill-opacity': 0.75
       	  }
       	// place layer underneath this layer
       	}, firstSymbolId);		
@@ -117,6 +118,7 @@ export class CircleMap extends Component {
 			paint: {
 				'raster-opacity': 0.6
 			}
+		// place layer underneath this layer
 		}, firstSymbolId);
 
 		// add legend
@@ -162,9 +164,8 @@ export class CircleMap extends Component {
 				'circle-stroke-width': 0.5,
 				'circle-stroke-color': '#FFF'
 			}
-		},
 		// place layer underneath this layer
-		firstSymbolId);
+		},firstSymbolId);
 	}
 
 	componentDidMount() {
@@ -181,6 +182,7 @@ export class CircleMap extends Component {
 			container: this.mapContainer,
 			maxZoom: this.props.maxZoom,
 			minZoom: this.props.minZoom,
+			maxZoom: 30,
 			style: this.props.mapboxStyle,
       		zoom: this.props.zoom
 		});
