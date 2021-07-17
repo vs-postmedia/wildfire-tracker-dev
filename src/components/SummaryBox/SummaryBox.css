@@ -54,6 +54,7 @@
 	margin: 10px 0;
 }
 
+.summary-box a,
 .summary-box a:visited {
 	color: var(--grey02);
 }
