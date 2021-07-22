@@ -29,7 +29,7 @@ export class WildfireTracker extends Component {
 				this.setupFiresOfNote(resp.data);
 
 				// download alert & evacuation perimeter data
-				this.fetchEvacs(this.props.evacsAlerts);
+				this.fetchEvacs(this.props.evacsAlertsUrl);
 			});
 
 		this.flyToLocation = this.flyToLocation.bind(this);

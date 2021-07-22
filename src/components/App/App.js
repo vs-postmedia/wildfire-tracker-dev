@@ -23,7 +23,7 @@ function App() {
 	return (
 		<WildfireTracker
 			currentData={currentFiresURL}
-			evacsAlerts={evacsAlertsUrl}
+			evacsAlertsUrl={evacsAlertsUrl}
 			fireSmokeUrl={fireSmokeUrl}
 		  	fonData={firesOfNoteURL}
 			firePerimeters={firePerimeters}

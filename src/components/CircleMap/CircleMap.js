@@ -56,7 +56,7 @@ export class CircleMap extends Component {
       	      '#A7A9AB',
       	      '#A7A9AB'
       	    ],
-      	    'fill-opacity': 0.75
+      	    'fill-opacity': 0.7
       	  }
       	// place layer underneath this layer
       	}, firstSymbolId);		
@@ -165,7 +165,8 @@ export class CircleMap extends Component {
 				'circle-stroke-color': '#FFF'
 			}
 		// place layer underneath this layer
-		},firstSymbolId);
+		// },firstSymbolId);
+		});
 	}
 
 	componentDidMount() {
@@ -319,11 +320,16 @@ export class CircleMap extends Component {
 			// add firesmoke
 			this.addFiresmokeLayer(this.props.fireSmokeUrl, firstSymbolId);
 
-			// Evac and alerts
-			this.addEvacsAlerts(this.props.evacsAlerts, firstSymbolId)
+			// Evac and alerts (waiting 1 sec seems to avoid issue where wms json data isn't readable...)
+			const interval = setInterval(() => {
+				if (this.props.evacsAlerts !== undefined) {
+					clearInterval(interval);
+					this.addEvacsAlerts(this.props.evacsAlerts, firstSymbolId);
+				}
+			}, 1000)
 
 			// wildfires
-			this.addWildfireLayer(data, firstSymbolId)
+			this.addWildfireLayer(data, firstSymbolId);
 
 			// Add zoom and rotation controls to the map.
 			this.map.addControl(new maplibregl.NavigationControl());
