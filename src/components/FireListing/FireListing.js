@@ -18,8 +18,15 @@ const FireListing = (props) => {
 				return ListItem(d.properties, props.flyToLocation);
 			});	
 	} else {
+		list = <li className="no-fires"><p>Currently there are no fires of note in B.C.</p></li>
+
 		// hide sidebar
-		list = <li className="no-fires">Currently there are no fires of note in B.C.</li>
+		buttonStatus = 'closed';
+		const fonToggle = document.getElementById('switch');
+		if (fonToggle !== null) {
+			fonToggle.className = 'closed';
+		}
+		
 	}
 
 
@@ -42,8 +49,6 @@ function ListItem(data, clickHandler) {
 	const size = Math.round((data.CURRENT_SI / 100) * 10) / 10;
 	const name = data.FIRE_NT_NM; // data.fire_name.split(' (')[0]
 
-	// console.log(name, data)
-
 	const sizeText = size > 0.1 ? `${size} sq. km` : 'Spot fire';
 	return (
 		<li key={data.FIRE_NUMBE} id={data.fire_id} className="item" onClick={clickHandler}>
@@ -55,7 +60,7 @@ function ListItem(data, clickHandler) {
 }
 
 function toggleSidebar(e) {
-	// console.log(e)
+	// console.log(e.target)
 	const sidebar = document.getElementById('listings');
 
 	if (buttonStatus === 'open') {
