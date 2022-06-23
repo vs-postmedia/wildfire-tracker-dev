@@ -5,8 +5,10 @@ import FireListing from '../FireListing/FireListing';
 import './WildfireMap.css';
 
 
-let zoom = window.innerWidth > 400 ? 5 : 4;
-let center = window.innerWidth > 400 ? [51.5, -124] : [54, -125];
+// let zoom = window.innerWidth > 400 ? 4.25 : 4;
+// let center = window.innerWidth > 400 ? [51.5, -124] : [54, -125];
+const zoom = 4;
+const center = [55, -125];
 
 export class WildfireTracker extends Component {
 	map_options = {
