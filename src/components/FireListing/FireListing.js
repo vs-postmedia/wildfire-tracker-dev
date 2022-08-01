@@ -8,6 +8,8 @@ const FireListing = (props) => {
 	let list;
 	const fon = props.data.length > 0 ? props.data.filter(d => d.properties.FIRE_STATU === 'Fire of Note') : [];
 
+	console.log(fon)
+
 	// NO FON? HIDE SIDEBAR
 	if (fon.length > 0) {
 		// YES FON
@@ -17,16 +19,21 @@ const FireListing = (props) => {
 			.map(d => {
 				return ListItem(d.properties, props.flyToLocation);
 			});	
+
+		// show sidebar
+		const fonToggle = document.getElementById('switch');
+		if (fonToggle !== null) {
+			fonToggle.className = 'open';
+		}
 	} else {
 		list = <li className="no-fires"><p>Currently there are no fires of note in B.C.</p></li>
 
 		// hide sidebar
-		buttonStatus = 'closed';
-		const fonToggle = document.getElementById('switch');
-		if (fonToggle !== null) {
-			fonToggle.className = 'closed';
-		}
-		
+		// buttonStatus = 'closed';
+		// const fonToggle = document.getElementById('switch');
+		// if (fonToggle !== null) {
+		// 	fonToggle.className = 'closed';
+		// }
 	}
 
 
